@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './default.scss';
 import Routes from './Routes';
+import { Store } from "./context/StoreContext";
 
 const App = () => {
   const [gmapsLoaded, setGmapsLoaded] = useState(false);
@@ -21,7 +22,9 @@ const App = () => {
   return (
     <>
       {gmapsLoaded && (
-        <Routes />
+        <Store>
+          <Routes />
+        </Store>
       )}
     </>
   )
