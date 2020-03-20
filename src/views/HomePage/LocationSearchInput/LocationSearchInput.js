@@ -6,11 +6,13 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete';
 import { useHistory } from 'react-router-dom';
+import { useStoreContext } from "../../../context/StoreContext";
  
 const LocationSearchInput = () => {
   const history = useHistory();
   const [address, setAddress] = useState('');
   const berlin = new google.maps.LatLng(52.50888, 13.396647);
+  const { setPlaceId } = useStoreContext();
 
   const goToKiez = (latLng) => {
     history.push(`/kiez?lat=${latLng.lat}&lng=${latLng.lng}`);
@@ -18,7 +20,10 @@ const LocationSearchInput = () => {
   
   const handleSelect = (input) => {
     geocodeByAddress(input)
-      .then(results => getLatLng(results[0]))
+      .then(results => {
+        setPlaceId(results[0].place_id);
+        return getLatLng(results[0]);
+      })
       .then(latLng => goToKiez(latLng))
       .catch(error => console.error('Error', error));
   };
