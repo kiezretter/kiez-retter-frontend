@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './default.scss';
 import Routes from './Routes';
 import { Store } from "./context/StoreContext";
+import { Markers } from "./context/MarkerContext";
 
 const App = () => {
   const [gmapsLoaded, setGmapsLoaded] = useState(false);
@@ -22,9 +23,11 @@ const App = () => {
   return (
     <>
       {gmapsLoaded && (
-        <Store>
-          <Routes />
-        </Store>
+        <Markers>
+          <Store>
+            <Routes />
+          </Store>
+        </Markers>
       )}
     </>
   )

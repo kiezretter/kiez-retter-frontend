@@ -5,32 +5,34 @@ import { useStoreContext } from "../../../context/StoreContext";
 const Info = () => {
   const {
     store,
+    googleDatails,
   } = useStoreContext();
-  let obj = (
+
+  let placeholder = (
     <>
-      Es konnte leider keine Informationen geladen werden.
+      Klicken sie eine Lokation in ihrem Kiez an.
     </>
   );
 
-  console.log("store ", store);
-
-  if (store) {
-    obj = (
-      <>
-        name: { store.name}
-        address: { store.address}
-        shopImages: { store.shop_images}
-        verified: { store.verified}
-        text: { store.text}
-        image: { store.profile_image}
-      </>
-    );
-  }
-
   return (
     <div className="info-window">
-      {obj}
-      <button>Spenden</button>
+      {!store && !googleDatails && placeholder}
+      {store && (
+        <>
+          name: { store.name}
+          address: { store.address}
+          shopImages: { store.shop_images}
+          verified: { store.verified}
+          text: { store.text}
+          image: { store.profile_image}
+        </>
+      )}
+      {googleDatails && (
+        <>
+          Hier kommen die Informationen von Google hin.
+        </>
+      )}
+      {store && googleDatails && <button>Spenden</button>}
     </div>
   )
 }
