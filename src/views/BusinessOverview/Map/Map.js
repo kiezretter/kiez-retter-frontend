@@ -1,26 +1,15 @@
 import React, { useRef } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import currentLocationIcon from '../../../assets/images/current-location.svg';
+import { useMarkersContext } from "../../../context/MarkerContext";
+import { useStoreContext } from '../../../context/StoreContext';
 
-const markers = [
-  {
-    id: 1,
-    title: 'Hello my darling',
-    position: {
-      lat: 52.50888,
-      lng: 13.396647
-    }
-  }
-]
-
-// Get markers from API
-
-const showInfo = (info) => {
-  
-}
 
 export const Geo = ({ google, currentLocation }) => {
   const mapRef = useRef(null);
+  const { markers } = useMarkersContext();
+  const { setPlaceId } = useStoreContext();
+
   return (
     <Map 
       ref={mapRef}
@@ -38,14 +27,16 @@ export const Geo = ({ google, currentLocation }) => {
         position={currentLocation}
         icon={currentLocationIcon}
       />
-      {markers.map(marker => (
-        <Marker
-          key={marker.id}
-          position={marker.position}
-          title={marker.title}
-          onClick={() => showInfo(marker.info)}
-        />
-      ))}
+      {markers.map(marker => {
+        return (
+          <Marker
+            key={marker.id}
+            position={marker.position}
+            title={marker.title}
+            onClick={() => setPlaceId(marker.place_id)}
+          />
+        )
+      })}
     </Map>
   );
 };
