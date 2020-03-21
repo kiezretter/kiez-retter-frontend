@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     minWidth: 120,
     display: 'flex',
   },
-  h1: {
+  h2: {
     marginTop: theme.spacing(3),
   },
 }));
@@ -36,11 +36,11 @@ const RegistrationForm = () => {
           spacing={3}
         >
           <Grid item xs={12}>
-            <h1 className={classes.h1}>Inhaber</h1>
+            <h2 className={classes.h2}>Inhaber</h2>
           </Grid>
           <Grid item xs={12} sm={3}>
             <FormControl className={classes.formControl}>
-              <FileUpload label="Foto hochladen" />
+              <FileUpload label="Foto hochladen" showImagePreview />
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -63,30 +63,37 @@ const RegistrationForm = () => {
             <FormControl className={classes.formControl}>
               <TextField id="standard-basic" label="Spitzname" />
             </FormControl>
-            <FormControl className={classes.formControl}>
-              <Button
-                variant="contained"
-                component="label"
-              >
-                <i className="material-icons">cloud_upload</i>&nbsp;Gewerbeschein
-            <input
-                  type="file"
-                  style={{ display: "none" }}
-                />
-              </Button>
-            </FormControl>
-            <FormControl className={classes.formControl}>
-              <Button
-                variant="contained"
-                component="label"
-              >
-                <i className="material-icons">cloud_upload</i>&nbsp;Personalausweis
-            <input
-                  type="file"
-                  style={{ display: "none" }}
-                />
-              </Button>
-            </FormControl>
+
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={6}>
+                <FormControl className={classes.formControl}>
+                  <Button
+                    variant="contained"
+                    component="label"
+                  >
+                    <i className="material-icons">cloud_upload</i>&nbsp;Gewerbeschein
+                  <input
+                      type="file"
+                      style={{ display: "none" }}
+                    />
+                  </Button>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FormControl className={classes.formControl}>
+                  <Button
+                    variant="contained"
+                    component="label"
+                  >
+                    <i className="material-icons">cloud_upload</i>&nbsp;Personalausweis
+                  <input
+                      type="file"
+                      style={{ display: "none" }}
+                    />
+                  </Button>
+                </FormControl>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
         <Grid
@@ -96,11 +103,11 @@ const RegistrationForm = () => {
           spacing={3}
         >
           <Grid item xs={12}>
-            <h1 className={classes.h1}>Lieblingsort</h1>
+            <h2 className={classes.h2}>Lieblingsort</h2>
           </Grid>
           <Grid item xs={12} sm={3}>
             <FormControl className={classes.formControl}>
-              <FileUpload label="Foto hochladen" />
+              <FileUpload label="Foto hochladen" showImagePreview />
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -121,74 +128,72 @@ const RegistrationForm = () => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid
-            justify="flex-start"
-            alignItems="center"
-            container
-            spacing={3}
-          >
-
-            <Grid item xs={12}>
-
-              <h1 className={classes.h1}>Rettungs-Aufruf</h1>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <FormControl className={classes.formControl}>
-                <TextField
-                  variant="outlined"
-                  helperText="Hier den Text für Deinen Rettungsaufruf eingeben"
-                  label="Rettungs aufruf"
-                  multiline
-                  rows={4}
-                  rowsMax={8}
-                />
-              </FormControl>
-            </Grid>
+        </Grid>
+        <Grid
+          justify="flex-start"
+          alignItems="center"
+          container
+          spacing={3}
+        >
+          <Grid item xs={12}>
+            <h2 className={classes.h2}>Rettungs-Aufruf</h2>
           </Grid>
-          <Grid
-            justify="flex-start"
-            alignItems="center"
-            container spacing={3}
-          >
-            <Grid item xs={12}>
-              <h1 className={classes.h1}>Dankeschön</h1>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <FormControl className={classes.formControl}>
-                <TextField
-                  variant="outlined"
-                  helperText="Hier den Danke-Text für Spenden eingeben"
-                  label="Dankeschön"
-                  multiline
-                  rows={4}
-                  rowsMax={8}
-                />
-              </FormControl>
-            </Grid>
+          <Grid item xs={12} sm={6}>
+            <FormControl className={classes.formControl}>
+              <TextField
+                variant="outlined"
+                helperText="Hier den Text für Deinen Rettungsaufruf eingeben"
+                label="Rettungs aufruf"
+                multiline
+                rows={4}
+                rowsMax={8}
+              />
+            </FormControl>
           </Grid>
-          <Grid
-            justify="flex-start"
-            alignItems="center"
-            container
-            spacing={3}
-          >
-            <Grid item xs={12} sm={2}>
-              <Button
-                variant="contained"
-                color="primary"
-                component="label"
-              >
-                Registrieren
+        </Grid>
+        <Grid
+          justify="flex-start"
+          alignItems="center"
+          container spacing={3}
+        >
+          <Grid item xs={12}>
+            <h2 className={classes.h2}>Dankeschön</h2>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <FormControl className={classes.formControl}>
+              <TextField
+                variant="outlined"
+                helperText="Hier den Danke-Text für Spenden eingeben"
+                label="Dankeschön"
+                multiline
+                rows={4}
+                rowsMax={8}
+              />
+            </FormControl>
+          </Grid>
+        </Grid>
+        <Grid
+          justify="flex-start"
+          alignItems="center"
+          container
+          spacing={3}
+        >
+          <Grid item xs={12} sm={2}>
+            <Button
+              variant="contained"
+              color="primary"
+              component="label"
+            >
+              Registrieren
               </Button>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Button
-                component="label"
-                color="secondary"
-              >
-                Abbrechen
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Button
+              component="label"
+              color="secondary"
+            >
+              Abbrechen
               </Button>
-            </Grid>
           </Grid>
         </Grid>
       </form>
