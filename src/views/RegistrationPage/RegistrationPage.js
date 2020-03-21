@@ -2,13 +2,16 @@ import React from 'react';
 import {
   Container
 } from '@material-ui/core'
+import Navigation from '../../components/Navigation/Navigation.jsx';
+import Footer from '../../components/Footer/Footer.jsx';
 import RegistrationForm from "./RegistrationForm";
 
 const RegistrationPage = () => {
   return (
     <Container>
-      <h1>Registration Page</h1>
+      <Navigation />
       <RegistrationForm />
+      <Footer />
     </Container>
   )
 }
