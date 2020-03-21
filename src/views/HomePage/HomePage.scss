@@ -1,7 +1,24 @@
+@import "../../styles/Colors.scss";
+
 .kr-homepage {
     &--search-container {
         position: relative;
         padding-top: 8rem;
+    }
+
+    &--about {
+        margin: 10rem 0 3rem 0;
+    }
+
+    &--together,
+    &--about {
+        background-color: $brand-blue;
+        color: #fff;
+        padding: 1rem 0;
+    }
+
+    &--howitworks {
+        margin: 3rem 0;
     }
 
     &--kiezhero {
@@ -9,5 +26,30 @@
         width: 25rem;
         top: 0;
         transform: translateX(-50%);
+    }
+
+    &--stats {
+        margin-top: 2rem !important;
+    }
+
+    &--wirvsvirus {
+        max-width: 100%;
+        width: 20rem;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &--gethelp {
+        margin-top: 1rem !important;
+
+        .MuiCardContent-root {
+            overflow: hidden;
+        }
+
+        .MuiButton-root {
+            float: right;
+            margin-top: .5rem;
+        }
     }
 }

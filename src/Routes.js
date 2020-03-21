@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import BusinessOverviewView from './views/BusinessOverview/BusinessOverview';
-import HomePageView from './views/HomePage/HomePage';
+import HomePageView from './views/HomePage/HomePage.jsx';
 
 import AGBView from './views/AGB/AGB.jsx';
 import DatenschutzView from './views/Datenschutz/Datenschutz.jsx';

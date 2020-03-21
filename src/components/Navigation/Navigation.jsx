@@ -3,6 +3,7 @@ import React from 'react';
 import {
     Typography,
     Link,
+    Container,
 } from '@material-ui/core';
 
 import './Navigation.scss';
@@ -24,20 +25,19 @@ export default class Navigation extends React.Component {
 
     render() {
         return (
-            <Typography className="kr-nav" align="right">
-                <Link className={this.getClassesForLink('/')} href="/">
-                    Home
-                </Link>
-                <Link className={this.getClassesForLink('/inhaber')} href="/inhaber">
-                    Inhaber
-                </Link>
-                <Link className={this.getClassesForLink('/kiezretter')} href="/kiezretter">
-                    Kiezretter
-                </Link>
-                <Link className={this.getClassesForLink('/ueberuns')} href="/ueberuns">
-                    Über uns
-                </Link>
-            </Typography>
+            <Container maxWidth="md">
+                <Typography className="kr-nav" align="right">
+                    <Link className={this.getClassesForLink('/')} href="/">
+                        Home
+                    </Link>
+                    <Link className={this.getClassesForLink('/inhaber')} href="/inhaber">
+                        Inhaber
+                    </Link>
+                    <Link className={this.getClassesForLink('/kiezretter')} href="/kiezretter">
+                        Kiezretter
+                    </Link>
+                </Typography>
+            </Container>
         );
     }
 }
