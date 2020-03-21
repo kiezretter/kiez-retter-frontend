@@ -18,6 +18,7 @@ class RegistrationForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleFileUpload = this.handleFileUpload.bind(this);
     this.handleFormSend = this.handleFormSend.bind(this);
+    this.handleFormCancel = this.handleFormCancel.bind(this);
   }
 
   handleChange(evt) {
@@ -40,7 +41,20 @@ class RegistrationForm extends React.Component {
 
   handleFormCancel(evt) {
     evt.preventDefault();
-    console.log('CL: handleFormCancel -> evt', evt)
+    this.setState({
+      firstName: '',
+      surname: '',
+      paypalHandle: '',
+      rescueCallText: '',
+      thankYouText: '',
+      title: '',
+      storeType: '',
+      ownerImage: '',
+      tradeLicence: '',
+      idCard: '',
+      favoritePlace: ''
+    })
+    console.log('handleFormCancel => ', this.state)
   }
 
   render() {
@@ -87,12 +101,12 @@ class RegistrationForm extends React.Component {
               <Grid container spacing={3} className="upload-button">
                 <Grid item xs={12} md={6}>
                   <FormControl className="form-control">
-                    <FileUpload name="ownerImage" label="Gewerbeschein" onChange={this.handleFileUpload} />
+                    <FileUpload name="tradeLicence" label="Gewerbeschein" onChange={this.handleFileUpload} />
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <FormControl className="form-control">
-                    <FileUpload name="ownerImage" label="Personalausweis" onChange={this.handleFileUpload} />
+                    <FileUpload name="idCard" label="Personalausweis" onChange={this.handleFileUpload} />
                   </FormControl>
                 </Grid>
               </Grid>
@@ -109,7 +123,7 @@ class RegistrationForm extends React.Component {
             </Grid>
             <Grid item xs={12} md={3}>
               <FormControl className="form-control">
-                <FileUpload label="Foto hochladen" showImagePreview />
+                <FileUpload name="favoritePlace" label="Foto hochladen" showImagePreview onChange={this.handleFileUpload} />
               </FormControl>
             </Grid>
             <Grid item xs={12} md={6}>
