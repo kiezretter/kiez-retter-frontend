@@ -1,0 +1,9 @@
+.kr-nav {
+    padding: .5rem 0;
+
+    &--link {
+        & + & {
+            margin-left: 2rem;
+        }
+    }
+}
