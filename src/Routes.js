@@ -2,14 +2,16 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import BusinessOverview from './views/BusinessOverview/BusinessOverview';
 import HomePage from './views/HomePage/HomePage';
+import RegistrationPage from './views/RegistrationPage/RegistrationPage';
 
 const Routes = () => {
   return (
     <Router>
-        <Switch>
-          <Route exact path="/kiez" component={BusinessOverview} />
-          <Route exact path="/" component={HomePage} />
-        </Switch>
+      <Switch>
+        <Route exact path="/kiez" component={BusinessOverview} />
+        <Route exact path="/registration" component={RegistrationPage} />
+        <Route exact path="/" component={HomePage} />
+      </Switch>
     </Router>
   );
 }
