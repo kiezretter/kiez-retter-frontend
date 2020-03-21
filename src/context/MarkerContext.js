@@ -19,9 +19,7 @@ const Markers = ({
   }, [markers])
 
   return (
-    <Provider value={{
-      markers
-    }}>
+    <Provider value={{markers}}>
       {children}
     </Provider>
   )

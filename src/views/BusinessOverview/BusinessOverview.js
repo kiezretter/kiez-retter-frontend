@@ -19,6 +19,7 @@ const BusinessOverview = () => {
           lat,
           lng,
         }}
+        cardIn={200}
       />
       <Info />
     </>
