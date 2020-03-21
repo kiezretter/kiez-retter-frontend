@@ -1,37 +1,68 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './info.scss';
+import { Input, withStyles } from '@material-ui/core';
 import { useStoreContext } from "../../context/StoreContext";
 import verifiedIcon from '../../assets/images/correct.svg';
 import notVerifiedIcon from '../../assets/images/check.svg';
 import shareIcon from '../../assets/images/share.svg';
-import DiscreteSlider from "../DonateSlider/DonateSlider";
+import PrettoSlider from "../DonateSlider/DonateSlider";
+import pub1 from '../../assets/images/pub1.png';
+import pub2 from '../../assets/images/pub2.png';
+import pub3 from '../../assets/images/pub3.png';
+
+const StyledInput = withStyles({
+  root: {
+    width: '100px',
+    padding: "0 15px",
+    color: '#1A73E8',
+    fontSize: 24,
+    fontWeight: '500',
+  },
+  input: {
+    textAlign: 'center'
+  }
+})(Input);
 
 const Info = ({ userName }) => {
   const [showStoreInfo, setShowStoreInfo] = useState(false);
-  const [showInfoCard, setShowInfoCard] = useState(true);
-  const [donatedAmount, setDonatedAmount] = useState(5);
+  const [donatedValue, setDonatedValue] = useState(10);
+  // const [currentStore, setCurrentStore] = useState(null);
   const {
     store,
     googleDatails,
   } = useStoreContext();
   const infoRef = useRef(null);
 
-  function useOutsideAlerter(ref) {
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setShowInfoCard(false);
-      }
-    }
+  // useEffect(() => {
+  //   setCurrentStore(store);
+  // }, [store])
 
-    useEffect(() => {
-      document.addEventListener("click", handleClickOutside);
-      return () => {
-        document.removeEventListener("click", handleClickOutside);
-      };
-    });
+  // const useOutsideAlerter = ref => {
+  //   const handleClickOutside = event => {
+  //     if (ref.current && !ref.current.contains(event.target)) {
+  //       setCurrentStore(null);
+  //     }
+  //   }
+
+  //   console.log('currentStore', currentStore)
+
+  //   useEffect(() => {
+  //     document.addEventListener("click", handleClickOutside);
+  //     return () => {
+  //       document.removeEventListener("click", handleClickOutside);
+  //     };
+  //   });
+  // }
+
+  // useOutsideAlerter(infoRef);
+
+  const handleChange = (event, newValue) => {
+    setDonatedValue(newValue);
   }
 
-  useOutsideAlerter(infoRef);
+  const handleInputChange = event => {
+    setDonatedValue(event.target.value)
+  }
 
   let placeholder = (
     <div className="info__prompt">
@@ -42,7 +73,7 @@ const Info = ({ userName }) => {
   return (
     <>
       {!store && !googleDatails && placeholder}
-      {store && showInfoCard && (
+      {store && (
         <div className="row" ref={infoRef}>
           <div className="info__wrapper">
             <div className="info__img">
@@ -59,9 +90,7 @@ const Info = ({ userName }) => {
             </div>
             <div className="info__box">
               <div className="info__box-name__wrapper">
-                <div className="info__box-name__wrapper-name">
-                  {store.name}
-                </div>
+                <div className="info__box-name__wrapper-name">{store.name}</div>
                 <div className="info__box-name__wrapper-icon">
                   <img
                     src={shareIcon}
@@ -81,8 +110,8 @@ const Info = ({ userName }) => {
                 }
               >
                 Beste Laden wo gibt, ohne mich könnt ihr Euch keinen mehr
-                reinlöten und auch sonst wird's schwer. ALso lasst nen Taler
-                da, ich weiss es zu schäten!
+                reinlöten und auch sonst wird's schwer. ALso lasst nen Taler da,
+                ich weiss es zu schäten!
               </div>
               <div
                 className="info__box-info-btn"
@@ -94,9 +123,32 @@ const Info = ({ userName }) => {
                   <span>mehr &#8594;</span>
                 )}
               </div>
-              <DiscreteSlider />
+              <div className="info__box-icons">
+                <img src={pub1} alt="beer" className="info__box-icon" />
+                <img src={pub2} alt="beers" className="info__box-icon" />
+                <img src={pub3} alt="party" className="info__box-icon" />
+              </div>
+              <PrettoSlider
+                aria-label="pretto slider"
+                defaultValue={10}
+                aria-labelledby="discrete-slider"
+                value={donatedValue}
+                onChange={handleChange}
+                min={0}
+                max={100}
+              />
+              <div className="info__box-amount">
+                <StyledInput
+                  type="text"
+                  placeholder={donatedValue.toString()}
+                  value={donatedValue}
+                  onChange={handleInputChange}
+                  classes={{ root: "my-class-name" }}
+                />
+                <span>EUR</span>
+              </div>
               <a
-                href={`https://www.paypal.me/${userName}/${donatedAmount}`}
+                href={`https://www.paypal.me/${userName}/${donatedValue}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="info__box-button"

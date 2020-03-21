@@ -5,12 +5,16 @@ import { useMarkersContext } from "../../context/MarkerContext";
 import { useStoreContext } from '../../context/StoreContext';
 
 
-export const Geo = ({ google, currentLocation, infoHeight }) => {
+export const Geo = ({ google, currentLocation }) => {
   const mapRef = useRef(null);
   const { markers } = useMarkersContext();
   const { setPlaceId } = useStoreContext();
 
   const screenHeight = window.innerHeight;
+
+  const showDefaultMap = () => {
+    console.log('works liks a sharme')
+  }
 
   return (
     <Map
@@ -23,6 +27,8 @@ export const Geo = ({ google, currentLocation, infoHeight }) => {
       }}
       initialCenter={currentLocation}
       zoom={16}
+      disableDefaultUI={true}
+      click={showDefaultMap}
       >
       <Marker
         title="Da bist du!"
