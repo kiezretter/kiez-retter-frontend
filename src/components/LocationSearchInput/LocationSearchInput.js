@@ -6,7 +6,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete';
 import { useHistory } from 'react-router-dom';
-import { useStoreContext } from "../../../context/StoreContext";
+import { useStoreContext } from "../../context/StoreContext";
  
 const LocationSearchInput = () => {
   const history = useHistory();

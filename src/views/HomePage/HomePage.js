@@ -1,5 +1,5 @@
 import React from 'react';
-import LocationSearchInput from './LocationSearchInput/LocationSearchInput';
+import LocationSearchInput from '../../components/LocationSearchInput/LocationSearchInput';
 
 const HomePage = () => {
 

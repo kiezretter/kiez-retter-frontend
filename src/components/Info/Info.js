@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './info.scss';
-import { useStoreContext } from "../../../context/StoreContext";
-import verifiedIcon from '../../../assets/images/correct.svg';
-import notVerifiedIcon from '../../../assets/images/check.svg';
-import shareIcon from '../../../assets/images/share.svg';
+import { useStoreContext } from "../../context/StoreContext";
+import verifiedIcon from '../../assets/images/correct.svg';
+import notVerifiedIcon from '../../assets/images/check.svg';
+import shareIcon from '../../assets/images/share.svg';
 
 const Info = () => {
   const [showInfo, setShowInfo] = useState(false);
