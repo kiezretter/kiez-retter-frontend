@@ -7,7 +7,6 @@ import {
   TextField,
   Button,
   Container,
-  Slider,
   Grid
 } from '@material-ui/core';
 import FileUpload from '../../components/Form/FileUpload'
@@ -24,32 +23,6 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(3),
   },
 }));
-
-
-const marks = [
-  {
-    value: 0,
-    label: '2,50 €',
-  },
-  {
-    value: 50,
-    label: '5,00 €',
-  },
-  {
-    value: 100,
-    label: '10,00 €',
-  },
-];
-
-function valueText(value) {
-  console.log('CL: valueText -> value', value)
-  return `${value} €`;
-}
-
-function valueLabelFormat(value) {
-  // const index = marks.findIndex(mark => mark.value === value);
-  return ''// marks[index].label
-}
 
 const RegistrationForm = () => {
   const classes = useStyles();
@@ -133,9 +106,9 @@ const RegistrationForm = () => {
           <Grid item xs={12} sm={6}>
             <p>
               Muster Shop<br />
-            Hauptstr. 5<br />
-            12345 Berlin
-          </p>
+              Hauptstr. 5<br />
+              12345 Berlin
+            </p>
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="storeType">Geschäftstype</InputLabel>
               <Select
@@ -160,60 +133,14 @@ const RegistrationForm = () => {
               <h1 className={classes.h1}>Rettungs-Aufruf</h1>
             </Grid>
             <Grid item xs={12} sm={6}>
-
-              <FormControl className={classes.formControl}>
-                <TextField
-                  id="date"
-                  label="Gültig von"
-                  type="date"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </FormControl>
-              <FormControl className={classes.formControl}>
-                <TextField
-                  id="date"
-                  label="Gültig bis"
-                  type="date"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </FormControl>
               <FormControl className={classes.formControl}>
                 <TextField
                   variant="outlined"
-                  placeholder="Hier den Text für Deinen Rettungsaufruf eingeben"
+                  helperText="Hier den Text für Deinen Rettungsaufruf eingeben"
                   label="Rettungs aufruf"
                   multiline
                   rows={4}
                   rowsMax={8}
-                />
-              </FormControl>
-            </Grid>
-          </Grid>
-          <Grid
-            justify="flex-start"
-            alignItems="center"
-            container
-            spacing={3}
-          >
-            <Grid item xs={12}>
-              <h1 className={classes.h1}>Spendenvorschlag</h1>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-
-              <FormControl className={classes.formControl}>
-                <Slider
-                  className={classes.formControl}
-                  defaultValue={0}
-                  valueLabelFormat={valueLabelFormat}
-                  getAriaValueText={valueText}
-                  aria-labelledby="discrete-slider-custom"
-                  step={50}
-                  valueLabelDisplay="on"
-                  marks={marks}
                 />
               </FormControl>
             </Grid>
@@ -230,7 +157,7 @@ const RegistrationForm = () => {
               <FormControl className={classes.formControl}>
                 <TextField
                   variant="outlined"
-                  placeholder="Hier den Danke-Text für Spenden eingeben"
+                  helperText="Hier den Danke-Text für Spenden eingeben"
                   label="Dankeschön"
                   multiline
                   rows={4}
