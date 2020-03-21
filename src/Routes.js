@@ -8,7 +8,6 @@ import AGBView from './views/AGB/AGB.jsx';
 import DatenschutzView from './views/Datenschutz/Datenschutz.jsx';
 import FAQView from './views/FAQ/FAQ.jsx';
 import ImpressumView from './views/Impressum/Impressum.jsx';
-import UeberUnsView from './views/UeberUns/UeberUns.jsx';
 
 const Routes = () => {
   return (
@@ -20,7 +19,6 @@ const Routes = () => {
           <Route exact path="/datenschutz" component={DatenschutzView} />
           <Route exact path="/faq" component={FAQView} />
           <Route exact path="/impressum" component={ImpressumView} />
-          <Route exact path="/ueberuns" component={UeberUnsView} />
         </Switch>
     </Router>
   );
