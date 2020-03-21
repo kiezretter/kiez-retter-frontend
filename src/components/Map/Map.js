@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import currentLocationIcon from '../../../assets/images/current-location.svg';
-import { useMarkersContext } from "../../../context/MarkerContext";
-import { useStoreContext } from '../../../context/StoreContext';
+import currentLocationIcon from '../../assets/images/current-location.svg';
+import { useMarkersContext } from "../../context/MarkerContext";
+import { useStoreContext } from '../../context/StoreContext';
 
 
 export const Geo = ({ google, currentLocation, infoHeight }) => {

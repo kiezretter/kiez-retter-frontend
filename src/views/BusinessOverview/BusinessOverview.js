@@ -1,6 +1,6 @@
 import React from 'react';
-import GoogleApiWrapper from './Map/Map';
-import Info from './Info/Info';
+import GoogleApiWrapper from '../../components/Map/Map';
+import Info from '../../components/Info/Info';
 import { useLocation } from 'react-router-dom';
 
 
