@@ -7,6 +7,8 @@ import PlacesAutocomplete, {
 } from 'react-places-autocomplete';
 import { useHistory } from 'react-router-dom';
 import { useStoreContext } from "../../context/StoreContext";
+
+import { TextField } from '@material-ui/core';
  
 const LocationSearchInput = () => {
   const history = useHistory();
@@ -43,9 +45,10 @@ const LocationSearchInput = () => {
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div>
-          <input
+          <TextField 
             {...getInputProps({
-              placeholder: 'Am Berlin Museum 8',
+              label: 'Dein Lieblingsort',
+              id: 'standard-basic',
               className: 'location-search-input',
             })}
           />
