@@ -1,9 +1,98 @@
-.info-window {
-  min-height: 400px;
-  position: absolute;
-  bottom: 0;
-  left:0;
-  right: 0;
-  background-color: white;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+@import '../../../styles/Breakpoints.scss';
+@import '../../../styles/Colors.scss';
+
+.info__prompt {
+  font-size: 1.6em;
+  padding: 1em;
+  text-align: center;
+  font-weight: 500;
+  color: $mapsBlue;
 }
+.info {
+  &__wrapper {
+    border-radius: 1em;
+    background-color: white;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  &__img {
+    height: 20em;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 100%;
+    }
+  }
+  &__box {
+    padding: 2em;
+    border-radius: 1em;
+    margin-top: -1em;
+    &-name {
+      &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &-name {
+          font-size: 2.4em;
+          font-weight: 700;
+          letter-spacing: 1px;
+          color: $primary;
+        }
+        &-icon__share {
+          margin-right: 1em;
+        }
+        &-icon img{
+          height: 3em;
+          width: 3em;
+        }
+      }
+    }
+    &-address {
+      color: $grey;
+      font-size: 1.6em;
+      padding-bottom: 1em;
+    }
+    &-intro {
+      font-size: 1.6em;
+      padding: 1em 0;
+      margin-top: 0px;
+      transition: all .5s;
+      &.hide {
+        margin-top: -50px;
+        opacity: 0;
+        pointer-events:none;
+        @media only screen and (max-width: $s) {
+          margin-top: -100px;
+        }
+      }
+    }
+    &-info-btn {
+      font-size: 1.4em;
+      padding-bottom: 2px !important;
+      border-bottom: 1px solid black;
+      width: fit-content;
+      padding: 1em 0;
+      display: flex;
+    }
+    &-button {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      text-decoration: none;
+      border-style: none;
+      outline-style: none;
+      margin: 2em 0;
+      border-radius: 2em;
+      padding: .8em 1.6em;
+      background-color: $mapsBlue;
+      color: $white;
+      font-size: 1.6em;
+      box-shadow: 1px 2px 5px rgba(black, .2);
+    }
+  }
+}
+

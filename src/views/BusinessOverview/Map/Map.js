@@ -5,37 +5,38 @@ import { useMarkersContext } from "../../../context/MarkerContext";
 import { useStoreContext } from '../../../context/StoreContext';
 
 
-export const Geo = ({ google, currentLocation }) => {
+export const Geo = ({ google, currentLocation, infoHeight }) => {
   const mapRef = useRef(null);
   const { markers } = useMarkersContext();
   const { setPlaceId } = useStoreContext();
 
   return (
-    <Map 
+    <Map
       ref={mapRef}
-		  google={google}
-		  containerStyle={{
-        height: '100vh',
-        width: '100%',
-        position: 'relative',
+      google={google}
+      containerStyle={{
+        // height: cardSettings === undefined ? 'calc(100vh - 50px)' : 'calc(100vh - 200px)',
+        height: 'calc(100vh - 55px)',
+        width: "100%",
+        position: "relative"
       }}
       initialCenter={currentLocation}
       zoom={16}
-	  >
-      <Marker 
-        title='Da bist du!'
+      >
+      <Marker
+        title="Da bist du!"
         position={currentLocation}
         icon={currentLocationIcon}
-      />
+        />
       {markers.map(marker => {
         return (
           <Marker
-            key={marker.id}
-            position={marker.position}
-            title={marker.title}
-            onClick={() => setPlaceId(marker.place_id)}
+          key={marker.id}
+          position={marker.position}
+          title={marker.title}
+          onClick={() => setPlaceId(marker.place_id)}
           />
-        )
+        );
       })}
     </Map>
   );

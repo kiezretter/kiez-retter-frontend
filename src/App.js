@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import './default.scss';
+import './index.scss';
 import Routes from './Routes';
 import { Store } from "./context/StoreContext";
 import { Markers } from "./context/MarkerContext";
