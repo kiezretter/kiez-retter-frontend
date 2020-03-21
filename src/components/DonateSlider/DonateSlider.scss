@@ -1,0 +1,14 @@
+.slider {
+  &__wrapper {
+    margin-top: 3em;
+  }
+  &__img-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__image {
+    height: 5em;
+    width: auto;
+  }
+}

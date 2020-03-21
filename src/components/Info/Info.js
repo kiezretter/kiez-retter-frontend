@@ -4,6 +4,7 @@ import { useStoreContext } from "../../context/StoreContext";
 import verifiedIcon from '../../assets/images/correct.svg';
 import notVerifiedIcon from '../../assets/images/check.svg';
 import shareIcon from '../../assets/images/share.svg';
+import DiscreteSlider from "../DonateSlider/DonateSlider";
 
 const Info = () => {
   const [showInfo, setShowInfo] = useState(false);
@@ -71,6 +72,7 @@ const Info = () => {
                   <span>mehr &#8594;</span>
                 )}
               </div>
+              <DiscreteSlider />
               <button className="info__box-button">Spenden</button>
             </div>
           </div>

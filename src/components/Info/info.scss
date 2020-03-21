@@ -5,8 +5,14 @@
   font-size: 1.6em;
   padding: 1em;
   text-align: center;
+  background-color: $white;
   font-weight: 500;
   color: $mapsBlue;
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  right: 0px;
+  box-shadow: 0 -5px 5px -5px rgba($black, .2);
 }
 .info {
   &__wrapper {
@@ -14,8 +20,8 @@
     background-color: white;
     overflow: hidden;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 0px;
+    right: 0px;
   }
   &__img {
     height: 20em;
@@ -23,6 +29,7 @@
     overflow: hidden;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 -5px 5px -5px rgba($black, .2);
     img {
       width: 100%;
     }
@@ -57,7 +64,7 @@
       padding-bottom: 1em;
     }
     &-intro {
-      font-size: 1.6em;
+      font-size: 1.6em; 
       padding: 1em 0;
       margin-top: 0px;
       transition: all .5s;
@@ -73,7 +80,7 @@
     &-info-btn {
       font-size: 1.4em;
       padding-bottom: 2px !important;
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid $black;
       width: fit-content;
       padding: 1em 0;
       display: flex;
@@ -91,7 +98,7 @@
       background-color: $mapsBlue;
       color: $white;
       font-size: 1.6em;
-      box-shadow: 1px 2px 5px rgba(black, .2);
+      box-shadow: 1px 2px 5px rgba($black, .2);
     }
   }
 }

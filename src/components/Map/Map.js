@@ -15,8 +15,7 @@ export const Geo = ({ google, currentLocation, infoHeight }) => {
       ref={mapRef}
       google={google}
       containerStyle={{
-        // height: cardSettings === undefined ? 'calc(100vh - 50px)' : 'calc(100vh - 200px)',
-        height: 'calc(100vh - 55px)',
+        height: '100%',
         width: "100%",
         position: "relative"
       }}
