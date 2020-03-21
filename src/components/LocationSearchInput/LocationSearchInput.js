@@ -137,10 +137,10 @@ const LocationSearchInput = () => {
             {...getInputProps({
               label: 'Dein Lieblingsort',
               variant: 'outlined',
-              className: 'kr-location-search--input',
               fullWidth: true,
               placeholder: 'Kiez, Stadtteil, Späti, Kneipe, Club, Laden, Restaurant...',
             })}
+            className="kr-location-search--input"
             InputProps={{
               startAdornment: <InputAdornment position="start">
                 <Icon>search</Icon>

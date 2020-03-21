@@ -16,6 +16,18 @@
 
     &--input {
         background-color: #fff;
-        border-radius: 3px;
+        border-radius: 1.75rem;
+
+        .MuiInputBase-formControl {
+            border-radius: 1.75rem;
+        }
+
+        .MuiInputLabel-outlined {
+            transform: translate(2.9rem, -6px) scale(.75) !important;
+        }
+
+        .MuiOutlinedInput-notchedOutline legend {
+            margin-left: 2rem;
+        }
     }
 } 
