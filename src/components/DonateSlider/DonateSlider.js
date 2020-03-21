@@ -1,9 +1,9 @@
 import React from 'react';
-import Slider from "@material-ui/core/Slider";
+import { Slider } from "@material-ui/core";
 import './DonateSlider.scss';
-import beer from '../../assets/images/beer.svg';
-import beers from '../../assets/images/beers.svg';
-import bottles from '../../assets/images/bottles.svg';
+import beer from '../../assets/images/beer.png';
+import beers from '../../assets/images/beers.png';
+import bottles from '../../assets/images/bottles.png';
 
 const marks = [
   {
@@ -29,7 +29,7 @@ const DonateSlider = () => {
         <img src={bottles} alt="bottles" className="slider__image"/>
       </div>
       <Slider
-        defaultValue={2.5}
+        defaultValue={50}
         aria-labelledby="discrete-slider-custom"
         step={50}
         root={styles.root}

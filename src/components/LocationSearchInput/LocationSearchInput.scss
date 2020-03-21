@@ -1,0 +1,15 @@
+.kr-location-search {
+    position: relative;
+
+    &--autocomplete {
+        position: absolute !important;
+        width: 100%;
+        top: calc(100% + .5rem);
+        box-shadow: 0 2px 5px rgba(0,0,0,.05);
+    }
+
+    &--input {
+        background-color: #fff;
+        border-radius: 3px;
+    }
+} 

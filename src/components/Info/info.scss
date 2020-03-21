@@ -22,6 +22,7 @@
     position: absolute;
     bottom: 0px;
     right: 0px;
+    box-shadow: 0 -5px 5px -5px rgba($black, .8);
   }
   &__img {
     height: 20em;
@@ -29,7 +30,6 @@
     overflow: hidden;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 -5px 5px -5px rgba($black, .2);
     img {
       width: 100%;
     }

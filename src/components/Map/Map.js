@@ -10,12 +10,14 @@ export const Geo = ({ google, currentLocation, infoHeight }) => {
   const { markers } = useMarkersContext();
   const { setPlaceId } = useStoreContext();
 
+  const screenHeight = window.innerHeight;
+
   return (
     <Map
       ref={mapRef}
       google={google}
       containerStyle={{
-        height: '100%',
+        height: `${screenHeight}px`,
         width: "100%",
         position: "relative"
       }}
@@ -26,7 +28,7 @@ export const Geo = ({ google, currentLocation, infoHeight }) => {
         title="Da bist du!"
         position={currentLocation}
         icon={currentLocationIcon}
-        />
+      />
       {markers.map(marker => {
         return (
           <Marker

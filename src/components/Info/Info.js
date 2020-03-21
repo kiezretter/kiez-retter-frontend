@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './info.scss';
 import { useStoreContext } from "../../context/StoreContext";
 import verifiedIcon from '../../assets/images/correct.svg';
@@ -6,12 +6,32 @@ import notVerifiedIcon from '../../assets/images/check.svg';
 import shareIcon from '../../assets/images/share.svg';
 import DiscreteSlider from "../DonateSlider/DonateSlider";
 
-const Info = () => {
-  const [showInfo, setShowInfo] = useState(false);
+const Info = ({ userName }) => {
+  const [showStoreInfo, setShowStoreInfo] = useState(false);
+  const [showInfoCard, setShowInfoCard] = useState(true);
+  const [donatedAmount, setDonatedAmount] = useState(5);
   const {
     store,
     googleDatails,
   } = useStoreContext();
+  const infoRef = useRef(null);
+
+  function useOutsideAlerter(ref) {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setShowInfoCard(false);
+      }
+    }
+
+    useEffect(() => {
+      document.addEventListener("click", handleClickOutside);
+      return () => {
+        document.removeEventListener("click", handleClickOutside);
+      };
+    });
+  }
+
+  useOutsideAlerter(infoRef);
 
   let placeholder = (
     <div className="info__prompt">
@@ -22,8 +42,8 @@ const Info = () => {
   return (
     <>
       {!store && !googleDatails && placeholder}
-      {store && (
-        <div className="row">
+      {store && showInfoCard && (
+        <div className="row" ref={infoRef}>
           <div className="info__wrapper">
             <div className="info__img">
               <img
@@ -39,7 +59,9 @@ const Info = () => {
             </div>
             <div className="info__box">
               <div className="info__box-name__wrapper">
-                <div className="info__box-name__wrapper-name">{store.name}</div>
+                <div className="info__box-name__wrapper-name">
+                  {store.name}
+                </div>
                 <div className="info__box-name__wrapper-icon">
                   <img
                     src={shareIcon}
@@ -55,25 +77,32 @@ const Info = () => {
               <div className="info__box-address">{store.address}</div>
               <div
                 className={
-                  showInfo ? "info__box-intro" : "info__box-intro hide"
+                  showStoreInfo ? "info__box-intro" : "info__box-intro hide"
                 }
               >
                 Beste Laden wo gibt, ohne mich könnt ihr Euch keinen mehr
-                reinlöten und auch sonst wird's schwer. ALso lasst nen Taler da,
-                ich weiss es zu schäten!
+                reinlöten und auch sonst wird's schwer. ALso lasst nen Taler
+                da, ich weiss es zu schäten!
               </div>
               <div
                 className="info__box-info-btn"
-                onClick={() => setShowInfo(!showInfo)}
+                onClick={() => setShowStoreInfo(!showStoreInfo)}
               >
-                {showInfo ? (
+                {showStoreInfo ? (
                   <span>&#8592; less</span>
                 ) : (
                   <span>mehr &#8594;</span>
                 )}
               </div>
               <DiscreteSlider />
-              <button className="info__box-button">Spenden</button>
+              <a
+                href={`https://www.paypal.me/${userName}/${donatedAmount}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="info__box-button"
+              >
+                Spenden
+              </a>
             </div>
           </div>
         </div>
