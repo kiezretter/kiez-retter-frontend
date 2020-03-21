@@ -15,13 +15,13 @@ const FileUpload = (props) => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Card>
+      {props.showImagePreview && <Card>
         <CardMedia
           className={classes.mediaImage}
           image="https://via.placeholder.com/250"
           title="Foto"
         ></CardMedia>
-      </Card>
+      </Card>}
       <Button
         variant="contained"
         component="label"
