@@ -4,6 +4,17 @@ import Routes from './Routes';
 import { Store } from "./context/StoreContext";
 import { Markers } from "./context/MarkerContext";
 
+import {
+  ThemeProvider,
+  createMuiTheme,
+} from '@material-ui/core';
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: 'Montserrat, Arial',
+  }
+});
+
 const App = () => {
   const [gmapsLoaded, setGmapsLoaded] = useState(false);
 
@@ -21,7 +32,7 @@ const App = () => {
     initializeGoogleMapsApi();
   }, []);
   return (
-    <>
+    <ThemeProvider theme={theme}>
       {gmapsLoaded && (
         <Markers>
           <Store>
@@ -29,7 +40,7 @@ const App = () => {
           </Store>
         </Markers>
       )}
-    </>
+    </ThemeProvider>
   )
 }
 
