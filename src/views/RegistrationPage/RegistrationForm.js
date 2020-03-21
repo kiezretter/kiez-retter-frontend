@@ -1,5 +1,4 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
 import {
   InputLabel,
   FormControl,
@@ -9,196 +8,205 @@ import {
   Container,
   Grid
 } from '@material-ui/core';
+import './RegistrationForm.scss';
 import FileUpload from '../../components/Form/FileUpload'
 
+class RegistrationForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+    this.handleChange = this.handleChange.bind(this);
+    this.handleFormSend = this.handleFormSend.bind(this);
+  }
 
-const useStyles = makeStyles(theme => ({
-  formControl: {
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
-    minWidth: 120,
-    display: 'flex',
-  },
-  h2: {
-    marginTop: theme.spacing(3),
-  },
-}));
+  handleChange(evt) {
+    this.setState({
+      [evt.target.name]: evt.target.value
+    })
 
-const RegistrationForm = () => {
-  const classes = useStyles();
-  return (
-    <Container>
-      <form>
-        <Grid
-          container
-          justify="flex-start"
-          alignItems="center"
-          spacing={3}
-        >
-          <Grid item xs={12}>
-            <h2 className={classes.h2}>Inhaber</h2>
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <FormControl className={classes.formControl}>
-              <FileUpload label="Foto hochladen" showImagePreview />
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="gender">Titel</InputLabel>
-              <Select
-                native
-              >
-                <option aria-label="None" value="" />
-                <option value={'Frau'}>Frau</option>
-                <option value={'Herr'}>Herr</option>
-              </Select>
-            </FormControl>
-            <FormControl className={classes.formControl}>
-              <TextField id="standard-basic" label="Vorname" />
-            </FormControl>
-            <FormControl className={classes.formControl}>
-              <TextField id="standard-basic" label="Nachname" />
-            </FormControl>
-            <FormControl className={classes.formControl}>
-              <TextField id="standard-basic" label="Spitzname" />
-            </FormControl>
+  }
 
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
-                <FormControl className={classes.formControl}>
-                  <Button
-                    variant="contained"
-                    component="label"
-                  >
-                    <i className="material-icons">cloud_upload</i>&nbsp;Gewerbeschein
-                  <input
-                      type="file"
-                      style={{ display: "none" }}
-                    />
-                  </Button>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <FormControl className={classes.formControl}>
-                  <Button
-                    variant="contained"
-                    component="label"
-                  >
-                    <i className="material-icons">cloud_upload</i>&nbsp;Personalausweis
-                  <input
-                      type="file"
-                      style={{ display: "none" }}
-                    />
-                  </Button>
-                </FormControl>
+  handleFileUpload(evt) {
+    console.log('CL: RegistrationForm -> handleFileUpload -> evt', evt)
+
+  }
+
+  handleFormSend(evt) {
+    evt.preventDefault();
+    console.log('this.state', this.state)
+  }
+
+  handleFormCancel(evt) {
+    evt.preventDefault();
+    console.log('CL: handleFormCancel -> evt', evt)
+  }
+
+  render() {
+    return (
+      <Container>
+        <form>
+          <Grid
+            container
+            justify="flex-start"
+            alignItems="center"
+            spacing={3}
+          >
+            <Grid item xs={12}>
+              <h2 className="h2">Inhaber</h2>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <FormControl className="form-control">
+                <FileUpload name="ownerImage" label="Foto hochladen" showImagePreview onChange={this.handleFileUpload} />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <FormControl className="form-control">
+                <InputLabel htmlFor="title">Titel</InputLabel>
+                <Select
+                  native
+                  name="title"
+                  onChange={this.handleChange}
+                >
+                  <option aria-label="None" value="" />
+                  <option value={'Frau'}>Frau</option>
+                  <option value={'Herr'}>Herr</option>
+                </Select>
+              </FormControl>
+              <FormControl className="form-control">
+                <TextField name="firstName" id="standard-basic" label="Vorname" onChange={this.handleChange} />
+              </FormControl>
+              <FormControl className="form-control">
+                <TextField name="surname" id="standard-basic" label="Nachname" onChange={this.handleChange} />
+              </FormControl>
+              <FormControl className="form-control">
+                <TextField name="paypalHandle" id="standard-basic" label="Paypal Name" onChange={this.handleChange} />
+              </FormControl>
+
+              <Grid container spacing={3} className="upload-button">
+                <Grid item xs={12} md={6}>
+                  <FormControl className="form-control">
+                    <FileUpload name="ownerImage" label="Gewerbeschein" onChange={this.handleFileUpload} />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <FormControl className="form-control">
+                    <FileUpload name="ownerImage" label="Personalausweis" onChange={this.handleFileUpload} />
+                  </FormControl>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-        <Grid
-          justify="flex-start"
-          alignItems="center"
-          container
-          spacing={3}
-        >
-          <Grid item xs={12}>
-            <h2 className={classes.h2}>Lieblingsort</h2>
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <FormControl className={classes.formControl}>
-              <FileUpload label="Foto hochladen" showImagePreview />
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <p>
-              Muster Shop<br />
+          <Grid
+            justify="flex-start"
+            alignItems="center"
+            container
+            spacing={3}
+          >
+            <Grid item xs={12}>
+              <h2 className="h2">Lieblingsort</h2>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <FormControl className="form-control">
+                <FileUpload label="Foto hochladen" showImagePreview />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <p>
+                Muster Shop<br />
               Hauptstr. 5<br />
               12345 Berlin
             </p>
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="storeType">Geschäftstype</InputLabel>
-              <Select
-                native
-                id="storeType"
+              <FormControl className="form-control">
+                <InputLabel htmlFor="storeType">Geschäftstype</InputLabel>
+                <Select
+                  native
+                  name="storeType"
+                  onChange={this.handleChange}
+                >
+                  <option aria-label="None" value="" />
+                  <option value={'Kneipe'}>Kneipe</option>
+                  <option value={'Bar'}>Bar</option>
+                </Select>
+              </FormControl>
+            </Grid>
+          </Grid>
+          <Grid
+            justify="flex-start"
+            alignItems="center"
+            container
+            spacing={3}
+          >
+            <Grid item xs={12}>
+              <h2 className="h2">Rettungs-Aufruf</h2>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <FormControl className="form-control">
+                <TextField
+                  name="rescueCallText"
+                  variant="outlined"
+                  helperText="Hier den Text für Deinen Rettungsaufruf eingeben"
+                  label="Rettungs aufruf"
+                  multiline
+                  rows={4}
+                  rowsMax={8}
+                  onChange={this.handleChange}
+                />
+              </FormControl>
+            </Grid>
+          </Grid>
+          <Grid
+            justify="flex-start"
+            alignItems="center"
+            container spacing={3}
+          >
+            <Grid item xs={12}>
+              <h2 className="h2">Dankeschön</h2>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <FormControl className="form-control">
+                <TextField
+                  name="thankYouText"
+                  variant="outlined"
+                  helperText="Hier den Danke-Text für Spenden eingeben"
+                  label="Dankeschön"
+                  multiline
+                  rows={4}
+                  rowsMax={8}
+                  onChange={this.handleChange}
+                />
+              </FormControl>
+            </Grid>
+          </Grid>
+          <Grid
+            justify="flex-start"
+            alignItems="center"
+            container
+            spacing={3}
+          >
+            <Grid item xs={12} md={2}>
+              <Button
+                variant="contained"
+                color="primary"
+                component="label"
+                onClick={this.handleFormSend}
               >
-                <option aria-label="None" value="" />
-                <option value={'Kneipe'}>Kneipe</option>
-                <option value={'Bar'}>Bar</option>
-              </Select>
-            </FormControl>
-          </Grid>
-        </Grid>
-        <Grid
-          justify="flex-start"
-          alignItems="center"
-          container
-          spacing={3}
-        >
-          <Grid item xs={12}>
-            <h2 className={classes.h2}>Rettungs-Aufruf</h2>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControl className={classes.formControl}>
-              <TextField
-                variant="outlined"
-                helperText="Hier den Text für Deinen Rettungsaufruf eingeben"
-                label="Rettungs aufruf"
-                multiline
-                rows={4}
-                rowsMax={8}
-              />
-            </FormControl>
-          </Grid>
-        </Grid>
-        <Grid
-          justify="flex-start"
-          alignItems="center"
-          container spacing={3}
-        >
-          <Grid item xs={12}>
-            <h2 className={classes.h2}>Dankeschön</h2>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControl className={classes.formControl}>
-              <TextField
-                variant="outlined"
-                helperText="Hier den Danke-Text für Spenden eingeben"
-                label="Dankeschön"
-                multiline
-                rows={4}
-                rowsMax={8}
-              />
-            </FormControl>
-          </Grid>
-        </Grid>
-        <Grid
-          justify="flex-start"
-          alignItems="center"
-          container
-          spacing={3}
-        >
-          <Grid item xs={12} sm={2}>
-            <Button
-              variant="contained"
-              color="primary"
-              component="label"
-            >
-              Registrieren
+                Registrieren
               </Button>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Button
-              component="label"
-              color="secondary"
-            >
-              Abbrechen
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Button
+                component="label"
+                color="secondary"
+                onClick={this.handleFormCancel}
+              >
+                Abbrechen
               </Button>
+            </Grid>
           </Grid>
-        </Grid>
-      </form>
-    </Container >
-  )
+        </form>
+      </Container >
+    )
+  }
 }
 
 export default RegistrationForm;
