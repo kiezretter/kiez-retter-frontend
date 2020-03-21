@@ -11,17 +11,20 @@ export default class Footer extends React.Component {
     render() {
         return (
             <div className="kr-footer">
-                <Link className="kr-footer--link" href="/">
+                <Link className="kr-footer--link" href="/ueberuns">
+                    Über uns
+                </Link>
+                <Link className="kr-footer--link" href="/impressum">
                     Impressum
                 </Link>
-                <Link className="kr-footer--link" href="/inhaber">
+                <Link className="kr-footer--link" href="/datenschutz">
                     Datenschutz
                 </Link>
-                <Link className="kr-footer--link" href="/kiezretter">
+                <Link className="kr-footer--link" href="/agb">
                     AGB
                 </Link>
-                <Link className="kr-footer--link" href="/ueberuns">
-                    Hilfe
+                <Link className="kr-footer--link" href="/faq">
+                    FAQ
                 </Link>
             </div>
         );
