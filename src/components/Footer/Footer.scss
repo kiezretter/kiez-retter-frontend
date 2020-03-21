@@ -4,5 +4,9 @@
 
     &--link {
         margin: 0 1rem !important;
+
+        &__active {
+            font-weight: bold;
+        }
     }
 }
