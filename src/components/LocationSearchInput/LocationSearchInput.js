@@ -9,7 +9,6 @@ import { useHistory } from 'react-router-dom';
 import { useStoreContext } from "../../context/StoreContext";
 
 import { 
-  Grid,
   TextField,
   InputAdornment,
   Icon,
@@ -27,6 +26,9 @@ const locationTypeIcons = {
   bar: 'local_bar',
   restaurant: 'restaurant',
   grocery_or_supermarket: 'local_grocery_store',
+  cafe: 'local_cafe',
+  campground: 'fireplace',
+  movie_theater: 'theaters',
   default: 'location_on',
 };
  
@@ -76,7 +78,6 @@ const LocationSearchInput = () => {
         let className = 'kr-location-search--autocomplete-item';
         if (suggestion.active) className += ' kr-location-search--autocomplete-item__active';
 
-        console.log('suggestion', suggestion.types);
         let locationIcon;
 
         for(let type of suggestion.types) {
@@ -123,42 +124,38 @@ const LocationSearchInput = () => {
   }
 
   return (
-    <Grid container alignItems="center" spacing={1}>
-      <Grid item xs>
-        <PlacesAutocomplete
-          value={address}
-          onChange={input => setAddress(input)}
-          onSelect={input => handleSelect(input)}
-          onError={e => console.log('error', e)}
-          searchOptions={searchOptions}
-        >
-          {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-            <div className="kr-location-search">
-              <TextField 
-                {...getInputProps({
-                  label: 'Dein Lieblingsort',
-                  variant: 'outlined',
-                  className: 'kr-location-search--input',
-                  fullWidth: true,
-                  placeholder: 'Kiez, Stadtteil, Späti, Kneipe, Club, Laden, Restaurant...',
-                })}
-                InputProps={{
-                  startAdornment: <InputAdornment position="start">
-                    <Icon>search</Icon>
-                  </InputAdornment>,
-                }}
-              />
-              {renderResults(loading, suggestions, getSuggestionItemProps)}
-            </div>
-          )}
-        </PlacesAutocomplete>
-      </Grid>
-      <Grid item xs={1}>
-        <IconButton color="primary" component="span" onClick={e => getGeolocation()}>
-          <Icon>location_on</Icon>
-        </IconButton>
-      </Grid>
-    </Grid>
+    <PlacesAutocomplete
+      value={address}
+      onChange={input => setAddress(input)}
+      onSelect={input => handleSelect(input)}
+      onError={e => console.log('error', e)}
+      searchOptions={searchOptions}
+    >
+      {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+        <div className="kr-location-search">
+          <TextField 
+            {...getInputProps({
+              label: 'Dein Lieblingsort',
+              variant: 'outlined',
+              className: 'kr-location-search--input',
+              fullWidth: true,
+              placeholder: 'Kiez, Stadtteil, Späti, Kneipe, Club, Laden, Restaurant...',
+            })}
+            InputProps={{
+              startAdornment: <InputAdornment position="start">
+                <Icon>search</Icon>
+              </InputAdornment>,
+              endAdornment: <InputAdornment position="end">
+                <IconButton color="primary" component="span" onClick={e => getGeolocation()}>
+                  <Icon>location_on</Icon>
+                </IconButton>
+              </InputAdornment>,
+            }}
+          />
+          {renderResults(loading, suggestions, getSuggestionItemProps)}
+        </div>
+      )}
+    </PlacesAutocomplete>
   );
 }
 
