@@ -1,9 +1,25 @@
+@import "../../styles/Colors.scss";
+
 .kr-nav {
     padding: .5rem 0;
+    margin-right: -.25rem !important;
+    margin-bottom: 2rem !important;
 
     &--link {
+        padding: 0 .25rem;
+        padding-bottom: .25rem;
+
         & + & {
-            margin-left: 2rem;
+            margin-left: 1.5rem;
+        }
+
+        &:hover {
+            text-decoration: none !important;
+            border-bottom: 1px solid $brand-blue;
+        }
+        
+        &__active {
+            border-bottom: 1px solid $brand-red;
         }
     }
 }
