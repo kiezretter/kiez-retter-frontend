@@ -21,7 +21,7 @@ const BusinessOverview = () => {
         }}
         cardIn={200}
       />
-      <Info />
+      <Info userName='marcuszierke' />
     </>
   )
 }

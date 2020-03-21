@@ -5,29 +5,36 @@ import { useMarkersContext } from "../../context/MarkerContext";
 import { useStoreContext } from '../../context/StoreContext';
 
 
-export const Geo = ({ google, currentLocation, infoHeight }) => {
+export const Geo = ({ google, currentLocation }) => {
   const mapRef = useRef(null);
   const { markers } = useMarkersContext();
   const { setPlaceId } = useStoreContext();
+
+  const screenHeight = window.innerHeight;
+
+  const showDefaultMap = () => {
+    console.log('works liks a sharme')
+  }
 
   return (
     <Map
       ref={mapRef}
       google={google}
       containerStyle={{
-        // height: cardSettings === undefined ? 'calc(100vh - 50px)' : 'calc(100vh - 200px)',
-        height: 'calc(100vh - 55px)',
+        height: `${screenHeight}px`,
         width: "100%",
         position: "relative"
       }}
       initialCenter={currentLocation}
       zoom={16}
+      disableDefaultUI={true}
+      click={showDefaultMap}
       >
       <Marker
         title="Da bist du!"
         position={currentLocation}
         icon={currentLocationIcon}
-        />
+      />
       {markers.map(marker => {
         return (
           <Marker

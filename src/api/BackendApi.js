@@ -12,10 +12,10 @@ const BackendApi = () => {
 
     // return res.json();
     return {
-      name: "Muster Shop",
+      name: "Mustafa Shop",
       address: "Musterstr. 12345, Berlin",
       shop_images: ["ulr1", "ulr2", "ulr3"],
-      verified: "true",
+      verified: true,
       text: "some nice text",
       profile_image: "url",
     }
@@ -45,6 +45,15 @@ const BackendApi = () => {
       title: 'Hello my darling2',
       position: {
         lat: 52.50840,
+        lng: 13.396699
+      },
+      info: "some nice informationen",
+      place_id: "ChIJGYTmkKtRqEcRWx2mn3U_McE",
+    }, {
+      id: 2,
+      title: 'Hello my darling2',
+      position: {
+        lat: 52.51840,
         lng: 13.396699
       },
       info: "some nice informationen",

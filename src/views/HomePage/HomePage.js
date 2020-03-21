@@ -16,7 +16,7 @@ const HomePage = () => {
     <Container maxWidth="sm" className="kr-homepage">
       <Navigation />
       <div className="kr-homepage--search-container">
-        <img src={KiezheroImage} className="kr-homepage--kiezhero" />
+        <img src={KiezheroImage} className="kr-homepage--kiezhero" alt="logo" />
         <LocationSearchInput /> 
       </div>
       <Footer />
