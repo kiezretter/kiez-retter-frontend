@@ -8,7 +8,29 @@ import PlacesAutocomplete, {
 import { useHistory } from 'react-router-dom';
 import { useStoreContext } from "../../context/StoreContext";
 
-import { TextField } from '@material-ui/core';
+import { 
+  TextField,
+  InputAdornment,
+  Icon,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Paper,
+} from '@material-ui/core';
+
+import './LocationSearchInput.scss';
+
+const locationTypeIcons = {
+  bar: 'local_bar',
+  restaurant: 'restaurant',
+  grocery_or_supermarket: 'local_grocery_store',
+  cafe: 'local_cafe',
+  campground: 'fireplace',
+  movie_theater: 'theaters',
+  default: 'location_on',
+};
  
 const LocationSearchInput = () => {
   const history = useHistory();
@@ -35,6 +57,72 @@ const LocationSearchInput = () => {
     radius: 20000,
   }
 
+  const getGeolocation = () => {
+    if (!navigator.geolocation) {
+      alert('Sorry, dein Browser erlaubt keine Abfrage deines Ortes - benutz doch unsere Suchfunktion!');
+    } else {
+      navigator.geolocation.getCurrentPosition(getGeolocationSuccess, alert);
+    }
+  };
+
+  const getGeolocationSuccess = (position) => {
+    console.log('got location!', position.coords);
+    goToKiez({ lat: position.coords.latitude, lng: position.coords.longitude });
+  }
+
+  const renderResultList = (loading, suggestions, getSuggestionItemProps) => {
+    let results = <ListItem><ListItemText primary="Suche Ergebnisse für dich..." /></ListItem>;
+
+    if (suggestions.length) {
+      results = suggestions.map(suggestion => {
+        let className = 'kr-location-search--autocomplete-item';
+        if (suggestion.active) className += ' kr-location-search--autocomplete-item__active';
+
+        let locationIcon;
+
+        for(let type of suggestion.types) {
+          if (locationTypeIcons[type]) {
+            locationIcon = locationTypeIcons[type];
+            break;
+          }
+        }
+
+        if (!locationIcon) console.log('no icon found', suggestion.types);
+        if (!locationIcon) locationIcon = locationTypeIcons['default'];
+
+        return (
+          <ListItem
+            button
+            {...getSuggestionItemProps(suggestion, {
+              className,
+            })}
+          >
+            <ListItemIcon>
+              <Icon>{locationIcon}</Icon>
+            </ListItemIcon>
+            <ListItemText primary={suggestion.description} />
+          </ListItem>
+        );
+      });
+    }
+
+    return (
+      <List component="nav">
+        {results}
+      </List>
+    );
+  }
+
+  const renderResults = (loading, suggestions, getSuggestionItemProps) => {
+    if (!loading && !suggestions.length) return null;
+
+    return (
+      <Paper variant="outlined" className="kr-location-search--autocomplete">
+        {renderResultList(loading, suggestions, getSuggestionItemProps)}
+      </Paper>
+    );
+  }
+
   return (
     <PlacesAutocomplete
       value={address}
@@ -44,31 +132,27 @@ const LocationSearchInput = () => {
       searchOptions={searchOptions}
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-        <div>
+        <div className="kr-location-search">
           <TextField 
             {...getInputProps({
               label: 'Dein Lieblingsort',
-              id: 'standard-basic',
-              className: 'location-search-input',
+              variant: 'outlined',
+              fullWidth: true,
+              placeholder: 'Kiez, Stadtteil, Späti, Kneipe, Club, Laden, Restaurant...',
             })}
+            className="kr-location-search--input"
+            InputProps={{
+              startAdornment: <InputAdornment position="start">
+                <Icon>search</Icon>
+              </InputAdornment>,
+              endAdornment: <InputAdornment position="end">
+                <IconButton color="primary" component="span" onClick={e => getGeolocation()}>
+                  <Icon>location_on</Icon>
+                </IconButton>
+              </InputAdornment>,
+            }}
           />
-          <div className="autocomplete-dropdown-container">
-            {loading && <div>Suche Ergebnisse für dich...</div>}
-            {suggestions.map(suggestion => {
-              const className = suggestion.active
-                ? 'suggestion-item--active'
-                : 'suggestion-item';
-              return (
-                <div
-                  {...getSuggestionItemProps(suggestion, {
-                    className,
-                  })}
-                >
-                  <span>{suggestion.description}</span>
-                </div>
-              );
-            })}
-          </div>
+          {renderResults(loading, suggestions, getSuggestionItemProps)}
         </div>
       )}
     </PlacesAutocomplete>
