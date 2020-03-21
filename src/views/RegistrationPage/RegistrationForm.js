@@ -16,6 +16,7 @@ class RegistrationForm extends React.Component {
     super(props);
     this.state = {}
     this.handleChange = this.handleChange.bind(this);
+    this.handleFileUpload = this.handleFileUpload.bind(this);
     this.handleFormSend = this.handleFormSend.bind(this);
   }
 
@@ -26,9 +27,10 @@ class RegistrationForm extends React.Component {
 
   }
 
-  handleFileUpload(evt) {
-    console.log('CL: RegistrationForm -> handleFileUpload -> evt', evt)
-
+  handleFileUpload(data) {
+    this.setState({
+      [data.name]: data.file
+    })
   }
 
   handleFormSend(evt) {

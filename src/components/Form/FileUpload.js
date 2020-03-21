@@ -27,11 +27,10 @@ class FileUpload extends React.Component {
     reader.readAsDataURL(evt.target.files[0])
     reader.onloadend = e => {
       this.setState({
-        file: reader.result
+        file: reader.result,
+        name: this.props.name
       });
-      if (!this.props.showImagePreview) {
-        console.log('=> ', this.state.file)
-      }
+      this.props.onChange(this.state)
     }
   }
 
