@@ -33,7 +33,7 @@ const faqQuestionsSupporter = [
     },
     {
         question: 'Gibt es ein Mindestziel für Spendenaktionen?',
-        answer: 'Nein. Anders als bei manchen Crowdfunding-Websites, gibt es kein \„Spendenziel\“ welches erreicht werden muss. Jede Spende wird direkt an das gewünschte Unternehmen weitergeleitet.'
+        answer: 'Nein. Anders als bei manchen Crowdfunding-Websites, gibt es kein „Spendenziel“ welches erreicht werden muss. Jede Spende wird direkt an das gewünschte Unternehmen weitergeleitet.'
     },
     {
         question: 'Können Andere sehen, wem ich gespendet habe?',
@@ -57,7 +57,7 @@ const faqQuestionsSupporter = [
     },
     {
         question: 'Wie ist kiezretter entstanden?',
-        answer: 'Kiezretter ist eine Initiative die im Rahmen des Hackathons #WirvsVirus von der Bundesregierung entstanden ist. Wir sind 19 Personen zwischen 20 - 50 aus ganz Deutschland, die sich für diese Idee begeistern konnten und innerhalb von 72 Stunden kiezretter aufgezogen haben.'
+        answer: 'Kiezretter ist eine Initiative die im Rahmen des Hackathons #WirvsVirus von der Bundesregierung entstanden ist. Wir sind 19 Personen zwischen 20 - 50 aus ganz Deutschland, die sich für diese Idee begeistern konnten und innerhalb von 48 Stunden kiezretter aufgezogen haben.'
     },
     {
         question: 'Wie kann ich Werbung für euch machen? ',
