@@ -4,13 +4,13 @@ import {
   CardMedia,
   Button
 } from '@material-ui/core';
-import KiezheroImage from '../../assets/images/kiezhero_shadow.png';
+import storeImage from '../../assets/images/laden3.png';
 
 class FileUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: KiezheroImage
+      file: storeImage
     }
     this.fileChanged = false;
     this.useStyles = {
