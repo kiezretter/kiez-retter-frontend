@@ -288,7 +288,7 @@ class RegistrationForm extends React.Component {
                     required
                   />
                 }
-                label="Hiermit akzeptiere ich die AGBs*"
+                label={<span>Hiermit akzeptiere ich <a href="/agb">die AGBs*</a></span>}
               />
             </FormControl>
           </Grid>
