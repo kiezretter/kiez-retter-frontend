@@ -221,8 +221,13 @@ class RegistrationForm extends React.Component {
                 onChange={this.handleChange}
               >
                 <option aria-label="None" value="" />
-                <option value={'Kneipe'}>Kneipe</option>
-                <option value={'Bar'}>Bar</option>
+                <option value={'bar'}>Kneipe</option>
+                <option value={'club'}>Club</option>
+                <option value={'late_shop'}>Späti</option>
+                <option value={'restaurant'}>Restaurant</option>
+                <option value={'cafe'}>Café</option>
+                <option value={'shop'}>Einzelhandel</option>
+                <option value={'service'}>Dienstleistung</option>
               </Select>
             </FormControl>
             <FormControl className="form-control">
