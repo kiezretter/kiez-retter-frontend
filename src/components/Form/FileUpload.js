@@ -12,6 +12,7 @@ class FileUpload extends React.Component {
     this.state = {
       file: KiezheroImage
     }
+    this.fileChanged = false;
     this.useStyles = {
       weight: 250,
       height: 250
@@ -29,7 +30,8 @@ class FileUpload extends React.Component {
     reader.onloadend = e => {
       this.setState({
         file: reader.result,
-        name: this.props.name
+        name: this.props.name,
+        fileChanged: true
       });
       this.props.onChange(this.state)
     }
@@ -46,7 +48,7 @@ class FileUpload extends React.Component {
           ></CardMedia>
         </Card>}
         <Button
-          variant="contained"
+          variant={this.state.fileChanged ? 'outlined' : 'contained'}
           component="label"
         >
           <i className="material-icons">cloud_upload</i>&nbsp; {this.props.label}
