@@ -53,13 +53,11 @@ class RegistrationForm extends React.Component {
     if (evt.target.name === 'agbChecked') {
       this.setState({
         [evt.target.name]: evt.target.checked
-      });
-      this.validateForm();
+      }, this.validateForm.bind(this));
     } else {
       this.setState({
         [evt.target.name]: evt.target.value
-      });
-      this.validateForm();
+      }, this.validateForm.bind(this));
     }
     if (evt.target.name === 'street_address') {
 
