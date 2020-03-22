@@ -21,9 +21,10 @@ const BackendApi = () => {
   }
 
   const loadAllMarker = async () => {
-    await fetch("https://staging-api.kiez-retter.de/api/businesses/")
-      .then(res => { return res.json() })
-      .then(data => data.businesses )
+    console.log("loadAll")
+    await fetch(`${process.env.REACT_APP_ROOT_URL}/api/businesses/`)
+      .then(res => res.json())
+      .then(data => console.log('data', data) )
       .catch((error) => {
         console.log(`something went wrong by calling ${URL}`);
       });

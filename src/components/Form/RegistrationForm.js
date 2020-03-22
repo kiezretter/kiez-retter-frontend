@@ -119,7 +119,7 @@ class RegistrationForm extends React.Component {
         }
       }
     }
-    let response = await fetch('https://staging-api.kiez-retter.de/api/businesses', {
+    let response = await fetch(`${process.env.REACT_APP_ROOT_URL}/api/businesses`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -323,7 +323,7 @@ class RegistrationForm extends React.Component {
                     required
                   />
                 }
-                label={<span>Hiermit akzeptiere ich <a href="/agb">die AGBs*</a></span>}
+                label={<span>Hiermit akzeptiere ich <a target="_blank" href="/agb">die AGBs*</a></span>}
               />
             </FormControl>
           </Grid>
