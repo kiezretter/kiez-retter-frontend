@@ -1,9 +1,20 @@
+
 import React, { useState } from 'react';
+
 import './info.scss';
-import { Input, withStyles } from '@material-ui/core';
+
+import { 
+  Input,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  withStyles, 
+} from '@material-ui/core';
+
 import { useStoreContext } from "../../context/StoreContext";
-import verifiedIcon from '../../assets/images/correct.svg';
-import notVerifiedIcon from '../../assets/images/check.svg';
+
+import verifiedIcon from '../../assets/images/verifiziert.png';
 import shareIcon from '../../assets/images/share.svg';
 import PrettoSlider from "../DonateSlider/DonateSlider";
 import pub1 from '../../assets/images/pub1.png';
@@ -50,33 +61,36 @@ const Info = ({ userName }) => {
   return (
     <>
       {(store && showInfoCard) ? (
-        <div className="info__wrapper">
-          <div className="info__close-btn" onClick={() =>setShowInfoCard(false)}>&times;</div>
-          <div className="info__img">
-            <img
-              src="https://images.unsplash.com/photo-1582317361770-c0b3040d8d0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=60"
-              alt="store"
-              className="info__img-store"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1444069069008-83a57aac43ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=60"
-              alt="human"
-              className="info__img-human"
-            />
-          </div>
-          <div className="info__box">
-            <div className="info__box-name__wrapper">
-              <div className="info__box-name__wrapper-name">{store.name}</div>
-              <div className="info__box-name__wrapper-icon">
-                <img
-                  src={shareIcon}
-                  alt="share"
-                  className="info__box-name__wrapper-icon__share"
-                />
-                <img
-                  src={store.verified ? verifiedIcon : notVerifiedIcon}
-                  alt="verified"
-                />
+        <Card className="info__wrapper">
+          <div className="info__close-btn" onClick={() => setShowInfoCard(false)}>&times;</div>
+          <CardMedia
+            image="https://images.unsplash.com/photo-1582317361770-c0b3040d8d0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=60"
+            title="store"
+            className="info__img info__img-store"
+          />
+          <CardMedia
+            image="https://images.unsplash.com/photo-1444069069008-83a57aac43ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=60"
+            title="human"
+            className="info__img info__img-human"
+          />
+          <CardContent>
+            <div className="info__box">
+              <div className="info__box-name__wrapper">
+                <div className="info__box-name__wrapper-name">
+                  {store.name}
+                  <img
+                    src={verifiedIcon}
+                    alt="verified"
+                    className={`info__verified-icon ${store.verified ? 'info__verified-icon--verified' : ''}`}
+                  />
+                </div>
+                <div className="info__box-name__wrapper-icon">
+                  <img
+                    src={shareIcon}
+                    alt="share"
+                    className="info__box-name__wrapper-icon__share"
+                  />
+                </div>
               </div>
             </div>
             <div className="info__box-address">{store.address}</div>
@@ -113,26 +127,29 @@ const Info = ({ userName }) => {
               min={0}
               max={100}
             />
-            <div className="info__box-amount">
-              <StyledInput
-                type="text"
-                placeholder={donatedValue.toString()}
-                value={donatedValue}
-                onChange={handleSliderInputChange}
-                classes={{ root: "my-class-name" }}
-              />
-              <span>EUR</span>
-            </div>
-            <a
-              href={`https://www.paypal.me/${userName}/${donatedValue}EUR`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="info__box-button"
-            >
-              Spenden
-            </a>
-          </div>
-        </div>
+              <div className="info__box-amount">
+                <StyledInput
+                  type="text"
+                  placeholder={donatedValue.toString()}
+                  value={donatedValue}
+                  onChange={handleSliderInputChange}
+                  classes={{ root: "my-class-name" }}
+                />
+                <span>EUR</span>
+              </div>
+              <Button 
+                variant="contained" 
+                color="primary" 
+                disableElevation 
+                href={`https://www.paypal.me/${userName}/${donatedValue}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="info__box-button"
+              >
+                Jetzt spenden
+              </Button>
+          </CardContent>
+        </Card>
       ) : placeholder }
       {googleDatails && <>Hier kommen die Informationen von Google hin.</>}
       {store && googleDatails && <button>Spenden</button>}
