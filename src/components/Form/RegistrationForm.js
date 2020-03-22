@@ -119,6 +119,10 @@ class RegistrationForm extends React.Component {
         }
       }
     }
+    // Form sent successfully
+    // eslint-disable-next-line react/no-direct-mutation-state
+    this.state = { agbChecked: false, isFormValid: false };
+    this.form.current.reset();
     console.log('CL: RegistrationForm -> handleFormSend -> data', data)
   }
 
