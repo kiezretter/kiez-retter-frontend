@@ -17,9 +17,11 @@
     &--input {
         background-color: #fff;
         border-radius: 1.75rem;
+        // box-shadow: 0 0 10px rgba(0,0,0,0.2);
 
         .MuiInputBase-formControl {
             border-radius: 1.75rem;
+            padding-right: 4px;
         }
 
         .MuiInputLabel-outlined {

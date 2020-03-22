@@ -6,9 +6,19 @@ import {
     Container,
 } from '@material-ui/core';
 
+import LogoImage from '../../assets/images/logo_transparent.png';
+
 import './Navigation.scss';
 
 export default class Navigation extends React.Component {
+    get classes() {
+        let classes = 'kr-nav';
+
+        if (this.props.bordered) classes += ' kr-nav__bordered';
+
+        return classes;
+    }
+
     isActiveRoute(route) {
         return window.location.pathname === route;
     }
@@ -23,10 +33,18 @@ export default class Navigation extends React.Component {
         return classes;
     }
 
+    renderLogo() {
+        if (this.props.hideLogo) return null;
+
+        return <img src={LogoImage} alt="Kiezretter Logo" className="kr-nav--logo" />;
+    }
+
     render() {
         return (
-            <div className="kr-nav">
+            <div className={this.classes}>
                 <Container maxWidth="md">
+                    {this.renderLogo()}
+                    
                     <Typography className="kr-nav--list" align="right">
                         <Link className={this.getClassesForLink('/')} href="/">
                             Home

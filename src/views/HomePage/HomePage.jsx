@@ -36,9 +36,10 @@ export default class HomePage extends React.Component {
     render() {
         return (
             <>
-                <Navigation />
+                <Navigation hideLogo={true} />
                 
-                <SearchSection onSearchEnd={e => this.onSearchEnd()} onSearch={e => this.onSearch()} />
+                <SearchSection onSearchEnd={e => this.onSearchEnd()} onSearch={e => this.onSearch()} showKiez={this.state.showContent} />
+                
                 <Collapse in={this.state.showContent}>
                     <AboutSection />
                     <HowItWorksSection onClickHelp={e => this.focusSearch()} />
