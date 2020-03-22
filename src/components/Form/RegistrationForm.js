@@ -31,7 +31,6 @@ class RegistrationForm extends React.Component {
   }
 
   validateForm() {
-    console.log('no')
     if (this.state.gmap_id &&
       this.state.name &&
       this.state.street_address &&
@@ -46,7 +45,6 @@ class RegistrationForm extends React.Component {
       this.state.agbChecked) {
       // All required fields are valid
       this.setState({ isFormValid: true })
-
     }
   }
 
@@ -86,7 +84,6 @@ class RegistrationForm extends React.Component {
 
   handleFormSend(evt) {
     evt.preventDefault();
-    console.log('this.state', this.state)
     const data = {
       gmap_id: this.state.gmap_id,
       name: this.state.name,
@@ -164,7 +161,7 @@ class RegistrationForm extends React.Component {
               </Select>
             </FormControl>
             <FormControl className="form-control">
-              <TextField name="name" id="standard-basic" label="Vorname" required onChange={this.handleChange} />
+              <TextField name="first_name" id="standard-basic" label="Vorname" required onChange={this.handleChange} />
             </FormControl>
             <FormControl className="form-control">
               <TextField name="last_name" id="standard-basic" label="Nachname" required onChange={this.handleChange} />
@@ -212,6 +209,9 @@ class RegistrationForm extends React.Component {
             </FormControl>
           </Grid>
           <Grid item xs={12} md={6}>
+            <FormControl className="form-control">
+              <TextField name="name" id="standard-basic" label="Name" required onChange={this.handleChange} />
+            </FormControl>
             <FormControl className="form-control">
               <TextField name="street_address" id="standard-basic" label="Straße" required onChange={this.handleChange} />
             </FormControl>
