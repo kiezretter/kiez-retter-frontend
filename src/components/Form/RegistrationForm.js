@@ -38,7 +38,8 @@ class RegistrationForm extends React.Component {
       this.state.postcode &&
       this.state.city &&
       this.state.email &&
-      (this.state.trade_licence_image || this.state.id_card_image) &&
+      this.state.trade_licence_image &&
+      this.state.id_card_image &&
       this.state.name &&
       this.state.last_name &&
       this.state.paypal_handle &&
@@ -164,15 +165,15 @@ class RegistrationForm extends React.Component {
               <TextField name="paypal_handle" id="standard-basic" label="Paypal Name" required onChange={this.handleChange} />
             </FormControl>
 
-            <Grid container spacing={3} className="upload-button">
+            <Grid container spacing={1} className="upload-button">
               <Grid item xs={12} md={6}>
                 <FormControl className="form-control">
-                  <FileUpload name="trade_licence_image" label="Gewerbeschein" onChange={this.handleFileUpload} />
+                  <FileUpload name="trade_licence_image" label="Gewerbeschein*" onChange={this.handleFileUpload} />
                 </FormControl>
               </Grid>
               <Grid item xs={12} md={6}>
                 <FormControl className="form-control">
-                  <FileUpload name="id_card_image" label="Personalausweis" onChange={this.handleFileUpload} />
+                  <FileUpload name="id_card_image" label="Personalausweis*" onChange={this.handleFileUpload} />
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
