@@ -12,8 +12,17 @@
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
-        width: 2200px;
+        width: 100vw;
         opacity: .7;
+        height: 100%;
+        background-position: bottom center;
+        background-size: 2200px;
+        background-repeat: no-repeat;
+        transition: opaicty 300ms;
+
+        &__hidden {
+            opacity: 0;
+        }
     } 
 
     &--about {
