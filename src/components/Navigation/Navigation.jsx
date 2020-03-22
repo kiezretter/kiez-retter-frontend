@@ -25,19 +25,21 @@ export default class Navigation extends React.Component {
 
     render() {
         return (
-            <Container maxWidth="md">
-                <Typography className="kr-nav" align="right">
-                    <Link className={this.getClassesForLink('/')} href="/">
-                        Home
-                    </Link>
-                    <Link className={this.getClassesForLink('/inhaber')} href="/inhaber">
-                        Inhaber
-                    </Link>
-                    <Link className={this.getClassesForLink('/kiezretter')} href="/kiezretter">
-                        Kiezretter
-                    </Link>
-                </Typography>
-            </Container>
+            <div className="kr-nav">
+                <Container maxWidth="md">
+                    <Typography className="kr-nav--list" align="right">
+                        <Link className={this.getClassesForLink('/')} href="/">
+                            Home
+                        </Link>
+                        <Link className={this.getClassesForLink('/inhaber')} href="/inhaber">
+                            Inhaber
+                        </Link>
+                        <Link className={this.getClassesForLink('/kiezretter')} href="/kiezretter">
+                            Kiezretter
+                        </Link>
+                    </Typography>
+                </Container>
+            </div>
         );
     }
 }
