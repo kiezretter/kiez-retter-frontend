@@ -99,13 +99,27 @@ class RegistrationForm extends React.Component {
       personal_message: this.state.personal_message,
       personal_thank_you: this.state.personal_thank_you,
       business_type_id: this.state.business_type_id,
-      owner: {
+      favorite_place_image: {
+        data: this.state.favorite_place_image
+      },
+      trade_certificate_attributes: {
+        trade_licence_image: {
+          data: this.state.trade_licence_image
+        }
+      },
+      owner_attributes: {
         email: this.state.email,
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         salutation: this.state.salutation,
         nick_name: this.state.nick_name,
-        paypal_handle: this.state.paypal_handle
+        paypal_handle: this.state.paypal_handle,
+        owner_image: {
+          data: this.state.owner_image
+        },
+        id_card_image: {
+          data: this.state.id_card_image
+        }
       }
     }
     console.log('CL: RegistrationForm -> handleFormSend -> data', data)
