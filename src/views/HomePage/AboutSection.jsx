@@ -19,7 +19,7 @@ export default class AboutSection extends React.Component {
                         <br />
                         Unsere Plattform ermöglicht es jedem, ein Zeichen der Solidarität  zu setzen – und bringt unsere Gesellschaft somit ein Stückchen näher zusammen. Somit wird nicht nur die Vielfalt auf unseren Straßen erhalten, sondern auch die Identifikation mit der eigenen Nachbarschaft gestärkt – über soziale Grenzen hinweg!
                     </Typography>
-                    <Grid container spacing={3} alignItems="center" className="kr-homepage--stats">
+                    {/* <Grid container spacing={3} alignItems="center" className="kr-homepage--stats">
                         <Grid item xs>
                             <Typography>Kiezläden</Typography>
                             <Typography variant="h3" component="div" gutterBottom>9.876</Typography>
@@ -37,7 +37,7 @@ export default class AboutSection extends React.Component {
                                 <img src={WirVsVirusLogo} className="kr-homepage--wirvsvirus" alt="WirVsVirusHackathon Logo" />
                             </a>
                         </Grid>
-                    </Grid>
+                    </Grid> */}
                 </Container>
             </div>
         );
