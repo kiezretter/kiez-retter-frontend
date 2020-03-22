@@ -32,11 +32,16 @@ const locationTypeIcons = {
   default: 'location_on',
 };
  
-const LocationSearchInput = () => {
+let searchHasFocus = false;
+let onSearchEmitted, onSearchEndEmitted;
+
+const LocationSearchInput = (props) => {
   const history = useHistory();
+  const [, updateState] = React.useState();
   const [address, setAddress] = useState('');
   const berlin = new google.maps.LatLng(52.50888, 13.396647);
   const { setPlaceId } = useStoreContext();
+  const forceUpdate = React.useCallback(() => updateState({}), []);
 
   const goToKiez = (latLng) => {
     history.push(`/kiez?lat=${latLng.lat}&lng=${latLng.lng}`);
@@ -87,7 +92,7 @@ const LocationSearchInput = () => {
           }
         }
 
-        if (!locationIcon) console.log('no icon found', suggestion.types);
+        // if (!locationIcon) console.log('no icon found', suggestion.types);
         if (!locationIcon) locationIcon = locationTypeIcons['default'];
 
         return (
@@ -114,13 +119,41 @@ const LocationSearchInput = () => {
   }
 
   const renderResults = (loading, suggestions, getSuggestionItemProps) => {
-    if (!loading && !suggestions.length) return null;
+    if (!loading && !suggestions.length) {
+      return null;
+    }
+
+    if (!searchHasFocus) {
+      return null;
+    }
+
+    if (props.onSearch && !onSearchEmitted) { 
+      if (props.onSearch) props.onSearch();
+      onSearchEmitted = true;
+    }
 
     return (
       <Paper variant="outlined" className="kr-location-search--autocomplete">
         {renderResultList(loading, suggestions, getSuggestionItemProps)}
       </Paper>
     );
+  }
+
+  const onBlurSearch = () => {
+    searchHasFocus = false;
+    onSearchEmitted = false;
+    if (props.onSearchEnd) props.onSearchEnd();
+
+    forceUpdate();
+  }
+
+  const onFocusSearch = () => {
+    searchHasFocus = true;
+    onSearchEndEmitted = false;
+  }
+
+  const onChangeSearch = (e) => {
+    if (!e.target.value && props.onSearchEnd) props.onSearchEnd();
   }
 
   return (
@@ -140,6 +173,9 @@ const LocationSearchInput = () => {
               fullWidth: true,
               placeholder: 'Kiez, Stadtteil, Späti, Kneipe, Club, Laden, Restaurant...',
             })}
+            onBlur={e => onBlurSearch()}
+            onFocus={e => onFocusSearch()}
+            onKeyUp={onChangeSearch}
             className="kr-location-search--input"
             InputProps={{
               startAdornment: <InputAdornment position="start">
