@@ -15,11 +15,9 @@ export default class AboutSection extends React.Component {
                 <Container maxWidth="md">
                     <Typography variant="h4" component="h3" gutterBottom>#kiezretter</Typography>
                     <Typography>
-                        Die Kiezretter sind entstanden Ullam voluptas asperiores. Recusandae culpa commodi. Consequatur ut quis animi modi.<br />
+                        Kiezretter ist eine Liebeserklärung an unsere Kieze – gemeinsam wollen wir dafür sorgen, dass unsere Nachbarschaft nach der Krise noch genauso bunt und vielfältig ist wie davor!<br />
                         <br />
-                        Quasi temporibus dicta tempora natus animi sint aliquid voluptatem. Aut ad nam. Labore nobis saepe iure eaque quia dolorum quas aut qui. Eligendi voluptatem occaecati unde dolorem et velit itaque est rem.<br />
-                        <br />
-                        Aliquam molestiae beatae atque fugit dolor tempora quis adipisci minus. Iusto et id sunt. Et nobis voluptas aperiam omnis. Iusto omnis asperiores consectetur. Nulla aut delectus laboriosam dolores assumenda adipisci molestiae id.
+                        Unsere Plattform ermöglicht es jedem, ein Zeichen der Solidarität  zu setzen – und bringt unsere Gesellschaft somit ein Stückchen näher zusammen. Somit wird nicht nur die Vielfalt auf unseren Straßen erhalten, sondern auch die Identifikation mit der eigenen Nachbarschaft gestärkt – über soziale Grenzen hinweg!
                     </Typography>
                     <Grid container spacing={3} alignItems="center" className="kr-homepage--stats">
                         <Grid item xs>
