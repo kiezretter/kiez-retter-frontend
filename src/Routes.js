@@ -9,6 +9,7 @@ import DatenschutzView from './views/Datenschutz/Datenschutz.jsx';
 import FAQView from './views/FAQ/FAQ.jsx';
 import ImpressumView from './views/Impressum/Impressum.jsx';
 import UeberUnsView from './views/UeberUns/UeberUns.jsx';
+import InhaberView from './views/Inhaber/Inhaber.jsx';
 
 const Routes = () => {
   return (
@@ -21,6 +22,7 @@ const Routes = () => {
         <Route exact path="/faq" component={FAQView} />
         <Route exact path="/impressum" component={ImpressumView} />
         <Route exact path="/ueberuns" component={UeberUnsView} />
+        <Route exact path="/inhaber" component={InhaberView} />
       </Switch>
     </Router>
   );
