@@ -109,7 +109,6 @@ class RegistrationForm extends React.Component {
         email: this.state.email,
         first_name: this.state.first_name,
         last_name: this.state.last_name,
-        salutation: this.state.salutation,
         nick_name: this.state.nick_name,
         paypal_handle: this.state.paypal_handle,
         owner_image: {
@@ -153,18 +152,6 @@ class RegistrationForm extends React.Component {
             </FormControl>
           </Grid>
           <Grid item xs={12} md={6}>
-            <FormControl className="form-control">
-              <InputLabel htmlFor="title">Titel</InputLabel>
-              <Select
-                native
-                name="salutation"
-                onChange={this.handleChange}
-              >
-                <option aria-label="None" value="" />
-                <option value={'Frau'}>Frau</option>
-                <option value={'Herr'}>Herr</option>
-              </Select>
-            </FormControl>
             <FormControl className="form-control">
               <TextField name="first_name" id="standard-basic" label="Vorname" required onChange={this.handleChange} />
             </FormControl>
