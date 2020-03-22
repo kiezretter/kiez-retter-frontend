@@ -80,8 +80,7 @@ const Info = ({ userName }) => {
 
   return (
     <>
-      {!store && !googleDatails && placeholder}
-      {showInfoCard && (
+      {showInfoCard ? (
         <div className="row" ref={infoRef}>
           <div className="info__wrapper">
             <div className="info__close-btn" onClick={() =>setShowInfoCard(false)}>&times;</div>
@@ -167,7 +166,7 @@ const Info = ({ userName }) => {
             </div>
           </div>
         </div>
-      )}
+      ) : placeholder }
       {googleDatails && <>Hier kommen die Informationen von Google hin.</>}
       {store && googleDatails && <button>Spenden</button>}
     </>

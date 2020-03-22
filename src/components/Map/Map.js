@@ -12,6 +12,9 @@ export const Geo = ({ google, currentLocation }) => {
 
   const screenHeight = window.innerHeight;
 
+  const onMarkerClick = (id) => {
+    setPlaceId(id);
+  }
   return (
     <Map
       ref={mapRef}
@@ -33,10 +36,10 @@ export const Geo = ({ google, currentLocation }) => {
       {markers.map(marker => {
         return (
           <Marker
-          key={marker.position}
-          position={marker.position}
-          title={marker.title}
-          onClick={() => setPlaceId(marker.place_id)}
+            key={marker.position}
+            position={marker.position}
+            title={marker.title}
+            onClick={() => onMarkerClick(marker.place_id)}
           />
         );
       })}

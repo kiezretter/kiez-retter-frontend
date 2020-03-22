@@ -19,6 +19,7 @@ const BusinessOverview = () => {
           lng,
         }}
         cardIn={200}
+        showInfoCard={showInfoCard}
       />
       <Info userName='marcuszierke' />
     </>
