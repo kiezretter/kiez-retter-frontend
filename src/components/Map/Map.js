@@ -8,12 +8,13 @@ import { useStoreContext } from '../../context/StoreContext';
 export const Geo = ({ google, currentLocation }) => {
   const mapRef = useRef(null);
   const { markers } = useMarkersContext();
-  const { setPlaceId } = useStoreContext();
+  const { setPlaceId, setShowInfoCard } = useStoreContext();
 
   const screenHeight = window.innerHeight;
 
   const onMarkerClick = (id) => {
     setPlaceId(id);
+    setShowInfoCard(true);
   }
   return (
     <Map
