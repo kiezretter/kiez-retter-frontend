@@ -13,13 +13,15 @@ import './Datenschutz.scss';
 export default class DatenschutzView extends React.Component {
     render() {
         return (
-            <Container maxWidth="sm" className="kr-datenschutz">
+            <>
                 <Navigation />
 
-                <Typography variant="h2" gutterBottom>Datenschutz</Typography>
+                <Container maxWidth="md" className="kr-datenschutz">
+                    <Typography variant="h2" gutterBottom>Datenschutz</Typography>
+                </Container>
 
                 <Footer />
-            </Container>
+            </>
         );
     }
 }

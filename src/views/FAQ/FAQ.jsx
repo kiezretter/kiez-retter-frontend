@@ -34,7 +34,7 @@ export default class FAQView extends React.Component {
         super(props);
 
         this.state = {
-            expanded: null,
+            expanded: 'question-0',
         };
     }
 
@@ -69,15 +69,17 @@ export default class FAQView extends React.Component {
 
     render() {
         return (
-            <Container maxWidth="sm" className="kr-faq">
+            <>
                 <Navigation />
 
-                <Typography variant="h2" gutterBottom>FAQ</Typography>
-                
-                {this.renderQuestions()}
+                <Container maxWidth="md" className="kr-faq">
+                    <Typography variant="h2" gutterBottom>FAQ</Typography>
+                    
+                    {this.renderQuestions()}
+                </Container>
 
                 <Footer />
-            </Container>
+            </>
         );
     }
 }
