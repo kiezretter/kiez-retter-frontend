@@ -83,7 +83,7 @@ class RegistrationForm extends React.Component {
     })
   }
 
-  handleFormSend(evt) {
+  async handleFormSend(evt) {
     evt.preventDefault();
     const data = {
       gmap_id: this.state.gmap_id,
@@ -119,11 +119,27 @@ class RegistrationForm extends React.Component {
         }
       }
     }
-    // Form sent successfully
-    // eslint-disable-next-line react/no-direct-mutation-state
-    this.state = { agbChecked: false, isFormValid: false };
-    this.form.current.reset();
-    console.log('CL: RegistrationForm -> handleFormSend -> data', data)
+    let response = await fetch('https://staging-api.kiez-retter.de/api/businesses', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) { // if HTTP-status is 200-299
+      // get the response body (the method explained below)
+      let result = await response.json();
+      console.log('CL: RegistrationForm -> handleFormSend -> result', result)
+      // Form sent successfully
+      // eslint-disable-next-line react/no-direct-mutation-state
+      this.state = { agbChecked: false, isFormValid: false };
+      this.form.current.reset();
+      this.forceUpdate();
+    } else {
+      console.error("HTTP-Error: " + response.status);
+    }
+
   }
 
   handleFormCancel(evt) {
@@ -258,7 +274,7 @@ class RegistrationForm extends React.Component {
                 name="personal_message"
                 variant="outlined"
                 helperText="Lass die kiezretter wissen, wie deine aktuelle Situation ist und warum sie dich unterstützen sollen."
-                label="Rettungs aufruf"
+                label="Rettungsaufruf"
                 multiline
                 rows={4}
                 rowsMax={8}
