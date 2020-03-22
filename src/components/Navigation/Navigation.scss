@@ -1,9 +1,13 @@
 @import "../../styles/Colors.scss";
 
 .kr-nav {
-    padding: .5rem 0;
-    margin-right: -.25rem !important;
+    padding: .75rem 0;
     margin-bottom: 2rem !important;
+    border-top: 10px solid $brand-red;
+    
+    &--list {
+        margin-right: -.25rem !important;
+    }
 
     &--link {
         padding: 0 .25rem;
