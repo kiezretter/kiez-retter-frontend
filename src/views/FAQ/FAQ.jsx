@@ -45,7 +45,7 @@ const faqQuestionsSupporter = [
     },
     {
         question: 'Geht meine Spende direkt an meinen Lieblingsladen?',
-        answer: 'Ja. Kiezretter erhebt keine Gebühr oder ähnliches. Lediglich die Gebühren bei Zahlungen über PayPal müssen in bestimmten Fällen berücksichtigt werden (<a href="https://www.paypal.com/de/webapps/mpp/paypal-fees" target="_blank">paypal.com/de/webapps/mpp/paypal-fees</a>).'
+        answer: 'Ja. Kiezretter erhebt keine Gebühr oder ähnliches. Lediglich die Gebühren bei Zahlungen über PayPal müssen in bestimmten Fällen berücksichtigt werden (<a href="https://www.paypal.com/de/webapps/mpp/paypal-fees" target="_blank" rel="noopener noreferrer">paypal.com/de/webapps/mpp/paypal-fees</a>).'
     },
     {
         question: 'Verdient kiezretter Geld mit der Webseite?',
