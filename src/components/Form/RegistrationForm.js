@@ -165,7 +165,15 @@ class RegistrationForm extends React.Component {
               <TextField type="email" name="email" id="standard-basic" label="Email" required onChange={this.handleChange} />
             </FormControl>
             <FormControl className="form-control">
-              <TextField name="paypal_handle" id="standard-basic" label="Paypal Name" required onChange={this.handleChange} />
+              <TextField
+                name="paypal_handle"
+                id="standard-basic"
+                label="PayPal.Me Link"
+                placeholder="PayPal.Me/IhrName"
+                helperText={<span>Noch kein PayPal.Me Link? <a href="https://www.paypal.com/de/webapps/mpp/paypal-me">Hier kostenfrei erstellen</a></span>}
+                required
+                onChange={this.handleChange}
+              />
             </FormControl>
 
             <Grid container spacing={1} className="upload-button">
