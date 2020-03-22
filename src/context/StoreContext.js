@@ -14,7 +14,6 @@ const Store = ({
   const [showInfoCard, setShowInfoCard] = useState(false);
 
   useEffect(() => {
-    console.log("placeId ", placeId);
     const loadAllInformation = async () => {
       const backendPromise = ApiHelper.loadInformation(placeId);
       // TODO: use Promise handling with google api
@@ -27,8 +26,6 @@ const Store = ({
   }, [placeId]);
 
   useEffect(() => {
-    console.log("store ", store);
-    console.log("googleDetails ", googleDetails);
   }, [store, googleDetails, showInfoCard]);
 
   return (

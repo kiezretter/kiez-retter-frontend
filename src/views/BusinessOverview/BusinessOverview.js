@@ -24,7 +24,7 @@ const BusinessOverview = ({ setShowInfoCard }) => {
         }}
         cardIn={200}
       />
-      <Info userName='marcuszierke' />
+      <Info userName='robinzuschke' />
     </>
   )
 }
