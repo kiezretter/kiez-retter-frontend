@@ -3,12 +3,10 @@ import GoogleApiWrapper from '../../components/Map/Map';
 import Info from '../../components/Info/Info';
 import { useLocation } from 'react-router-dom';
 
-
-const BusinessOverview = () => {
+const BusinessOverview = ({ setShowInfoCard }) => {
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
   }
-
   const query = useQuery();
   const lat = query.get('lat');
   const lng = query.get('lng');
