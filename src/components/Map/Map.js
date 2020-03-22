@@ -8,14 +8,14 @@ import { useStoreContext } from '../../context/StoreContext';
 export const Geo = ({ google, currentLocation }) => {
   const mapRef = useRef(null);
   const { markers } = useMarkersContext();
-  const { setPlaceId } = useStoreContext();
+  const { setPlaceId, setShowInfoCard } = useStoreContext();
 
   const screenHeight = window.innerHeight;
 
-  const showDefaultMap = () => {
-    console.log('works liks a sharme')
+  const onMarkerClick = (id) => {
+    setPlaceId(id);
+    setShowInfoCard(true);
   }
-
   return (
     <Map
       ref={mapRef}
@@ -28,7 +28,6 @@ export const Geo = ({ google, currentLocation }) => {
       initialCenter={currentLocation}
       zoom={16}
       disableDefaultUI={true}
-      click={showDefaultMap}
       >
       <Marker
         title="Da bist du!"
@@ -38,10 +37,10 @@ export const Geo = ({ google, currentLocation }) => {
       {markers.map(marker => {
         return (
           <Marker
-          key={marker.id}
-          position={marker.position}
-          title={marker.title}
-          onClick={() => setPlaceId(marker.place_id)}
+            key={marker.position.lat + ',' + marker.position.lng}
+            position={marker.position}
+            title={marker.title}
+            onClick={() => onMarkerClick(marker.place_id)}
           />
         );
       })}

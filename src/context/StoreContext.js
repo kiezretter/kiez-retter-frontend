@@ -9,8 +9,9 @@ const Store = ({
   children,
 }) => {
   const [store, setStore] = useState();
-  const [googleDatails, setGoogleDetails] = useState();
+  const [googleDetails, setGoogleDetails] = useState();
   const [placeId, setPlaceId] = useState();
+  const [showInfoCard, setShowInfoCard] = useState(false);
 
   useEffect(() => {
     console.log("placeId ", placeId);
@@ -23,18 +24,20 @@ const Store = ({
       // setGoogleDetails(google);
     };
     if (placeId) loadAllInformation();
-  }, placeId);
+  }, [placeId]);
 
   useEffect(() => {
     console.log("store ", store);
-    console.log("googleDatails ", googleDatails);
-  }, [store, googleDatails]);
+    console.log("googleDetails ", googleDetails);
+  }, [store, googleDetails, showInfoCard]);
 
   return (
     <Provider value={{
       store,
-      googleDatails,
+      googleDetails,
       setPlaceId,
+      showInfoCard,
+      setShowInfoCard
     }}>
       {children}
     </Provider>
