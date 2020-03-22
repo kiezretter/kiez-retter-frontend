@@ -3,7 +3,7 @@ const BackendApi = () => {
 
   const loadInformation = async (placeId) => {
     console.log("placeId ", placeId);
-    const apiURL = `https://jsonplaceholder.typicode.com/todos/1`;
+    const apiURL = `staging.`;
 
     const res = await fetch(apiURL)
     if (!res.ok) {

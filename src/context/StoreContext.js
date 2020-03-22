@@ -23,7 +23,7 @@ const Store = ({
       // setGoogleDetails(google);
     };
     if (placeId) loadAllInformation();
-  }, placeId);
+  }, [placeId]);
 
   useEffect(() => {
     console.log("store ", store);

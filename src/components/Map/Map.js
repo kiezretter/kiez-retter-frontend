@@ -12,10 +12,6 @@ export const Geo = ({ google, currentLocation }) => {
 
   const screenHeight = window.innerHeight;
 
-  const showDefaultMap = () => {
-    console.log('works liks a sharme')
-  }
-
   return (
     <Map
       ref={mapRef}
@@ -28,7 +24,6 @@ export const Geo = ({ google, currentLocation }) => {
       initialCenter={currentLocation}
       zoom={16}
       disableDefaultUI={true}
-      click={showDefaultMap}
       >
       <Marker
         title="Da bist du!"
@@ -38,7 +33,7 @@ export const Geo = ({ google, currentLocation }) => {
       {markers.map(marker => {
         return (
           <Marker
-          key={marker.id}
+          key={marker.position}
           position={marker.position}
           title={marker.title}
           onClick={() => setPlaceId(marker.place_id)}

@@ -3,7 +3,6 @@ import GoogleApiWrapper from '../../components/Map/Map';
 import Info from '../../components/Info/Info';
 import { useLocation } from 'react-router-dom';
 
-
 const BusinessOverview = () => {
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);

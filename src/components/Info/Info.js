@@ -26,13 +26,19 @@ const StyledInput = withStyles({
 const Info = ({ userName }) => {
   const [showStoreInfo, setShowStoreInfo] = useState(false);
   const [donatedValue, setDonatedValue] = useState(10);
-  // const [currentStore, setCurrentStore] = useState(null);
+  const [showInfoCard, setShowInfoCard] = useState(false);
   const {
     store,
     googleDatails,
   } = useStoreContext();
   const infoRef = useRef(null);
 
+  useEffect(() => {
+    if (store !== undefined) {
+      setShowInfoCard(true);
+      console.log('store in useffect', store)
+    }
+  }, [store]);
   // useEffect(() => {
   //   setCurrentStore(store);
   // }, [store])
@@ -56,6 +62,8 @@ const Info = ({ userName }) => {
 
   // useOutsideAlerter(infoRef);
 
+  
+
   const handleChange = (event, newValue) => {
     setDonatedValue(newValue);
   }
@@ -73,9 +81,10 @@ const Info = ({ userName }) => {
   return (
     <>
       {!store && !googleDatails && placeholder}
-      {store && (
+      {showInfoCard && (
         <div className="row" ref={infoRef}>
           <div className="info__wrapper">
+            <div className="info__close-btn" onClick={() =>setShowInfoCard(false)}>&times;</div>
             <div className="info__img">
               <img
                 src="https://images.unsplash.com/photo-1582317361770-c0b3040d8d0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=60"
@@ -148,7 +157,7 @@ const Info = ({ userName }) => {
                 <span>EUR</span>
               </div>
               <a
-                href={`https://www.paypal.me/${userName}/${donatedValue}`}
+                href={`https://www.paypal.me/${userName}/${donatedValue}EUR`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="info__box-button"

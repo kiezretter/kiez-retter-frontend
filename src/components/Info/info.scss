@@ -34,6 +34,27 @@
       width: 100%;
     }
   }
+  &__close-btn {
+    position: absolute;
+    // top: 10;
+    // left: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+    margin: .2em;
+    cursor: pointer;
+    background-color: $white;
+    color: $mapsBlue;
+    font-weight: 500;
+    font-size: 3.2em;
+    &:hover {
+      opacity: .8;
+    }
+    
+  }
   &__box {
     padding: 2em;
     border-radius: 1em;
@@ -51,10 +72,12 @@
         }
         &-icon__share {
           margin-right: 1em;
+          cursor: pointer;
         }
         &-icon img{
           height: 3em;
           width: 3em;
+          cursor: pointer;
         }
       }
     }
@@ -84,6 +107,10 @@
       width: fit-content;
       padding: 1em 0;
       display: flex;
+      cursor: pointer;
+      &:hover {
+        padding-bottom: 4px !important;
+      }
     }
     &-button {
       display: flex;
