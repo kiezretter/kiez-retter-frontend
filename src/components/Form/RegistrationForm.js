@@ -96,7 +96,7 @@ class RegistrationForm extends React.Component {
       city: this.state.city,
       personal_message: this.state.personal_message,
       personal_thank_you: this.state.personal_thank_you,
-      business_type_id: this.state.business_type_id,
+      business_type: this.state.business_type,
       favorite_place_image: {
         data: this.state.favorite_place_image
       },
@@ -217,7 +217,7 @@ class RegistrationForm extends React.Component {
               <InputLabel htmlFor="storeType">Kategorie</InputLabel>
               <Select
                 native
-                name="business_type_id"
+                name="business_type"
                 onChange={this.handleChange}
               >
                 <option aria-label="None" value="" />
