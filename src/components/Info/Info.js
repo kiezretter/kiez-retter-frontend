@@ -99,9 +99,7 @@ const Info = ({ userName }) => {
                 showStoreInfo ? "info__box-intro" : "info__box-intro hide"
               }
             >
-              Beste Laden wo gibt, ohne mich könnt ihr Euch keinen mehr
-              reinlöten und auch sonst wird's schwer. ALso lasst nen Taler da,
-              ich weiss es zu schäten!
+              Hey Leute, danke das ihr mich unterstützen wollt! Jeder Cent hilft - zusammen schaffen wir das .Vielen Dank an alle da draussen, die an mich gedacht haben!
             </div>
             <div
               className="info__box-info-btn"
