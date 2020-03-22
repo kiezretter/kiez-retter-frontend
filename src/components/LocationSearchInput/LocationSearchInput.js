@@ -33,7 +33,7 @@ const locationTypeIcons = {
 };
  
 let searchHasFocus = false;
-let onSearchEmitted, onSearchEndEmitted;
+let onSearchEmitted;
 
 const LocationSearchInput = (props) => {
   const history = useHistory();
@@ -149,7 +149,6 @@ const LocationSearchInput = (props) => {
 
   const onFocusSearch = () => {
     searchHasFocus = true;
-    onSearchEndEmitted = false;
   }
 
   const onChangeSearch = (e) => {

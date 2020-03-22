@@ -35,8 +35,8 @@ export default class AboutSection extends React.Component {
                             <Typography variant="h3" component="div" gutterBottom>12.345</Typography>
                         </Grid>
                         <Grid item sm={12} md={3}>
-                            <a href="https://wirvsvirushackathon.org" target="_blank">
-                                <img src={WirVsVirusLogo} className="kr-homepage--wirvsvirus" />
+                            <a href="https://wirvsvirushackathon.org" target="_blank" rel="noopener noreferrer">
+                                <img src={WirVsVirusLogo} className="kr-homepage--wirvsvirus" alt="WirVsVirusHackathon Logo" />
                             </a>
                         </Grid>
                     </Grid>
