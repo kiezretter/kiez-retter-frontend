@@ -16,7 +16,7 @@ export default class Inhaber extends React.Component {
         return (
             <Container maxWidth="md" className="kr-inhaber">
                 <Navigation />
-                <Typography variant="h2" gutterBottom>Inhaber</Typography>
+                <Typography variant="h2" gutterBottom>Dein kiezretter Profil</Typography>
                 <RegistrationForm />
                 <Footer />
             </Container>
