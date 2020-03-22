@@ -78,7 +78,7 @@ class RegistrationForm extends React.Component {
   handleFileUpload(data) {
     this.setState({
       [data.name]: data.file
-    })
+    }, this.validateForm.bind(this))
   }
 
   async handleFormSend(evt) {
@@ -131,9 +131,11 @@ class RegistrationForm extends React.Component {
       console.log('CL: RegistrationForm -> handleFormSend -> result', result)
       // Form sent successfully
       // eslint-disable-next-line react/no-direct-mutation-state
-      this.state = { agbChecked: false, isFormValid: false };
-      this.form.current.reset();
-      this.forceUpdate();
+      // this.state = { agbChecked: false, isFormValid: false };
+      // this.form.current.reset();
+      // this.forceUpdate();
+      
+      window.location.href = '/?registerSuccess';
     } else {
       console.error("HTTP-Error: " + response.status);
     }
