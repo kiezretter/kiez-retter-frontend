@@ -9,7 +9,7 @@ import {
   Grid
 } from '@material-ui/core';
 import './RegistrationForm.scss';
-import FileUpload from '../../components/Form/FileUpload'
+import FileUpload from '../components/Form/FileUpload'
 
 class RegistrationForm extends React.Component {
   constructor(props) {
