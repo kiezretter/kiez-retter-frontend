@@ -4,6 +4,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete';
 import {
+  Typography,
   InputLabel,
   FormControl,
   Select,
@@ -143,7 +144,7 @@ class RegistrationForm extends React.Component {
           spacing={3}
         >
           <Grid item xs={12}>
-            <h2 className="h2">Inhaber</h2>
+            <Typography variant="h5">Inhaber</Typography>
           </Grid>
           <Grid item xs={12} md={3}>
             <FormControl className="form-control">
@@ -204,7 +205,7 @@ class RegistrationForm extends React.Component {
           spacing={3}
         >
           <Grid item xs={12}>
-            <h2 className="h2">Dein Laden</h2>
+            <Typography variant="h5">Dein Laden</Typography>
           </Grid>
           <Grid item xs={12} md={3}>
             <FormControl className="form-control">
@@ -249,9 +250,9 @@ class RegistrationForm extends React.Component {
           spacing={3}
         >
           <Grid item xs={12}>
-            <h2 className="h2">Rettungsaufruf</h2>
+            <Typography variant="h5">Rettungsaufruf</Typography>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={9}>
             <FormControl className="form-control">
               <TextField
                 name="personal_message"
@@ -272,9 +273,9 @@ class RegistrationForm extends React.Component {
           container spacing={3}
         >
           <Grid item xs={12}>
-            <h2 className="h2">Dankeschön an deine Kiezretter</h2>
+            <Typography variant="h5">Dankeschön an deine Kiezretter</Typography>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={9}>
             <FormControl className="form-control">
               <TextField
                 name="personal_thank_you"
