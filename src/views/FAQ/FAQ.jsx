@@ -72,7 +72,7 @@ export default class FAQView extends React.Component {
             <>
                 <Navigation />
 
-                <Container maxWidth="sm" className="kr-faq">
+                <Container maxWidth="md" className="kr-faq">
                     <Typography variant="h2" gutterBottom>FAQ</Typography>
                     
                     {this.renderQuestions()}
