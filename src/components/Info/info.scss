@@ -7,15 +7,17 @@
   text-align: center;
   background-color: $white;
   font-weight: 500;
-  color: $mapsBlue;
+  color: $brand-blue;
   position: absolute;
   width: 100%;
   bottom: 0px;
   right: 0px;
   box-shadow: 0 -5px 5px -5px rgba($black, .2);
 }
+
 .info {
   &__wrapper {
+    max-width: 30rem;
     border-radius: 1em;
     background-color: white;
     overflow: hidden;
@@ -23,17 +25,31 @@
     bottom: 0px;
     right: 0px;
     box-shadow: 0 -5px 5px -5px rgba($black, .8);
-  }
-  &__img {
-    height: 20em;
-    display: flex;
-    overflow: hidden;
-    justify-content: center;
-    align-items: center;
-    img {
-      width: 100%;
+    
+    .MuiCardContent-root {
+      overflow: hidden;
     }
   }
+
+
+  &__img {
+    height: 20em;
+    width: 50%;
+    float: left;
+  }
+
+  &__verified-icon {
+    opacity: .5;
+    width: 35px;
+    vertical-align: middle;
+    margin-left: 10px;
+    margin-top: -4px;
+
+    &--verified {
+      opacity: 1;
+    }
+  }
+
   &__close-btn {
     position: absolute;
     // top: 10;
@@ -50,30 +66,30 @@
     color: $mapsBlue;
     font-weight: 500;
     font-size: 3.2em;
+
     &:hover {
       opacity: .8;
     }
-    
   }
+
   &__box {
-    padding: 2em;
-    border-radius: 1em;
-    margin-top: -1em;
     &-name {
       &__wrapper {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
         &-name {
           font-size: 2.4em;
           font-weight: 700;
           letter-spacing: 1px;
-          color: $primary;
+          color: $brand-blue;
         }
         &-icon__share {
           margin-right: 1em;
           cursor: pointer;
         }
+
         &-icon img{
           height: 3em;
           width: 3em;
@@ -81,25 +97,30 @@
         }
       }
     }
+
     &-address {
       color: $grey;
       font-size: 1.6em;
       padding-bottom: 1em;
     }
+
     &-intro {
       font-size: 1.6em; 
       padding: 1em 0;
       margin-top: 0px;
       transition: all .5s;
+      
       &.hide {
         margin-top: -50px;
         opacity: 0;
         pointer-events:none;
+        
         @media only screen and (max-width: $s) {
           margin-top: -100px;
         }
       }
     }
+
     &-info-btn {
       font-size: 1.4em;
       padding-bottom: 2px !important;
@@ -112,32 +133,26 @@
         padding-bottom: 4px !important;
       }
     }
+
     &-button {
       display: flex;
+      margin-top: 1rem !important;
       width: 100%;
-      justify-content: center;
-      text-decoration: none;
-      border-style: none;
-      outline-style: none;
-      margin: 2em 0;
-      border-radius: 2em;
-      padding: .8em 1.6em;
-      background-color: $mapsBlue;
-      color: $white;
-      font-size: 1.6em;
-      box-shadow: 1px 2px 5px rgba($black, .2);
     }
+
     &-amount {
       text-align: center;
       font-weight: 500;
       font-size: 2.4em;
     }
+
     &-icons {
       margin-top: 2em;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
+
     &-icon {
       height: 7em;
     }

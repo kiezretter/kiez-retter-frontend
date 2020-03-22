@@ -37,7 +37,7 @@ export const Geo = ({ google, currentLocation }) => {
       {markers.map(marker => {
         return (
           <Marker
-            key={marker.position}
+            key={marker.position.lat + ',' + marker.position.lng}
             position={marker.position}
             title={marker.title}
             onClick={() => onMarkerClick(marker.place_id)}
