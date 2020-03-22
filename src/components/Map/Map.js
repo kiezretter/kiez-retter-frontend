@@ -21,7 +21,7 @@ export const Geo = ({ google, currentLocation }) => {
       ref={mapRef}
       google={google}
       containerStyle={{
-        height: `${screenHeight}px`,
+        height: `${screenHeight - 83}px`,
         width: "100%",
         position: "relative"
       }}
