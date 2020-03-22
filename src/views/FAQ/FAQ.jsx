@@ -34,7 +34,7 @@ export default class FAQView extends React.Component {
         super(props);
 
         this.state = {
-            expanded: null,
+            expanded: 'question-0',
         };
     }
 
