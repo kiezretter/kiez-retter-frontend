@@ -13,13 +13,15 @@ import './Impressum.scss';
 export default class ImpressumView extends React.Component {
     render() {
         return (
-            <Container maxWidth="sm" className="kr-impressum">
+            <>
                 <Navigation />
 
-                <Typography variant="h2" gutterBottom>Impressum</Typography>
+                <Container maxWidth="md" className="kr-impressum">
+                    <Typography variant="h2" gutterBottom>Impressum</Typography>
+                </Container>
 
                 <Footer />
-            </Container>
+            </>
         );
     }
 }
