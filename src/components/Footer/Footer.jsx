@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {
-    Typography,
     Link,
+    Container,
 } from '@material-ui/core';
 
 import './Footer.scss';
@@ -24,8 +24,8 @@ export default class Footer extends React.Component {
 
     render() {
         return (
-            <div className="kr-footer">
-                <Link className={this.getClassesForLink('/ueberuns')} href="/ueberuns">
+            <Container maxWidth="sm" className="kr-footer">
+                <Link className={this.getClassesForLink('/ueberuns')} href="/#ueberuns">
                     Über uns
                 </Link>
                 <Link className={this.getClassesForLink('/impressum')} href="/impressum">
@@ -40,7 +40,7 @@ export default class Footer extends React.Component {
                 <Link className={this.getClassesForLink('/faq')} href="/faq">
                     FAQ
                 </Link>
-            </div>
+            </Container>
         );
     }
 }
