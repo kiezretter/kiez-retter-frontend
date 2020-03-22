@@ -26,7 +26,7 @@ export default class HowItWorksSection extends React.Component {
                                 <CardContent>
                                     <Typography variant="h5" component="h4">Ich möchte helfen</Typography>
                                     <Typography>Quasi temporibus dicta tempora natus animi sint aliquid voluptatem. Aut ad nam. Labore nobis saepe iure eaque quia dolorum quas aut qui. Eligendi voluptatem occaecati unde dolorem et velit itaque est rem.</Typography>
-                                    <Button variant="contained" disableElevation onClick={this.props.onClickHelp}>
+                                    <Button variant="contained" color="primary" disableElevation onClick={this.props.onClickHelp}>
                                         Ich bin Kiezretter
                                     </Button>
                                 </CardContent>
