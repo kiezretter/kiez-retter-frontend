@@ -43,7 +43,7 @@ class RegistrationForm extends React.Component {
       name: this.state.name,
       "lng": 13.4590208,
       "lat": 52.5097213,
-      phone_number: "0302911937",
+      phone_number: this.state.phone_number,
       street_address: "Krossener Str. 24",
       postcode: "10245",
       city: "Berlin",
@@ -161,6 +161,9 @@ class RegistrationForm extends React.Component {
                 <option value={'Kneipe'}>Kneipe</option>
                 <option value={'Bar'}>Bar</option>
               </Select>
+            </FormControl>
+            <FormControl className="form-control">
+              <TextField name="phone_number" id="standard-basic" label="Telefon" onChange={this.handleChange} />
             </FormControl>
           </Grid>
         </Grid>
