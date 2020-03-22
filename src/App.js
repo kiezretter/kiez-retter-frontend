@@ -12,7 +12,17 @@ import {
 const theme = createMuiTheme({
   typography: {
     fontFamily: 'Montserrat, Arial',
-  }
+    // fontSize: 16,
+    // htmlFontSize: 10,
+  },
+  palette: {
+    primary: {
+      main: 'rgb(30, 80, 145)', // brand-blue
+    },
+    secondary: {
+      main: 'rgb(222, 58, 66)', // brand-red
+    },
+  },
 });
 
 const App = () => {
