@@ -5,12 +5,13 @@ import {
   Button
 } from '@material-ui/core';
 import storeImage from '../../assets/images/laden3.png';
+import superWomanImage from '../../assets/images/superman_f_klein.png';
 
 class FileUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: storeImage
+      file: this.props.name === 'owner_image' ? superWomanImage : storeImage
     }
     this.fileChanged = false;
     this.useStyles = {
