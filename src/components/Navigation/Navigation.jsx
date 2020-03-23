@@ -36,7 +36,7 @@ export default class Navigation extends React.Component {
     renderLogo() {
         if (this.props.hideLogo) return null;
 
-        return <img src={LogoImage} alt="Kiezretter Logo" className="kr-nav--logo" />;
+        return (<a href="/"><img src={LogoImage} alt="Kiezretter Logo" className="kr-nav--logo" /></a>);
     }
 
     render() {
@@ -52,9 +52,9 @@ export default class Navigation extends React.Component {
                         <Link className={this.getClassesForLink('/inhaber')} href="/inhaber">
                             Inhaber
                         </Link>
-                        <Link className={this.getClassesForLink('/kiezretter')} href="/kiezretter">
+                        {/* <Link className={this.getClassesForLink('/kiezretter')} href="/kiezretter">
                             Kiezretter
-                        </Link>
+                        </Link> */}
                     </Typography>
                 </Container>
             </div>

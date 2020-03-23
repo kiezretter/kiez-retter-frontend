@@ -16,13 +16,15 @@ import {
 } from '@material-ui/core';
 import './RegistrationForm.scss';
 import FileUpload from './FileUpload'
+import Loader from '../Loader/Loader';
 
 class RegistrationForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       agbChecked: false,
-      isFormValid: false
+      isFormValid: false,
+      loading: false,
     }
     this.form = React.createRef();
     this.handleChange = this.handleChange.bind(this);
@@ -43,17 +45,20 @@ class RegistrationForm extends React.Component {
       this.state.name &&
       this.state.last_name &&
       this.state.paypal_handle &&
-      this.state.agbChecked) {
+      this.state.agbChecked &&
+      this.state.business_type) {
       // All required fields are valid
       this.setState({ isFormValid: true })
+    } else {
+      this.setState({ isFormValid: false })
     }
   }
 
   handleChange(evt) {
     if (evt.target.name === 'agbChecked') {
-      this.setState({
-        [evt.target.name]: evt.target.checked
-      }, this.validateForm.bind(this));
+      this.setState(prevState => ({
+        agbChecked: !prevState.agbChecked
+      }), this.validateForm.bind(this));
     } else {
       this.setState({
         [evt.target.name]: evt.target.value
@@ -83,6 +88,7 @@ class RegistrationForm extends React.Component {
 
   async handleFormSend(evt) {
     evt.preventDefault();
+    this.setState({ loading: true })
     const data = {
       gmap_id: this.state.gmap_id,
       name: this.state.name,
@@ -124,6 +130,7 @@ class RegistrationForm extends React.Component {
       },
       body: JSON.stringify(data)
     });
+    this.setState({ loading: false });
 
     if (response.ok) { // if HTTP-status is 200-299
       // get the response body (the method explained below)
@@ -150,6 +157,9 @@ class RegistrationForm extends React.Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return <Loader />
+    }
     return (
       <form ref={this.form}>
         <Grid
@@ -238,7 +248,7 @@ class RegistrationForm extends React.Component {
               <TextField name="city" id="standard-basic" label="Stadt" required onChange={this.handleChange} />
             </FormControl>
             <FormControl className="form-control">
-              <InputLabel htmlFor="storeType">Kategorie</InputLabel>
+              <InputLabel required htmlFor="storeType">Kategorie</InputLabel>
               <Select
                 native
                 name="business_type"
