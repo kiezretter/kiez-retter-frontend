@@ -4,7 +4,6 @@ import Info from '../../components/Info/Info';
 import { useLocation } from 'react-router-dom';
 
 import Navigation from '../../components/Navigation/Navigation.jsx';
-import Footer from '../../components/Footer/Footer.jsx';
 
 
 const BusinessOverview = ({ setShowInfoCard }) => {
@@ -24,7 +23,7 @@ const BusinessOverview = ({ setShowInfoCard }) => {
         }}
         cardIn={200}
       />
-      <Info userName='robinzuschke' />
+      <Info />
     </>
   )
 }

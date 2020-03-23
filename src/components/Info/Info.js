@@ -15,11 +15,28 @@ import {
 import { useStoreContext } from "../../context/StoreContext";
 
 import verifiedIcon from '../../assets/images/verifiziert.png';
-import shareIcon from '../../assets/images/share.svg';
+// import shareIcon from '../../assets/images/share.svg';
 import PrettoSlider from "../DonateSlider/DonateSlider";
-import pub1 from '../../assets/images/pub1.png';
-import pub2 from '../../assets/images/pub2.png';
-import pub3 from '../../assets/images/pub3.png';
+import bar1 from '../../assets/images/bar1.png';
+import bar2 from '../../assets/images/bar2.png';
+import bar3 from '../../assets/images/bar3.png';
+import club1 from '../../assets/images/club1.png';
+import club2 from '../../assets/images/club2.png';
+import club3 from '../../assets/images/club3.png';
+import late_shop1 from '../../assets/images/late_shop1.png';
+import late_shop2 from '../../assets/images/late_shop2.png';
+import late_shop3 from '../../assets/images/late_shop3.png';
+import restaurant1 from '../../assets/images/restaurant1.png';
+import restaurant2 from '../../assets/images/restaurant2.png';
+import restaurant3 from '../../assets/images/restaurant3.png';
+import cafe1 from '../../assets/images/cafe1.png';
+import cafe2 from '../../assets/images/cafe2.png';
+import cafe3 from '../../assets/images/cafe3.png';
+import service1 from '../../assets/images/service1.png';
+import service2 from '../../assets/images/service2.png';
+import service3 from '../../assets/images/service3.png';
+import ownerPlaceholder from '../../assets/images/owner_placeholder.png';
+import shopPlaceholder from '../../assets/images/shop_placeholder.png';
 
 const StyledInput = withStyles({
   root: {
@@ -34,9 +51,9 @@ const StyledInput = withStyles({
   }
 })(Input);
 
-const Info = ({ userName }) => {
+const Info = () => {
   const [showStoreInfo, setShowStoreInfo] = useState(false);
-  const [donatedValue, setDonatedValue] = useState(10);
+  const [donatedValue, setDonatedValue] = useState(7.5);
   const {
     store,
     googleDatails,
@@ -52,11 +69,51 @@ const Info = ({ userName }) => {
     setDonatedValue(event.target.value)
   }
 
+  const icons = () => {
+    switch(store.business_type) {
+      case 'bar':
+        return [bar1, bar2, bar3];
+      case 'club':
+        return [club1, club2, club3];
+      case 'late_shop':
+        return [late_shop1, late_shop2, late_shop3];
+      case 'restaurant':
+        return [restaurant1, restaurant2, restaurant3];
+      case 'cafe':
+        return [cafe1, cafe2, cafe3];
+      default:
+        return [service1, service2, service3];
+    }
+  }
+
   let placeholder = (
     <div className="info__prompt">
-      Klicken sie eine Lokation in ihrem Kiez an.
+      Klick eine Location in deinem Kiez an.
     </div>
   );
+
+  const owner_image = () => store.owner.image ? store.owner.image : ownerPlaceholder;
+  const place_image = () => store.favorite_place_image ? store.favorite_place_image : shopPlaceholder;
+
+  const sendDonation = async () => {
+    const data = {
+      business_id: store.business_id,
+      amount_cents: donatedValue * 100,
+    }
+    let response = await fetch(`${process.env.REACT_APP_ROOT_URL}/api/donations`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+      console.log('Danke fürs Spenden!')
+    } else {
+      console.error("HTTP-Error: " + response.status);
+    }
+  }
 
   return (
     <>
@@ -64,12 +121,12 @@ const Info = ({ userName }) => {
         <Card className="info__wrapper">
           <div className="info__close-btn" onClick={() => setShowInfoCard(false)}>&times;</div>
           <CardMedia
-            image="https://images.unsplash.com/photo-1582317361770-c0b3040d8d0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=60"
+            image={store && owner_image()}
             title="store"
             className="info__img info__img-store"
           />
           <CardMedia
-            image="https://images.unsplash.com/photo-1444069069008-83a57aac43ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=60"
+            image={store && place_image()}
             title="human"
             className="info__img info__img-human"
           />
@@ -84,51 +141,57 @@ const Info = ({ userName }) => {
                     className={`info__verified-icon ${store.verified ? 'info__verified-icon--verified' : ''}`}
                   />
                 </div>
-                <div className="info__box-name__wrapper-icon">
+                {/* <div className="info__box-name__wrapper-icon">
                   <img
                     src={shareIcon}
                     alt="share"
                     className="info__box-name__wrapper-icon__share"
                   />
-                </div>
+                </div> */}
               </div>
             </div>
-            <div className="info__box-address">{store.address}</div>
-            <div
-              className={
-                showStoreInfo ? "info__box-intro" : "info__box-intro hide"
-              }
-            >
-              Hey Leute, danke das ihr mich unterstützen wollt! Jeder Cent hilft - zusammen schaffen wir das .Vielen Dank an alle da draussen, die an mich gedacht haben!
+            <div className="info__box-address">
+              <div>{store.address.street_address}</div>
+              <div>
+                {store.address.postcode} {store.address.city}
+              </div>
             </div>
-            <div
-              className="info__box-info-btn"
-              onClick={() => setShowStoreInfo(!showStoreInfo)}
-            >
-              {showStoreInfo ? (
-                <span>&#8592; less</span>
-              ) : (
-                <span>mehr &#8594;</span>
-              )}
+            <div>
+              <div
+                className={
+                  showStoreInfo ? "info__box-intro" : "info__box-intro hide"
+                }
+              >
+                {store.message}
+              </div>
+              <div
+                className="info__box-info-btn"
+                onClick={() => setShowStoreInfo(!showStoreInfo)}
+              >
+                {showStoreInfo ? (
+                  <div>&#8592; weniger anzeigen</div>
+                ) : (
+                  <div>mehr anzeigen &#8594;</div>
+                )}
+              </div>
             </div>
             <div className="info__box-icons">
-              <img src={pub1} alt="beer" className="info__box-icon" />
-              <img src={pub2} alt="beers" className="info__box-icon" />
-              <img src={pub3} alt="party" className="info__box-icon" />
+              <img src={icons()[0]} alt="beer" className="info__box-icon" />
+              <img src={icons()[1]} alt="beers" className="info__box-icon" />
+              <img src={icons()[2]} alt="party" className="info__box-icon" />
             </div>
             <PrettoSlider
               aria-label="pretto slider"
-              defaultValue={10}
               aria-labelledby="discrete-slider"
               value={donatedValue}
               onChange={handleSliderChange}
-              min={0}
-              max={100}
+              min={0.00}
+              max={15.00}
+              step={0.50}
             />
               <div className="info__box-amount">
                 <StyledInput
                   type="text"
-                  placeholder={donatedValue.toString()}
                   value={donatedValue}
                   onChange={handleSliderInputChange}
                   classes={{ root: "my-class-name" }}
@@ -139,12 +202,13 @@ const Info = ({ userName }) => {
                 variant="contained" 
                 color="primary" 
                 disableElevation 
-                href={`https://www.paypal.me/${userName}/${donatedValue}`}
+                href={`https://www.paypal.me/${store.owner.paypal}/${donatedValue}EUR`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="info__box-button"
+                onClick={() => sendDonation()}
               >
-                Jetzt spenden
+                Jetzt Retten
               </Button>
           </CardContent>
         </Card>

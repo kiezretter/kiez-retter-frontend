@@ -38,7 +38,7 @@ class RegistrationForm extends React.Component {
       this.state.postcode &&
       this.state.city &&
       this.state.email &&
-      this.state.trade_licence_image &&
+      this.state.trade_license_image &&
       this.state.id_card_image &&
       this.state.name &&
       this.state.last_name &&
@@ -99,8 +99,8 @@ class RegistrationForm extends React.Component {
         data: this.state.favorite_place_image
       },
       trade_certificate_attributes: {
-        trade_licence_image: {
-          data: this.state.trade_licence_image
+        trade_license_image: {
+          data: this.state.trade_license_image
         }
       },
       owner_attributes: {
@@ -117,7 +117,7 @@ class RegistrationForm extends React.Component {
         }
       }
     }
-    let response = await fetch('https://staging-api.kiez-retter.de/api/businesses', {
+    let response = await fetch(`${process.env.REACT_APP_ROOT_URL}/api/businesses`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -184,9 +184,9 @@ class RegistrationForm extends React.Component {
               <TextField
                 name="paypal_handle"
                 id="standard-basic"
-                label="PayPal.Me Link"
-                placeholder="PayPal.Me/IhrName"
-                helperText={<span>Noch kein PayPal.Me Link? <a href="https://www.paypal.com/de/webapps/mpp/paypal-me">Hier kostenfrei erstellen</a></span>}
+                label="PayPal.Me Name"
+                placeholder="DeinPayPalName"
+                helperText={<div><div>https://paypal.me/<strong>DeinPayPalName</strong> (lediglich das fett gedruckte)</div><div>Noch kein PayPal.Me Account? <a href="https://www.paypal.com/de/webapps/mpp/paypal-me">Hier kostenfrei erstellen</a></div></div>}
                 required
                 onChange={this.handleChange}
               />
@@ -195,7 +195,7 @@ class RegistrationForm extends React.Component {
             <Grid container spacing={1} className="upload-button">
               <Grid item xs={12} md={6}>
                 <FormControl className="form-control">
-                  <FileUpload name="trade_licence_image" label="Gewerbeschein*" onChange={this.handleFileUpload} />
+                  <FileUpload name="trade_license_image" label="Gewerbeschein*" onChange={this.handleFileUpload} />
                 </FormControl>
               </Grid>
               <Grid item xs={12} md={6}>
@@ -323,7 +323,7 @@ class RegistrationForm extends React.Component {
                     required
                   />
                 }
-                label={<span>Hiermit akzeptiere ich <a href="/agb">die AGBs*</a></span>}
+                label={<span>Hiermit akzeptiere ich <a target="_blank" href="/agb">die AGBs*</a></span>}
               />
             </FormControl>
           </Grid>
