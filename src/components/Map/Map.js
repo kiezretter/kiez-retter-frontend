@@ -26,7 +26,7 @@ export const Geo = ({ google, currentLocation }) => {
         position: "relative"
       }}
       initialCenter={currentLocation}
-      zoom={16}
+      zoom={13}
       disableDefaultUI={true}
     >
       <Marker
@@ -34,13 +34,13 @@ export const Geo = ({ google, currentLocation }) => {
         position={currentLocation}
         icon={currentLocationIcon}
       />
-      {markers.map(marker => {
+      {markers && markers.map(marker => {
         return (
           <Marker
-            key={marker.lat + "," + marker.lng}
+            key={marker.id}
             position={marker}
             title={marker.name}
-            onClick={() => onMarkerClick(marker.gmap_id)}
+            onClick={() => onMarkerClick(marker.id)}
           />
         );
       })}

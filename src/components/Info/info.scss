@@ -18,6 +18,8 @@
 .info {
   &__wrapper {
     max-width: 30rem;
+    min-width: 20rem;
+    width: 50vw;
     border-radius: 1em;
     background-color: white;
     overflow: hidden;
@@ -126,7 +128,7 @@
       padding-bottom: 2px !important;
       border-bottom: 1px solid $black;
       width: fit-content;
-      padding: 1em 0;
+      padding: 35px 0 1em 0;
       display: flex;
       cursor: pointer;
       &:hover {

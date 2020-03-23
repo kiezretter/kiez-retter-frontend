@@ -71,7 +71,6 @@ const LocationSearchInput = (props) => {
   };
 
   const getGeolocationSuccess = (position) => {
-    console.log('got location!', position.coords);
     goToKiez({ lat: position.coords.latitude, lng: position.coords.longitude });
   }
 
