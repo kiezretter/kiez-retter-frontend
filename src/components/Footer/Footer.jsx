@@ -3,6 +3,7 @@ import React from 'react';
 import {
     Link,
     Container,
+    Typography,
 } from '@material-ui/core';
 
 import './Footer.scss';
@@ -24,23 +25,27 @@ export default class Footer extends React.Component {
 
     render() {
         return (
-            <Container maxWidth="sm" className="kr-footer">
-                <Link className={this.getClassesForLink('/ueberuns')} href="/#ueberuns">
-                    Über uns
-                </Link>
-                <Link className={this.getClassesForLink('/impressum')} href="/impressum">
-                    Impressum
-                </Link>
-                <Link className={this.getClassesForLink('/datenschutz')} href="/datenschutz">
-                    Datenschutz
-                </Link>
-                <Link className={this.getClassesForLink('/agb')} href="/agb">
-                    AGB
-                </Link>
-                <Link className={this.getClassesForLink('/faq')} href="/faq">
-                    FAQ
-                </Link>
-            </Container>
+            <div className="kr-footer">
+                <Container maxWidth="sm">
+                    <Typography variant="body2">
+                        <Link className={this.getClassesForLink('/ueberuns')} href="/#ueberuns">
+                            Über uns
+                        </Link>
+                        <Link className={this.getClassesForLink('/impressum')} href="/impressum">
+                            Impressum
+                        </Link>
+                        <Link className={this.getClassesForLink('/datenschutz')} href="/datenschutz">
+                            Datenschutz
+                        </Link>
+                        <Link className={this.getClassesForLink('/agb')} href="/agb">
+                            AGB
+                        </Link>
+                        <Link className={this.getClassesForLink('/faq')} href="/faq">
+                            FAQ
+                        </Link>
+                    </Typography>
+                </Container>
+            </div>
         );
     }
 }

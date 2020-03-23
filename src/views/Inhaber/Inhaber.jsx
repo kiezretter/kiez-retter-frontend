@@ -14,12 +14,16 @@ import './Inhaber.scss';
 export default class Inhaber extends React.Component {
     render() {
         return (
-            <Container maxWidth="md" className="kr-inhaber">
+            <>
                 <Navigation />
-                <Typography variant="h2" gutterBottom>Inhaber</Typography>
-                <RegistrationForm />
+
+                <Container maxWidth="md" className="kr-inhaber">
+                    <Typography variant="h2" gutterBottom>Inhaber</Typography>
+                    <RegistrationForm />
+                </Container>
+                
                 <Footer />
-            </Container>
+            </>
         );
     }
 }

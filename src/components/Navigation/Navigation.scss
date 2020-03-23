@@ -1,9 +1,28 @@
 @import "../../styles/Colors.scss";
 
 .kr-nav {
-    padding: .5rem 0;
-    margin-right: -.25rem !important;
-    margin-bottom: 2rem !important;
+    padding: 1.5rem 0;
+    border-top: 10px solid $brand-red;
+    
+    &__bordered {
+        border-bottom: 1px solid $brand-red;
+    }
+
+    .MuiContainer-root {
+        position: relative;
+    }
+    
+    &--logo {
+        width: 5.5rem;
+        position: absolute;
+        left: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &--list {
+        margin-right: -.25rem !important;
+    }
 
     &--link {
         padding: 0 .25rem;

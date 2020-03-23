@@ -1,6 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import ApiHelper from "../api/BackendApi";
-import GoogleApi from "../api/GoogleApi";
 
 const StoreContext = React.createContext();
 const { Provider } = StoreContext;
@@ -9,32 +7,31 @@ const Store = ({
   children,
 }) => {
   const [store, setStore] = useState();
-  const [googleDatails, setGoogleDetails] = useState();
+  const [googleDetails, setGoogleDetails] = useState();
   const [placeId, setPlaceId] = useState();
+  const [showInfoCard, setShowInfoCard] = useState(false);
 
   useEffect(() => {
-    console.log("placeId ", placeId);
-    const loadAllInformation = async () => {
-      const backendPromise = ApiHelper.loadInformation(placeId);
-      // TODO: use Promise handling with google api
-      // const googlePromise = GoogleApi.loadDetails(placeId);
-      const [backend] = await Promise.all([backendPromise]);
-      setStore(backend);
-      // setGoogleDetails(google);
-    };
-    if (placeId) loadAllInformation();
-  }, placeId);
-
-  useEffect(() => {
-    console.log("store ", store);
-    console.log("googleDatails ", googleDatails);
-  }, [store, googleDatails]);
+    const loadInformation = async () => {
+      await fetch(`${process.env.REACT_APP_ROOT_URL}/api/businesses/${placeId}`)
+        .then(res => res.json())
+        .then(data => {
+          setStore(data.business)
+        })
+        .catch((error) => {
+          console.log(`something went wrong by calling ${URL}, error: ${error}`);
+        });
+    }
+    if (placeId) loadInformation();
+  }, [placeId]);
 
   return (
     <Provider value={{
       store,
-      googleDatails,
+      googleDetails,
       setPlaceId,
+      showInfoCard,
+      setShowInfoCard
     }}>
       {children}
     </Provider>

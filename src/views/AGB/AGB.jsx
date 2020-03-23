@@ -13,13 +13,15 @@ import './AGB.scss';
 export default class AGBView extends React.Component {
     render() {
         return (
-            <Container maxWidth="sm" className="kr-agb">
+            <>
                 <Navigation />
-                
-                <Typography variant="h2" gutterBottom>AGB</Typography>
+                    
+                <Container maxWidth="md" className="kr-agb">
+                    <Typography variant="h2" gutterBottom>AGB</Typography>
+                </Container>
 
                 <Footer />
-            </Container>
+            </>
         );
     }
 }

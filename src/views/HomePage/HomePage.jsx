@@ -8,7 +8,12 @@ import AboutSection from './AboutSection.jsx';
 import HowItWorksSection from './HowItWorksSection.jsx';
 import TogetherSection from './TogetherSection.jsx';
 
-import { Collapse } from '@material-ui/core';
+import { 
+    Collapse,
+    Snackbar,
+    IconButton,
+    Icon,
+} from '@material-ui/core';
 
 import './HomePage.scss';
 
@@ -18,6 +23,13 @@ export default class HomePage extends React.Component {
 
         this.state = {
             showContent: true,
+            showRegisterSuccess: false,
+        }
+    }
+
+    componentDidMount() {
+        if (window.location.search.includes('registerSuccess')) {
+            this.setState({ showRegisterSuccess: true });
         }
     }
 
@@ -33,12 +45,36 @@ export default class HomePage extends React.Component {
         this.setState({ showContent: true });
     }
 
+    handleClose() {
+        this.setState({ showRegisterSuccess: false });
+    }
+
     render() {
         return (
             <>
-                <Navigation />
+                <Navigation hideLogo={true} />
                 
-                <SearchSection onSearchEnd={e => this.onSearchEnd()} onSearch={e => this.onSearch()} />
+                <SearchSection onSearchEnd={e => this.onSearchEnd()} onSearch={e => this.onSearch()} showKiez={this.state.showContent} />
+
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                    open={this.state.showRegisterSuccess} 
+                    autoHideDuration={6000} 
+                    onClose={this.handleClose.bind(this)}
+                    message="Danke für die Anmeldung, bald kann dein Kiez dich supporten! Wir überprüfen deine Angaben und melden uns in Kürze bei dir."
+                    className="kr-homepage--success-message"
+                    action={
+                        <>
+                            <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleClose.bind(this)}>
+                                <Icon>close</Icon>
+                            </IconButton>
+                        </>
+                    }
+                />
+                
                 <Collapse in={this.state.showContent}>
                     <AboutSection />
                     <HowItWorksSection onClickHelp={e => this.focusSearch()} />

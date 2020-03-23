@@ -1,7 +1,10 @@
+@import "../../styles/Colors.scss";
+
 .kr-footer {
     text-align: center;
     margin-top: 1rem;
     padding: 2rem 0;
+    border-bottom: 10px solid $brand-red;
 
     &--link {
         margin: 0 1rem !important;

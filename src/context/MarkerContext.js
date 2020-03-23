@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import ApiHelper from "../api/BackendApi";
-
 const MarktersContext = React.createContext();
 const { Provider } = MarktersContext;
 
@@ -10,13 +8,18 @@ const Markers = ({
 }) => {
   const [markers, setMarkers] = useState();
 
-  useEffect(() => {
-    (async () => setMarkers(await ApiHelper.loadAllMarker()))();
-  }, [])
+  const loadAllMarkers = async () => {
+    await fetch(`${process.env.REACT_APP_ROOT_URL}/api/businesses`)
+      .then(res => res.json())
+      .then(data => setMarkers(data.businesses))
+      .catch((error) => {
+        console.log(`something went wrong by calling ${URL}, error: ${error}`);
+      });
+  }
 
   useEffect(() => {
-    console.log("markers ", markers);
-  }, [markers])
+    loadAllMarkers();
+  }, [])
 
   return (
     <Provider value={{markers}}>
