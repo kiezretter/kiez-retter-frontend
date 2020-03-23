@@ -39,6 +39,7 @@ const LocationSearchInput = (props) => {
   const history = useHistory();
   const [, updateState] = React.useState();
   const [address, setAddress] = useState('');
+  const [iconLoading, setIconLoading] = useState('');
   const berlin = new google.maps.LatLng(52.50888, 13.396647);
   const { setPlaceId } = useStoreContext();
   const forceUpdate = React.useCallback(() => updateState({}), []);
@@ -66,6 +67,7 @@ const LocationSearchInput = (props) => {
     if (!navigator.geolocation) {
       alert('Sorry, dein Browser erlaubt keine Abfrage deines Ortes - benutz doch unsere Suchfunktion!');
     } else {
+      setIconLoading(true);
       navigator.geolocation.getCurrentPosition(getGeolocationSuccess, alert);
     }
   };
@@ -181,7 +183,7 @@ const LocationSearchInput = (props) => {
               </InputAdornment>,
               endAdornment: <InputAdornment position="end">
                 <IconButton color="primary" component="span" onClick={e => getGeolocation()}>
-                  <Icon>location_on</Icon>
+                  <Icon className={ iconLoading && 'kr-location-search--icon__loading'}>location_on</Icon>
                 </IconButton>
               </InputAdornment>,
             }}

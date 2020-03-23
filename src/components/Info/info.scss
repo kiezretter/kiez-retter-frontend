@@ -17,9 +17,9 @@
 
 .info {
   &__wrapper {
-    max-width: 30rem;
+    max-width: 31rem;
     min-width: 20rem;
-    width: 50vw;
+    width: 100%;
     border-radius: 1em;
     background-color: white;
     overflow: hidden;
@@ -54,8 +54,6 @@
 
   &__close-btn {
     position: absolute;
-    // top: 10;
-    // left: 10;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,6 +66,7 @@
     color: $mapsBlue;
     font-weight: 500;
     font-size: 3.2em;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
     &:hover {
       opacity: .8;
@@ -111,16 +110,6 @@
       padding: 1em 0;
       margin-top: 0px;
       transition: all .5s;
-      
-      &.hide {
-        margin-top: -50px;
-        opacity: 0;
-        pointer-events:none;
-        
-        @media only screen and (max-width: $s) {
-          margin-top: -100px;
-        }
-      }
     }
 
     &-info-btn {
@@ -128,7 +117,7 @@
       padding-bottom: 2px !important;
       border-bottom: 1px solid $black;
       width: fit-content;
-      padding: 35px 0 1em 0;
+      padding: 1em 0;
       display: flex;
       cursor: pointer;
       &:hover {
@@ -156,7 +145,13 @@
     }
 
     &-icon {
-      height: 7em;
+      height: 5em;
+    }
+
+    @media (min-width: 768px) {
+      &-icon {
+        height: 7em;
+      }
     }
   }
 }
@@ -165,3 +160,6 @@
   display: none;
 }
 
+.paypal-icon {
+  margin-right: 15px;
+}

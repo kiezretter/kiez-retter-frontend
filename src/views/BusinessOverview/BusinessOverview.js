@@ -13,6 +13,8 @@ const BusinessOverview = ({ setShowInfoCard }) => {
   const query = useQuery();
   const lat = query.get('lat');
   const lng = query.get('lng');
+  const active = query.get('active');
+
   return (
     <>
       <Navigation bordered={true} />
@@ -23,7 +25,7 @@ const BusinessOverview = ({ setShowInfoCard }) => {
         }}
         cardIn={200}
       />
-      <Info />
+      <Info active={active} />
     </>
   )
 }

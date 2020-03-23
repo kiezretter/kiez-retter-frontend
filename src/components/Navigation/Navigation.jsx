@@ -49,6 +49,9 @@ export default class Navigation extends React.Component {
                         <Link className={this.getClassesForLink('/')} href="/">
                             Home
                         </Link>
+                        <Link className={this.getClassesForLink('/ueberuns')} href="/ueberuns">
+                            Über uns
+                        </Link>
                         <Link className={this.getClassesForLink('/inhaber')} href="/inhaber">
                             Inhaber
                         </Link>

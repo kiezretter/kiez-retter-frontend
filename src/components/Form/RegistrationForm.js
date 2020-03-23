@@ -47,7 +47,6 @@ class RegistrationForm extends React.Component {
       this.state.paypal_handle &&
       this.state.agbChecked &&
       this.state.business_type) {
-      // All required fields are valid
       this.setState({ isFormValid: true })
     } else {
       this.setState({ isFormValid: false })
@@ -89,37 +88,44 @@ class RegistrationForm extends React.Component {
   async handleFormSend(evt) {
     evt.preventDefault();
     this.setState({ loading: true })
-    const data = {
-      gmap_id: this.state.gmap_id,
-      name: this.state.name,
-      lng: this.state.lng,
-      lat: this.state.lat,
-      phone_number: this.state.phone_number,
-      street_address: this.state.street_address,
-      postcode: this.state.postcode,
-      city: this.state.city,
-      personal_message: this.state.personal_message,
-      personal_thank_you: this.state.personal_thank_you,
-      business_type: this.state.business_type,
-      favorite_place_image: {
-        data: this.state.favorite_place_image
-      },
-      trade_certificate_attributes: {
-        trade_license_image: {
-          data: this.state.trade_license_image
-        }
-      },
-      owner_attributes: {
-        email: this.state.email,
-        first_name: this.state.first_name,
-        last_name: this.state.last_name,
-        nick_name: this.state.nick_name,
-        paypal_handle: this.state.paypal_handle,
-        owner_image: {
+
+    let ownerImage = null
+    if (this.state.owner_image) {
+        ownerImage = {
           data: this.state.owner_image
+        }
+    }
+    const data = {
+      business: {
+        gmap_id: this.state.gmap_id,
+        name: this.state.name,
+        lng: this.state.lng,
+        lat: this.state.lat,
+        phone_number: this.state.phone_number,
+        street_address: this.state.street_address,
+        postcode: this.state.postcode,
+        city: this.state.city,
+        personal_message: this.state.personal_message,
+        personal_thank_you: this.state.personal_thank_you,
+        business_type: this.state.business_type,
+        favorite_place_image: {
+          data: this.state.favorite_place_image
         },
-        id_card_image: {
-          data: this.state.id_card_image
+        trade_certificate_attributes: {
+          trade_license_image: {
+            data: this.state.trade_license_image
+          }
+        },
+        owner_attributes: {
+          email: this.state.email,
+          first_name: this.state.first_name,
+          last_name: this.state.last_name,
+          nick_name: this.state.nick_name,
+          paypal_handle: this.state.paypal_handle,
+          owner_image: ownerImage,
+          id_card_image: {
+            data: this.state.id_card_image
+          }
         }
       }
     }
@@ -196,7 +202,7 @@ class RegistrationForm extends React.Component {
                 id="standard-basic"
                 label="PayPal.Me Name"
                 placeholder="DeinPayPalName"
-                helperText={<div><div>https://paypal.me/<strong>DeinPayPalName</strong> (lediglich das fett gedruckte)</div><div>Noch kein PayPal.Me Account? <a href="https://www.paypal.com/de/webapps/mpp/paypal-me">Hier kostenfrei erstellen</a></div></div>}
+                helperText={<span>https://paypal.me/<strong>DeinPayPalName</strong> (lediglich das fett gedruckte)<br />Noch kein PayPal.Me Account? <a href="https://www.paypal.com/de/webapps/mpp/paypal-me">Hier kostenfrei erstellen</a></span>}
                 required
                 onChange={this.handleChange}
               />

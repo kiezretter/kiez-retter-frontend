@@ -1,0 +1,29 @@
+.kr-aboutus {
+    &--team {
+        // display: grid;
+        // grid-auto-columns: 200px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &--person {
+        // float: left;
+        min-width: 250px; 
+        max-width: 100%;
+        flex: 1;
+
+        @media screen and (min-width: 500px) {
+            max-width: 50%;
+        }
+
+        @media screen and (min-width: 800px) {
+            max-width: 33.33333%;
+        }
+
+        img {
+            max-width: 100%;
+        }
+    }
+}

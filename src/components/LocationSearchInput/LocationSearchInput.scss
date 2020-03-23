@@ -32,4 +32,41 @@
             margin-left: 2rem;
         }
     }
+    
+    &--icon__loading {
+        animation-name: locating;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+    }
 } 
+
+@keyframes locating {
+    0% {
+        transform: translateY(0) scale(1, 1);
+    }
+
+    20% {
+        transform: translateY(-20px) scale(1, 1.2);
+    }
+
+    25% {
+        transform: translateY(-20px) scale(1, 1);
+    }
+
+    45% {
+        transform: translateY(5px) scale(1, 1);
+    }
+
+    48% {
+        transform: translateY(5px) scale(1.25, .75);
+    }
+
+    90% {
+        transform: translateY(0) scale(1, 1);
+    }
+
+    100% {
+        transform: translateY(0) scale(1, 1);
+    }
+}
