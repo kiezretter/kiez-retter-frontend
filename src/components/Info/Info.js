@@ -160,13 +160,11 @@ const Info = () => {
             </div>
             {store.message && (
               <div>
-                <div
-                  className={
-                    showStoreInfo ? "info__box-intro" : "info__box-intro hide"
-                  }
-                >
-                  {store.message}
-                </div>
+                {showStoreInfo && (
+                  <div className="info__box-intro">
+                    {store.message}
+                  </div>
+                )}
                 <div
                   className="info__box-info-btn"
                   onClick={() => setShowStoreInfo(!showStoreInfo)}
