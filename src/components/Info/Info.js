@@ -1,6 +1,4 @@
-
 import React, { useState } from 'react';
-
 import './info.scss';
 
 import { 
@@ -9,7 +7,8 @@ import {
   Card,
   CardContent,
   CardMedia,
-  withStyles, 
+  withStyles,
+  InputAdornment,
 } from '@material-ui/core';
 
 import { useStoreContext } from "../../context/StoreContext";
@@ -44,7 +43,7 @@ const StyledInput = withStyles({
     padding: "0 15px",
     color: '#1A73E8',
     fontSize: 24,
-    fontWeight: '500',
+    fontWeight: '700',
   },
   input: {
     textAlign: 'center'
@@ -53,7 +52,7 @@ const StyledInput = withStyles({
 
 const Info = () => {
   const [showStoreInfo, setShowStoreInfo] = useState(false);
-  const [donatedValue, setDonatedValue] = useState(7.5);
+  const [donatedValue, setDonatedValue] = useState(8.5);
   const {
     store,
     googleDatails,
@@ -135,11 +134,13 @@ const Info = () => {
               <div className="info__box-name__wrapper">
                 <div className="info__box-name__wrapper-name">
                   {store.name}
-                  <img
-                    src={verifiedIcon}
-                    alt="verified"
-                    className={`info__verified-icon ${store.verified ? 'info__verified-icon--verified' : ''}`}
-                  />
+                  {store.verified && (
+                    <img
+                      src={verifiedIcon}
+                      alt="verified"
+                      className="info__verified-icon info__verified-icon--verified"
+                    />
+                  )}
                 </div>
                 {/* <div className="info__box-name__wrapper-icon">
                   <img
@@ -186,7 +187,7 @@ const Info = () => {
               value={donatedValue}
               onChange={handleSliderChange}
               min={0.00}
-              max={15.00}
+              max={20.00}
               step={0.50}
             />
               <div className="info__box-amount">
@@ -195,8 +196,8 @@ const Info = () => {
                   value={donatedValue}
                   onChange={handleSliderInputChange}
                   classes={{ root: "my-class-name" }}
+                  endAdornment={<InputAdornment position="end">‎€</InputAdornment>}
                 />
-                <span>EUR</span>
               </div>
               <Button 
                 variant="contained" 

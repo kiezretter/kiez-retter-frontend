@@ -47,7 +47,6 @@ class RegistrationForm extends React.Component {
       this.state.paypal_handle &&
       this.state.agbChecked &&
       this.state.business_type) {
-      // All required fields are valid
       this.setState({ isFormValid: true })
     } else {
       this.setState({ isFormValid: false })
@@ -201,7 +200,7 @@ class RegistrationForm extends React.Component {
                 id="standard-basic"
                 label="PayPal.Me Name"
                 placeholder="DeinPayPalName"
-                helperText={<div><div>https://paypal.me/<strong>DeinPayPalName</strong> (lediglich das fett gedruckte)</div><div>Noch kein PayPal.Me Account? <a href="https://www.paypal.com/de/webapps/mpp/paypal-me">Hier kostenfrei erstellen</a></div></div>}
+                helperText={<span>https://paypal.me/<strong>DeinPayPalName</strong> (lediglich das fett gedruckte)<br />Noch kein PayPal.Me Account? <a href="https://www.paypal.com/de/webapps/mpp/paypal-me">Hier kostenfrei erstellen</a></span>}
                 required
                 onChange={this.handleChange}
               />

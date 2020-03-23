@@ -1,21 +1,28 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import markerIcon from '../../assets/images/marker.png';
+import activeMarkerIcon from '../../assets/images/active_marker.png';
 import currentLocationIcon from '../../assets/images/current-location.svg';
 import { useMarkersContext } from "../../context/MarkerContext";
 import { useStoreContext } from '../../context/StoreContext';
+import { useHistory } from 'react-router-dom';
 
 
 export const Geo = ({ google, currentLocation }) => {
+  const history = useHistory();
   const mapRef = useRef(null);
+  const [activeMarker, setActiveMarker] = useState(null);
   const { markers } = useMarkersContext();
   const { setPlaceId, setShowInfoCard } = useStoreContext();
 
   const screenHeight = window.innerHeight;
-
   const onMarkerClick = (id) => {
     setPlaceId(id);
     setShowInfoCard(true);
+    setActiveMarker(id);
+    history.push(`/kiez?lat=${currentLocation.lat}&lng=${currentLocation.lng}&active=${id}`);
   }
+
   return (
     <Map
       ref={mapRef}
@@ -41,6 +48,7 @@ export const Geo = ({ google, currentLocation }) => {
             position={marker}
             title={marker.name}
             onClick={() => onMarkerClick(marker.id)}
+            icon={activeMarker === marker.id ? activeMarkerIcon : markerIcon}
           />
         );
       })}

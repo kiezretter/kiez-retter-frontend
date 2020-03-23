@@ -27,7 +27,7 @@ export default class Footer extends React.Component {
         return (
             <div className="kr-footer">
                 <Container maxWidth="sm">
-                    <Typography variant="body2">
+                    <Typography variant="body2" style={{ display: "flex",  flexWrap: "wrap", justifyContent: "center"}}>
                         <Link className={this.getClassesForLink('/ueberuns')} href="/#ueberuns">
                             Über uns
                         </Link>
