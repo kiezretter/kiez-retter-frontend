@@ -89,6 +89,13 @@ class RegistrationForm extends React.Component {
   async handleFormSend(evt) {
     evt.preventDefault();
     this.setState({ loading: true })
+
+    let ownerImage = null
+    if (this.state.owner_image) {
+        ownerImage = {
+          data: this.state.owner_image
+        }
+    }
     const data = {
       gmap_id: this.state.gmap_id,
       name: this.state.name,
@@ -115,9 +122,7 @@ class RegistrationForm extends React.Component {
         last_name: this.state.last_name,
         nick_name: this.state.nick_name,
         paypal_handle: this.state.paypal_handle,
-        owner_image: {
-          data: this.state.owner_image
-        },
+        owner_image: ownerImage,
         id_card_image: {
           data: this.state.id_card_image
         }
