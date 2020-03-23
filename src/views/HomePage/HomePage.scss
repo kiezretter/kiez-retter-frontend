@@ -4,7 +4,8 @@
     &--search-container {
         position: relative;
         padding-top: 8.5rem;
-        padding-bottom: 10rem;
+        height: 70vh;
+        max-height: 35rem;
     }
 
     &--kiez {
@@ -39,6 +40,10 @@
         background-color: $brand-blue;
         color: #fff;
         padding: 1rem 0;
+    }
+
+    &--about {
+        background-color: $brand-blue-l;
     }
 
     &--howitworks {
