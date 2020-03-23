@@ -157,7 +157,13 @@
     }
 
     &-icon {
-      height: 7em;
+      height: 5em;
+    }
+
+    @media (min-width: 768px) {
+      &-icon {
+        height: 7em;
+      }
     }
   }
 }
@@ -166,3 +172,6 @@
   display: none;
 }
 
+.paypal-icon {
+  margin-right: 15px;
+}

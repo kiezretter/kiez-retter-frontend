@@ -36,12 +36,13 @@ import service2 from '../../assets/images/service2.png';
 import service3 from '../../assets/images/service3.png';
 import ownerPlaceholder from '../../assets/images/owner_placeholder.png';
 import shopPlaceholder from '../../assets/images/shop_placeholder.png';
+import payPalIcon from '../../assets/images/paypal_icon.svg';
 
 const StyledInput = withStyles({
   root: {
     width: '100px',
     padding: "0 15px",
-    color: '#1A73E8',
+    color: '#000',
     fontSize: 24,
     fontWeight: '700',
   },
@@ -157,25 +158,27 @@ const Info = () => {
                 {store.address.postcode} {store.address.city}
               </div>
             </div>
-            <div>
-              <div
-                className={
-                  showStoreInfo ? "info__box-intro" : "info__box-intro hide"
-                }
-              >
-                {store.message}
+            {store.message && (
+              <div>
+                <div
+                  className={
+                    showStoreInfo ? "info__box-intro" : "info__box-intro hide"
+                  }
+                >
+                  {store.message}
+                </div>
+                <div
+                  className="info__box-info-btn"
+                  onClick={() => setShowStoreInfo(!showStoreInfo)}
+                >
+                  {showStoreInfo ? (
+                    <div>&#8592; weniger anzeigen</div>
+                  ) : (
+                    <div>mehr anzeigen &#8594;</div>
+                  )}
+                </div>
               </div>
-              <div
-                className="info__box-info-btn"
-                onClick={() => setShowStoreInfo(!showStoreInfo)}
-              >
-                {showStoreInfo ? (
-                  <div>&#8592; weniger anzeigen</div>
-                ) : (
-                  <div>mehr anzeigen &#8594;</div>
-                )}
-              </div>
-            </div>
+            )}
             <div className="info__box-icons">
               <img src={icons()[0]} alt="beer" className="info__box-icon" />
               <img src={icons()[1]} alt="beers" className="info__box-icon" />
@@ -209,6 +212,7 @@ const Info = () => {
                 className="info__box-button"
                 onClick={() => sendDonation()}
               >
+                <img src={payPalIcon} alt="paypal-icon" className="paypal-icon"/>
                 Jetzt Retten
               </Button>
           </CardContent>

@@ -18,7 +18,7 @@ export default class Inhaber extends React.Component {
                 <Navigation />
 
                 <Container maxWidth="md" className="kr-inhaber">
-                    <Typography style={{ wordWrap: "break-word" }} variant="h3" gutterBottom>Registrierung</Typography>
+                    <Typography style={{ wordWrap: "break-word" }} variant="h4" gutterBottom>Registrierung</Typography>
                     <RegistrationForm />
                 </Container>
                 
