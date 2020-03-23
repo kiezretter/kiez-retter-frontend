@@ -22,8 +22,8 @@ export default class HowItWorksSection extends React.Component {
                                 <CardContent>
                                     <Typography variant="h5" component="h4">Ich möchte helfen</Typography>
                                     <Typography>
-                                        Du möchtest sie in diesen schwierigen Zeiten unterstützen? Das kannst Du über unsere Plattform ganz einfach tun. Wähle Deinen Lieblingskiezladen aus, wähle die Höhe Deiner Spende und schicke sie per Paypal direkt an den Inhaber.<br />
-                                        Dein Lieblingskiezladen ist noch nicht bei „kiezretter”? Dann erzähl ihm doch von uns.
+                                        Du möchtest deine Lieblingsbar, dein Lieblingscafé, oder einen anderen Lieblingsort gerne unterstützen? Das kannst du über unsere Plattform ganz einfach tun. Wähle deinen Lieblingskiezladen aus, bestimme anschließend die Höhe der Spende und schicke diese per PayPal direkt an den Inhaber.
+                                        Dein Lieblingskiezladen ist noch nicht bei „kiezretter“? Dann erzähl ihm doch von uns. 
                                     </Typography>
                                     <br />
                                     <Button variant="contained" color="primary" disableElevation onClick={this.props.onClickHelp}>
@@ -37,7 +37,7 @@ export default class HowItWorksSection extends React.Component {
                                 <CardContent>
                                     <Typography variant="h5" component="h4">Ich brauche Unterstützung</Typography>
                                     <Typography>
-                                        Gib Deinen Kunden die Möglichkeit, Dich in dieser aktuell schwierigen Zeit zu unterstützen und ihren Kiez am Leben zu halten. Melde Dich dazu einfach auf unserer Plattform als Inhaber an. Die Kiezretter können Dich dann ganz einfach über die interaktive Karte finden und mit einer Spende unterstützen. Die Spenden erhältst Du unkompliziert und direkt über Paypal.
+                                        Du trägst mit Deinem Laden zur Vielfalt der Nachbarschaft bei, hast jedoch durch die andauernde Krise finanzielle Schwierigkeiten? Dann melde Dich auf unserer Plattform als Inhaber*in an. Die Kiezretter können Dich dann ganz einfach über die interaktive Karte finden und Dich mittels PayPal mit einer Spende unterstützen.
                                     </Typography>
                                     <br />
                                     <Button variant="contained" color="primary" disableElevation href="/inhaber">
