@@ -68,6 +68,7 @@
     color: $mapsBlue;
     font-weight: 500;
     font-size: 3.2em;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
     &:hover {
       opacity: .8;
@@ -156,7 +157,13 @@
     }
 
     &-icon {
-      height: 7em;
+      height: 5em;
+    }
+
+    @media (min-width: 768px) {
+      &-icon {
+        height: 7em;
+      }
     }
   }
 }
@@ -165,3 +172,6 @@
   display: none;
 }
 
+.paypal-icon {
+  margin-right: 15px;
+}
