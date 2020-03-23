@@ -45,7 +45,7 @@ export default class ImpressumView extends React.Component {
                         <strong>Dieses Impressum gilt auch für die folgenden Social-Media-Präsenzen und Onlineprofile:</strong><br />
                         <a href="https://www.facebook.com/Kiezretter-100330361618119/" target="_blank" rel="noopener noreferrer">https://www.facebook.com/Kiezretter-100330361618119</a>/<br />
                         <a href="https://twitter.com/kiezretter" target="_blank" rel="noopener noreferrer">https://twitter.com/kiezretter</a><br />
-                        <a href="https://twitter.com/kiezretter" target="_blank" rel="noopener noreferrer">https://www.instagram.com/kiezretter/?igshid=1v8lcnwcdea3n</a>
+                        <a href="https://www.instagram.com/kiezretter/?igshid=1v8lcnwcdea3n" target="_blank" rel="noopener noreferrer">https://www.instagram.com/kiezretter/?igshid=1v8lcnwcdea3n</a>
                     </Typography>
                     <br /><br />
                     
