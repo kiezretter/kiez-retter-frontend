@@ -15,7 +15,6 @@ export const Geo = ({ google, currentLocation }) => {
   const { markers } = useMarkersContext();
   const { setPlaceId, setShowInfoCard } = useStoreContext();
 
-  const screenHeight = window.innerHeight;
   const onMarkerClick = (id) => {
     setPlaceId(id);
     setShowInfoCard(true);
@@ -28,7 +27,7 @@ export const Geo = ({ google, currentLocation }) => {
       ref={mapRef}
       google={google}
       containerStyle={{
-        height: `${screenHeight - 83}px`,
+        height: "calc(100vh - 83px)",
         width: "100%",
         position: "relative"
       }}
