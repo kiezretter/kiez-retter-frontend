@@ -29,6 +29,11 @@
         margin: 0 0 3rem 0;
     }
 
+    &--success-message .MuiSnackbarContent-root {
+        background: #4caf50;
+        color: #fff
+    }
+
     &--together,
     &--about {
         background-color: $brand-blue;
