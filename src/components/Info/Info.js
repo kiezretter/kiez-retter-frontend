@@ -92,8 +92,8 @@ const Info = () => {
     </div>
   );
 
-  const owner_image = () => store.owner.image ? store.owner.image : ownerPlaceholder;
-  const place_image = () => store.favorite_place_image ? store.favorite_place_image : shopPlaceholder;
+  const owner_image = () => store.owner.image ? `${store.owner.image}&w=300` : ownerPlaceholder;
+  const place_image = () => store.favorite_place_image ? `${store.favorite_place_image}&w=300` : shopPlaceholder;
 
   const sendDonation = async () => {
     const data = {
