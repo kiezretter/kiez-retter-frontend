@@ -71,11 +71,32 @@
         overflow: hidden;
     }
 
-    &--kiezhero {
+    &--kiezhero,
+    &--kiezhero-animated {
         position: absolute;
         width: 25rem;
         top: 0;
         transform: translateX(-50%);
+    }
+
+    &--kiezhero {
+        display: none;
+    }
+
+    &--kiezhero-animated {
+        left: .35rem;
+        top: 1rem;
+        width: 25.75rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &--kiezhero {
+            display: block;
+        }
+
+        &--kiezhero-animated {
+            display: none;
+        }
     }
 
     &--stats {
