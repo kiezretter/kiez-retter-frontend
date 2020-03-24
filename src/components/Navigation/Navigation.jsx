@@ -53,7 +53,7 @@ export default class Navigation extends React.Component {
                             Über uns
                         </Link>
                         <Link className={this.getClassesForLink('/inhaber')} href="/inhaber">
-                            Inhaber
+                            Laden registrieren
                         </Link>
                         {/* <Link className={this.getClassesForLink('/kiezretter')} href="/kiezretter">
                             Kiezretter
