@@ -33,35 +33,15 @@ class RegistrationForm extends React.Component {
     this.handleFormCancel = this.handleFormCancel.bind(this);
   }
 
-  validateForm() {
-    if (this.state.gmap_id &&
-      this.state.name &&
-      this.state.street_address &&
-      this.state.postcode &&
-      this.state.city &&
-      this.state.email &&
-      this.state.trade_license_image &&
-      this.state.id_card_image &&
-      this.state.name &&
-      this.state.last_name &&
-      this.state.paypal_handle &&
-      this.state.agbChecked &&
-      this.state.business_type) {
-      this.setState({ isFormValid: true })
-    } else {
-      this.setState({ isFormValid: false })
-    }
-  }
-
   handleChange(evt) {
     if (evt.target.name === 'agbChecked') {
       this.setState(prevState => ({
         agbChecked: !prevState.agbChecked
-      }), this.validateForm.bind(this));
+      }));
     } else {
       this.setState({
         [evt.target.name]: evt.target.value
-      }, this.validateForm.bind(this));
+      });
     }
     if (evt.target.name === 'street_address') {
 
@@ -76,17 +56,19 @@ class RegistrationForm extends React.Component {
         .catch(error => console.error('Error', error));
 
     }
-    this.validateForm();
   }
 
   handleFileUpload(data) {
     this.setState({
       [data.name]: data.file
-    }, this.validateForm.bind(this))
+    })
   }
 
   async handleFormSend(evt) {
     evt.preventDefault();
+    
+    if (!this.form.current.reportValidity()) return false;
+    
     this.setState({ loading: true })
 
     let ownerImage = null
@@ -262,6 +244,7 @@ class RegistrationForm extends React.Component {
               <InputLabel required htmlFor="storeType">Kategorie</InputLabel>
               <Select
                 native
+                required
                 name="business_type"
                 onChange={this.handleChange}
               >
@@ -353,7 +336,6 @@ class RegistrationForm extends React.Component {
               variant="contained"
               color="primary"
               component="label"
-              disabled={!this.state.isFormValid}
               onClick={this.handleFormSend}
             >
               Registrieren
