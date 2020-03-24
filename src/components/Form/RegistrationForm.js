@@ -95,6 +95,13 @@ class RegistrationForm extends React.Component {
           data: this.state.owner_image
         }
     }
+
+    let favorite_place_image = null;
+    if (this.state.favorite_place_image) {
+      favorite_place_image = {
+        data: this.state.favorite_place_image
+      }
+    }
     const data = {
       business: {
         gmap_id: this.state.gmap_id,
@@ -108,9 +115,7 @@ class RegistrationForm extends React.Component {
         personal_message: this.state.personal_message,
         personal_thank_you: this.state.personal_thank_you,
         business_type: this.state.business_type,
-        favorite_place_image: {
-          data: this.state.favorite_place_image
-        },
+        favorite_place_image: favorite_place_image,
         trade_certificate_attributes: {
           trade_license_image: {
             data: this.state.trade_license_image
