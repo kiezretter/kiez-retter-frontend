@@ -7,6 +7,7 @@ import KiezSkylineImage from '../../assets/images/landingpage_kiez.png';
 
 import {
     Container,
+    Typography,
 } from '@material-ui/core';
 
 export default class SearchSection extends React.Component {
@@ -19,6 +20,9 @@ export default class SearchSection extends React.Component {
                 />
                 <img src={KiezheroImage} className="kr-homepage--kiezhero" alt="Kiez Hero" />
                 <LocationSearchInput onSearchEnd={this.props.onSearchEnd} onSearch={this.props.onSearch} />
+                <Typography variant="body2" className="kr-homepage--search-subline">
+                    Hilf Läden in deiner Nachbarschaft die Coronnakrise zu überstehen. Wenn du selbst Inhaber:in bist, dann registriere dich und lass dich finden!
+                </Typography>
             </Container>
         );
     }

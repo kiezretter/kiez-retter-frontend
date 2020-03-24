@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core';
 
 import WirVsVirusLogo from '../../assets/images/wirvsvirus_logo_weiss.png';
+import KiezretterTypo from '../../assets/images/Kiezretter_Schriftzug.png';
 
 export default class AboutSection extends React.Component {
     render() {
@@ -15,7 +16,9 @@ export default class AboutSection extends React.Component {
                 <Container maxWidth="md">
                     <Grid container spacing={3} alignItems="center" className="kr-homepage--stats">
                         <Grid item sm={12} md={9}>
-                            <Typography variant="h4" component="h3" gutterBottom>#kiezretter</Typography>
+                            <Typography variant="h4" component="h3" gutterBottom aria-label="#kiezretter">
+                                <img src={KiezretterTypo} className="kr-homepage--kiezretter" aria-hidden="true" alt="#kiezretter" />
+                            </Typography>
                             <Typography>
                                 Kiezretter ist eine Liebeserklärung an unsere Kieze – gemeinsam wollen wir dafür sorgen, dass unsere Nachbarschaft nach der Krise noch genauso bunt und vielfältig ist wie davor!<br />
                             </Typography>
