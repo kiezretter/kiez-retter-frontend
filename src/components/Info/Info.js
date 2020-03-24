@@ -92,8 +92,28 @@ const Info = () => {
     </div>
   );
 
-  const owner_image = () => store.owner.image ? store.owner.image : ownerPlaceholder;
-  const place_image = () => store.favorite_place_image ? store.favorite_place_image : shopPlaceholder;
+  const owner_image = () => store.owner.image ? `${store.owner.image}&w=300` : ownerPlaceholder;
+  const place_image = () => store.favorite_place_image ? `${store.favorite_place_image}&w=300` : shopPlaceholder;
+
+  const renderDonateButton = () => {
+    if (!store.verified) return 'Solange dein Lieblingsladen nicht verifiziert ist, kannst du leider nicht für ihn spenden. Schau doch einfach später nochmal vorbei!';
+
+    return (
+      <Button
+        variant="contained"
+        color="primary"
+        disableElevation
+        href={`https://www.paypal.me/${store.owner.paypal}/${donatedValue}EUR`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="info__box-button"
+        onClick={() => sendDonation()}
+      >
+        <img src={payPalIcon} alt="paypal-icon" className="paypal-icon" />
+                Jetzt Retten
+      </Button>
+    );
+  };
 
   const sendDonation = async () => {
     const data = {
@@ -200,19 +220,7 @@ const Info = () => {
                   endAdornment={<InputAdornment position="end">‎€</InputAdornment>}
                 />
               </div>
-              <Button 
-                variant="contained" 
-                color="primary" 
-                disableElevation 
-                href={`https://www.paypal.me/${store.owner.paypal}/${donatedValue}EUR`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="info__box-button"
-                onClick={() => sendDonation()}
-              >
-                <img src={payPalIcon} alt="paypal-icon" className="paypal-icon"/>
-                Jetzt Retten
-              </Button>
+              {renderDonateButton()}
           </CardContent>
         </Card>
       ) : placeholder }

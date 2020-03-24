@@ -54,9 +54,11 @@ class FileUpload extends React.Component {
         >
           <i className="material-icons">cloud_upload</i>&nbsp; {this.props.label}
           <input
-            type="file"
-            onChange={this.handleFileUpload}
-            style={{ display: "none" }}
+           type="file"
+           onChange={this.handleFileUpload}
+           style={{ position: 'absolute', zIndex: -2, opacity: 0 }}
+           required={this.props.required}
+           name={this.props.name}
           />
         </Button>
       </React.Fragment>

@@ -8,6 +8,18 @@
         max-height: 35rem;
     }
 
+    &--search-subline {
+        padding: 1rem 22px 0 22px;
+        text-align: justify;
+        color: $brand-blue;
+        font-size: .825rem !important;
+    }
+
+    &--kiezretter {
+        width: 250px;
+        margin-bottom: -1rem;
+    }
+
     &--kiez {
         position: absolute;
         bottom: 0;
@@ -26,6 +38,13 @@
         }
     } 
 
+    &--geben-image,
+    &--nehmen-image {
+        height: 150px;
+        margin: 0 auto 1rem auto;
+        display: block;
+    }
+
     &--about {
         margin: 0 0 3rem 0;
     }
@@ -40,26 +59,44 @@
         color: #fff;
         padding: 2.5rem 0;
     }
+
     &--about {
-        background-color: $brand-blue;
+        background-color: $brand-blue-l;
         color: #fff;
         padding: 0.5rem 0 3.5rem 0;
     }
 
-
-    &--about {
-        background-color: $brand-blue-l;
-    }
-
     &--howitworks {
         margin: 3rem 0;
+        overflow: hidden;
     }
 
-    &--kiezhero {
+    &--kiezhero,
+    &--kiezhero-animated {
         position: absolute;
         width: 25rem;
         top: 0;
         transform: translateX(-50%);
+    }
+
+    &--kiezhero {
+        display: none;
+    }
+
+    &--kiezhero-animated {
+        left: .35rem;
+        top: 1rem;
+        width: 25.75rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &--kiezhero {
+            display: block;
+        }
+
+        &--kiezhero-animated {
+            display: none;
+        }
     }
 
     &--stats {
@@ -77,13 +114,16 @@
     &--gethelp {
         margin-top: 1rem !important;
 
-        .MuiCardContent-root {
-            overflow: hidden;
+        .MuiGrid-item {
+            position: relative;
         }
 
         .MuiButton-root {
-            float: right;
-            margin-top: .5rem;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 1rem; 
+            background-color: $brand-blue-l;
         }
     }
 }
