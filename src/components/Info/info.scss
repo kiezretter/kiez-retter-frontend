@@ -22,7 +22,9 @@
     width: 100%;
     border-radius: 1em;
     background-color: white;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: auto;
+    max-height: 100vh;
     position: absolute;
     bottom: 0px;
     right: 0px;
