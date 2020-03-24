@@ -43,19 +43,6 @@ class RegistrationForm extends React.Component {
         [evt.target.name]: evt.target.value
       });
     }
-    if (evt.target.name === 'street_address') {
-
-      geocodeByAddress(evt.target.value)
-        .then(results => {
-          this.setState({
-            gmap_id: results[0].place_id,
-            lng: results[0].geometry.location.lng(),
-            lat: results[0].geometry.location.lat()
-          })
-        })
-        .catch(error => console.error('Error', error));
-
-    }
   }
 
   handleFileUpload(data) {
@@ -66,10 +53,8 @@ class RegistrationForm extends React.Component {
 
   async handleFormSend(evt) {
     evt.preventDefault();
-    
     if (!this.form.current.reportValidity()) return false;
-    
-    this.setState({ loading: true })
+    this.setState({ loading: true });
 
     let ownerImage = null
     if (this.state.owner_image) {
@@ -84,62 +69,67 @@ class RegistrationForm extends React.Component {
         data: this.state.favorite_place_image
       }
     }
-    const data = {
-      business: {
-        gmap_id: this.state.gmap_id,
-        name: this.state.name,
-        lng: this.state.lng,
-        lat: this.state.lat,
-        phone_number: this.state.phone_number,
-        street_address: this.state.street_address,
-        postcode: this.state.postcode,
-        city: this.state.city,
-        personal_message: this.state.personal_message,
-        personal_thank_you: this.state.personal_thank_you,
-        business_type: this.state.business_type,
-        favorite_place_image: favorite_place_image,
-        trade_certificate_attributes: {
-          trade_license_image: {
-            data: this.state.trade_license_image
-          }
-        },
-        owner_attributes: {
-          email: this.state.email,
-          first_name: this.state.first_name,
-          last_name: this.state.last_name,
-          nick_name: this.state.nick_name,
-          paypal_handle: this.state.paypal_handle,
-          owner_image: ownerImage,
-          id_card_image: {
-            data: this.state.id_card_image
+
+    const sendForm = async (lng, lat, gmap_id) => {
+      const data = {
+        business: {
+          gmap_id: gmap_id,
+          name: this.state.name,
+          lng: lng,
+          lat: lat,
+          phone_number: this.state.phone_number,
+          street_address: this.state.street_address,
+          postcode: this.state.postcode,
+          city: this.state.city,
+          personal_message: this.state.personal_message,
+          personal_thank_you: this.state.personal_thank_you,
+          business_type: this.state.business_type,
+          favorite_place_image: favorite_place_image,
+          trade_certificate_attributes: {
+            trade_license_image: {
+              data: this.state.trade_license_image
+            }
+          },
+          owner_attributes: {
+            email: this.state.email,
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
+            nick_name: this.state.nick_name,
+            paypal_handle: this.state.paypal_handle,
+            owner_image: ownerImage,
+            id_card_image: {
+              data: this.state.id_card_image
+            }
           }
         }
       }
-    }
-    let response = await fetch(`${process.env.REACT_APP_ROOT_URL}/api/businesses`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(data)
-    });
-    this.setState({ loading: false });
+      console.log("send form")
+      console.log('this.state', this.state)
+      let response = await fetch(`${process.env.REACT_APP_ROOT_URL}/api/businesses`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(data)
+      });
+      if (response.ok) {
+        let result = await response.json();
+        console.log('CL: RegistrationForm -> handleFormSend -> result', result)
+        window.location.href = '/?registerSuccess';
+      } else {
+        console.error("HTTP-Error: " + response.status);
+      }
 
-    if (response.ok) { // if HTTP-status is 200-299
-      // get the response body (the method explained below)
-      let result = await response.json();
-      console.log('CL: RegistrationForm -> handleFormSend -> result', result)
-      // Form sent successfully
-      // eslint-disable-next-line react/no-direct-mutation-state
-      // this.state = { agbChecked: false, isFormValid: false };
-      // this.form.current.reset();
-      // this.forceUpdate();
-      
-      window.location.href = '/?registerSuccess';
-    } else {
-      console.error("HTTP-Error: " + response.status);
     }
 
+    geocodeByAddress(`${this.state.street_address} ${this.state.postcode} ${this.state.city}`)
+      .then(results => {
+        const gmap_id = results[0].place_id;
+        const lng = results[0].geometry.location.lng();
+        const lat = results[0].geometry.location.lat();
+        sendForm(lng, lat, gmap_id);
+      })
+      .catch(error => console.error('Error', error));
   }
 
   handleFormCancel(evt) {
@@ -198,12 +188,12 @@ class RegistrationForm extends React.Component {
             <Grid container spacing={1} className="upload-button">
               <Grid item xs={12} md={6}>
                 <FormControl className="form-control">
-                  <FileUpload name="trade_license_image" label="Gewerbeschein*" onChange={this.handleFileUpload} />
+                  <FileUpload required name="trade_license_image" label="Gewerbeschein*" onChange={this.handleFileUpload} />
                 </FormControl>
               </Grid>
               <Grid item xs={12} md={6}>
                 <FormControl className="form-control">
-                  <FileUpload name="id_card_image" label="Personalausweis*" onChange={this.handleFileUpload} />
+                  <FileUpload  required name="id_card_image" label="Personalausweis*" onChange={this.handleFileUpload} />
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
