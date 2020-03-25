@@ -17,8 +17,6 @@ const BusinessOverview = () => {
     setShowInfoCard
   } = useStoreContext();
 
-  let deeplinkRequest = false;
-
   const { markers } = useMarkersContext();
 
   const useQuery = () => {
