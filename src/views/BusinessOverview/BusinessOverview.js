@@ -1,19 +1,50 @@
 import React from 'react';
-import GoogleApiWrapper from '../../components/Map/Map';
-import Info from '../../components/Info/Info';
-import { useLocation } from 'react-router-dom';
+import { 
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 
 import Navigation from '../../components/Navigation/Navigation.jsx';
+import GoogleApiWrapper from '../../components/Map/Map';
+import Info from '../../components/Info/Info';
 
+import { useStoreContext } from "../../context/StoreContext";
+import { useMarkersContext } from "../../context/MarkerContext";
 
-const BusinessOverview = ({ setShowInfoCard }) => {
+const BusinessOverview = () => {
+  const {
+    setPlaceId,
+    setShowInfoCard
+  } = useStoreContext();
+
+  let deeplinkRequest = false;
+
+  const { markers } = useMarkersContext();
+
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
   }
   const query = useQuery();
-  const lat = query.get('lat');
-  const lng = query.get('lng');
-  const active = query.get('active');
+  let lat = query.get('lat');
+  let lng = query.get('lng');
+
+  const { businessId } = useParams();
+
+  if (businessId) {
+    setPlaceId(businessId);
+    setShowInfoCard(true);
+
+    if (markers) {
+      const storeMarker = markers.find(_ => _.id === +businessId);
+
+      if (storeMarker) {
+        lat = storeMarker.lat;
+        lng = storeMarker.lng;
+      }
+    }
+  }
+
+  if (!lat || !lng) return null;
 
   return (
     <>
@@ -25,7 +56,12 @@ const BusinessOverview = ({ setShowInfoCard }) => {
         }}
         cardIn={200}
       />
-      <Info active={active} />
+      <Info
+        currentLocation={{
+          lat,
+          lng,
+        }}
+      />
     </>
   )
 }
