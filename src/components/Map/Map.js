@@ -11,15 +11,29 @@ import { useHistory } from 'react-router-dom';
 export const Geo = ({ google, currentLocation }) => {
   const history = useHistory();
   const mapRef = useRef(null);
-  const [activeMarker, setActiveMarker] = useState(null);
-  const { markers } = useMarkersContext();
-  const { setPlaceId, setShowInfoCard } = useStoreContext();
+  const { markers, activeMarker, setActiveMarker } = useMarkersContext();
+  const { store, setPlaceId, setShowInfoCard } = useStoreContext();
 
   const onMarkerClick = (id) => {
+    const store = markers.find(_ => _.id === id);
+
     setPlaceId(id);
     setShowInfoCard(true);
     setActiveMarker(id);
-    history.push(`/kiez?lat=${currentLocation.lat}&lng=${currentLocation.lng}&active=${id}`);
+    // history.push(`/kiez?lat=${currentLocation.lat}&lng=${currentLocation.lng}&active=${id}`);
+    history.push(`/kiez/${id}/${store.name}`);
+  }
+
+  const renderOwnMarker = () => {
+    const [lat, lng] = sessionStorage.getItem('personalLocation').split('|');
+
+    return (
+      <Marker
+        title="Da bist du!"
+        position={{ lat, lng }}
+        icon={currentLocationIcon}
+      />
+    );
   }
 
   return (
@@ -35,11 +49,7 @@ export const Geo = ({ google, currentLocation }) => {
       zoom={13}
       disableDefaultUI={true}
     >
-      <Marker
-        title="Da bist du!"
-        position={currentLocation}
-        icon={currentLocationIcon}
-      />
+      {renderOwnMarker()}
       {markers && markers.map(marker => {
         return (
           <Marker

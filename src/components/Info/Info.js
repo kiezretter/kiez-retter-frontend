@@ -11,7 +11,9 @@ import {
   InputAdornment,
 } from '@material-ui/core';
 
+import { useHistory } from 'react-router-dom';
 import { useStoreContext } from "../../context/StoreContext";
+import { useMarkersContext } from "../../context/MarkerContext";
 
 import verifiedIcon from '../../assets/images/verifiziert.png';
 // import shareIcon from '../../assets/images/share.svg';
@@ -51,15 +53,19 @@ const StyledInput = withStyles({
   }
 })(Input);
 
-const Info = () => {
+const Info = ({ currentLocation }) => {
+  const history = useHistory();
   const [showStoreInfo, setShowStoreInfo] = useState(false);
   const [donatedValue, setDonatedValue] = useState(8.5);
   const {
     store,
     googleDatails,
     showInfoCard,
-    setShowInfoCard
+    setShowInfoCard,
+    setPlaceId,
   } = useStoreContext();
+
+  const { setActiveMarker } = useMarkersContext();
 
   const handleSliderChange = (event, newValue) => {
     setDonatedValue(newValue);
@@ -135,11 +141,18 @@ const Info = () => {
     }
   }
 
+  const onClickClose = () => {
+    setPlaceId(null);
+    setShowInfoCard(false);
+    setActiveMarker(null);
+    history.push(`/kiez?lat=${currentLocation.lat}&lng=${currentLocation.lng}`);
+  }
+
   return (
     <>
       {(store && showInfoCard) ? (
         <Card className="info__wrapper">
-          <div className="info__close-btn" onClick={() => setShowInfoCard(false)}>&times;</div>
+          <div className="info__close-btn" onClick={() => onClickClose()}>&times;</div>
           <CardMedia
             image={store && owner_image()}
             title="store"

@@ -7,6 +7,7 @@ const Markers = ({
   children,
 }) => {
   const [markers, setMarkers] = useState();
+  const [activeMarker, setActiveMarker] = useState();
 
   const loadAllMarkers = async () => {
     await fetch(`${process.env.REACT_APP_ROOT_URL}/api/businesses`)
@@ -22,7 +23,7 @@ const Markers = ({
   }, [])
 
   return (
-    <Provider value={{markers}}>
+    <Provider value={{ markers, activeMarker, setActiveMarker }}>
       {children}
     </Provider>
   )
