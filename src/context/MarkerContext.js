@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 
-const MarktersContext = React.createContext();
-const { Provider } = MarktersContext;
+const MarkersContext = React.createContext();
+const { Provider } = MarkersContext;
 
 const Markers = ({
   children,
@@ -29,6 +29,6 @@ const Markers = ({
   )
 }
 
-const useMarkersContext = () => useContext(MarktersContext);
+const useMarkersContext = () => useContext(MarkersContext);
 
-export { Markers, useMarkersContext };
+export { Markers, MarkersContext, useMarkersContext };

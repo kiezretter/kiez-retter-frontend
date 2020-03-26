@@ -18,15 +18,14 @@ const theme = createMuiTheme({
     },
     palette: {
         primary: {
-        main: 'rgb(30, 80, 145)', // brand-blue
+            main: 'rgb(30, 80, 145)', // brand-blue
         },
         secondary: {
-        main: 'rgb(222, 58, 66)', // brand-red
+            main: 'rgb(222, 58, 66)', // brand-red
         },
     },
 });
 
-console.log('APP LOADED???')
 if (sessionStorage.getItem('personalLocation')) sessionStorage.removeItem('personalLocation');
 
 export default class App extends React.Component {

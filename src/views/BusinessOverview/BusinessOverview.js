@@ -6,7 +6,7 @@ import {
 
 import Navigation from '../../components/Navigation/Navigation.jsx';
 import GoogleApiWrapper from '../../components/Map/Map';
-import Info from '../../components/Info/Info';
+import InfoCard from '../../components/InfoCard/InfoCard';
 
 import { useStoreContext } from "../../context/StoreContext";
 import { useMarkersContext } from "../../context/MarkerContext";
@@ -58,12 +58,7 @@ const BusinessOverview = () => {
         }}
         cardIn={200}
       />
-      <Info
-        currentLocation={{
-          lat,
-          lng,
-        }}
-      />
+      <InfoCard />
     </>
   )
 }

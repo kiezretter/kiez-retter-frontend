@@ -42,4 +42,4 @@ const Store = ({
 
 const useStoreContext = () => useContext(StoreContext)
 
-export { Store, useStoreContext }
+export { Store, StoreContext, useStoreContext }

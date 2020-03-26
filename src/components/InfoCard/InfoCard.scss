@@ -1,0 +1,179 @@
+@import '../../styles/Breakpoints.scss';
+@import '../../styles/Colors.scss';
+
+.info__prompt {
+    font-size: 1.6em;
+    padding: 1em;
+    text-align: center;
+    background-color: $white;
+    font-weight: 500;
+    color: $brand-blue;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    right: 0px;
+    box-shadow: 0 -5px 5px -5px rgba($black, .2);
+}
+
+.info {
+    &__wrapper {
+        max-width: 31rem;
+        min-width: 20rem;
+        width: 100%;
+        border-radius: 1em;
+        background-color: white;
+        overflow-y: hidden;
+        overflow-x: auto;
+        max-height: 100vh;
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        box-shadow: 0 -5px 5px -5px rgba($black, .8);
+        
+        .MuiCardContent-root {
+            overflow: hidden;
+        }
+    }
+    
+    
+    &__img {
+        height: 20em;
+        width: 50%;
+        float: left;
+    }
+    
+    &__verified-icon {
+        opacity: .5;
+        width: 35px;
+        vertical-align: middle;
+        margin-left: 10px;
+        margin-top: -4px;
+        
+        &--verified {
+            opacity: 1;
+        }
+    }
+    
+    &__close-btn {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 1.2em;
+        height: 1.2em;
+        border-radius: 50%;
+        margin: .2em;
+        cursor: pointer;
+        background-color: $white;
+        color: $mapsBlue;
+        font-weight: 500;
+        font-size: 3.2em;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        
+        &:hover {
+            opacity: .8;
+        }
+    }
+    
+    &__box {
+        &-name {
+            &__wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                
+                &-name {
+                    font-size: 2.4em;
+                    font-weight: 700;
+                    letter-spacing: 1px;
+                    color: $brand-blue;
+                }
+                &-icon__share {
+                    margin-right: 1em;
+                    cursor: pointer;
+                }
+                
+                &-icon img{
+                    height: 3em;
+                    width: 3em;
+                    cursor: pointer;
+                }
+            }
+        }
+        
+        &-address {
+            color: $grey;
+            font-size: 1.6em;
+            padding-bottom: 1em;
+        }
+        
+        &-intro {
+            font-size: 1.6em; 
+            padding: 1em 0;
+            margin-top: 0px;
+            transition: all .5s;
+        }
+        
+        &-info-btn {
+            font-size: 1.4em;
+            padding-bottom: 2px !important;
+            border: 0;
+            border-bottom: 1px solid $brand-blue;
+            width: fit-content;
+            padding: 1em 0;
+            display: flex;
+            background: none;
+            cursor: pointer;
+            color: $brand-blue;
+            
+            
+            &:focus {
+                color: $brand-blue;
+                border-bottom-color: $brand-blue-l;
+                outline: 0;
+            }
+            
+            &:hover {
+                color: $brand-blue-l;
+            }
+        }
+        
+        &-button {
+            display: flex;
+            width: 100%;
+        }
+        
+        &-amount {
+            text-align: center;
+            font-weight: 500;
+            font-size: 2.4em;
+            margin-bottom: 1.5rem;
+        }
+        
+        &-icons {
+            margin-top: 2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        &-icon {
+            height: 5em;
+        }
+        
+        @media (min-width: 768px) {
+            &-icon {
+                height: 7em;
+            }
+        }
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.paypal-icon {
+    margin-right: 15px;
+    width: 20px;
+}
