@@ -44,6 +44,10 @@ const BusinessOverview = () => {
 
   if (!lat || !lng) return null;
 
+  if (!sessionStorage.getItem('personalLocation')) {
+    sessionStorage.setItem('personalLocation', `${lat}|${lng}`);
+  }
+
   return (
     <>
       <Navigation bordered={true} />

@@ -25,10 +25,12 @@ export const Geo = ({ google, currentLocation }) => {
   }
 
   const renderOwnMarker = () => {
+    const [lat, lng] = sessionStorage.getItem('personalLocation').split('|');
+
     return (
       <Marker
         title="Da bist du!"
-        position={currentLocation}
+        position={{ lat, lng }}
         icon={currentLocationIcon}
       />
     );

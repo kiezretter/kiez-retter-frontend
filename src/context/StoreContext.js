@@ -13,14 +13,16 @@ const Store = ({
 
   useEffect(() => {
     const loadInformation = async () => {
-      await fetch(`${process.env.REACT_APP_ROOT_URL}/api/businesses/${placeId}`)
-        .then(res => res.json())
-        .then(data => {
-          setStore(data.business)
-        })
-        .catch((error) => {
-          console.log(`something went wrong by calling ${URL}, error: ${error}`);
-        });
+      const dataUrl = `${process.env.REACT_APP_ROOT_URL}/api/businesses/${placeId}`;
+
+      try {
+        const store = await fetch(dataUrl);
+        const storeJSON = await store.json();
+        setStore(storeJSON.business);
+      } catch (error) {
+        console.error(`something went wrong by calling ${dataUrl}, error: ${error}`);
+      }
+
     }
     if (placeId) loadInformation();
   }, [placeId]);
