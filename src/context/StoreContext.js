@@ -7,6 +7,7 @@ const Store = ({
   children,
 }) => {
   const [store, setStore] = useState();
+  const [businessLocation, setBusinessLocation] = useState();
   const [placeId, setPlaceId] = useState();
   const [showInfoCard, setShowInfoCard] = useState(false);
 
@@ -18,6 +19,8 @@ const Store = ({
         const store = await fetch(dataUrl);
         const storeJSON = await store.json();
         setStore(storeJSON.business);
+        const [lat, lng] = storeJSON.business.address;
+        setBusinessLocation({lat, lng})
       } catch (error) {
         console.error(`something went wrong by calling ${dataUrl}, error: ${error}`);
       }
@@ -28,6 +31,7 @@ const Store = ({
   return (
     <Provider value={{
       store,
+      businessLocation,
       setPlaceId,
       showInfoCard,
       setShowInfoCard,

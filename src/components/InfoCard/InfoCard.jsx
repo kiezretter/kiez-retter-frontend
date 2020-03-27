@@ -155,13 +155,18 @@ const InfoCard = () => {
     };
 
     const renderOwnerImage = () => {
-        let image = IconProvider.ownerPlaceholder;
+        const image = () => {
+            if (business.owner.image) return `${business.owner.image}&w=300`;
 
-        if (business.owner.image) image = `${business.owner.image}&w=300`;
+            if (business.image_references) {
+                return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference=${business.image_references[0].google_reference}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+            }
+            return IconProvider.ownerPlaceholder;
+        }
 
         return (
             <CardMedia
-                image={image}
+                image={image()}
                 title="store"
                 className="info__img info__img-store"
             />
@@ -173,7 +178,8 @@ const InfoCard = () => {
         
         if (business.favorite_place_image) image = `${business.favorite_place_image}&w=300`;
         if (business.image_references) {
-            image = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference=${business.image_references[0]}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+            console.log('business', business)
+            image = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference=${business.image_references[1].google_reference}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
         }
 
         return (

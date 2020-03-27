@@ -19,7 +19,7 @@ const BusinessOverview = () => {
     store,
   } = useStoreContext();
 
-  const { setCurrentLocation, currentLocation } = useMarkerContext();
+  const { setActiveMarker, setCurrentLocation, currentLocation } = useMarkerContext();
 
   const useQuery = () => new URLSearchParams(useLocation().search);
   const query = useQuery();
@@ -27,7 +27,9 @@ const BusinessOverview = () => {
 
   useEffect(() => {
     setPlaceId(businessId);
-    getCurrentLocation();
+    if (store && !currentLocation) {
+      getCurrentLocation();
+    }
   }, [store, businessId]);
 
   const getCurrentLocation = () => {
@@ -38,7 +40,8 @@ const BusinessOverview = () => {
       sessionStorage.setItem('personalLocation', `${lat}|${lng}`);
     } else if (businessId) {
       setShowInfoCard(true);
-      console.log('currentLocation', currentLocation);
+      setActiveMarker(parseInt(businessId));
+      setCurrentLocation({lat: store.address.lat, lng: store.address.lng})
     } else if (personalLocationPresentInStorage()) {
       const [sessionLat, sessionLng] = sessionStorage.getItem('personalLocation').split('|');
       setCurrentLocation({sessionLat, sessionLng});
@@ -48,7 +51,6 @@ const BusinessOverview = () => {
   }
 
   const personalLocationPresentInStorage = () => {
-    console.log('seess', sessionStorage.getItem('personalLocation'))
     return sessionStorage.getItem('personalLocation') !== null
   }
 

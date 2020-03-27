@@ -21,7 +21,6 @@ const Markers = ({
 
   useEffect(() => {
     loadAllMarkers();
-    console.log('load all makers')
   }, [])
 
   return (
