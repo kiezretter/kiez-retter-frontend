@@ -45,7 +45,7 @@ export default class Navigation extends React.Component {
                 <Container maxWidth="md">
                     {this.renderLogo()}
                     
-                    <Typography className="kr-nav--list" align="right">
+                    <Typography className="kr-nav--list">
                         <Link className={this.getClassesForLink('/')} href="/">
                             Home
                         </Link>
