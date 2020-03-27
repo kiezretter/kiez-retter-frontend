@@ -3,16 +3,23 @@
 .kr-homepage {
     &--search-container {
         position: relative;
-        padding-top: 8.5rem;
-        height: 70vh;
+        padding-top: 7.5rem;
+        height: 65vh;
         max-height: 35rem;
+
+        @media screen and (min-width: 768px) {
+            height: 75vh;
+            max-height: 40rem;
+            padding-top: 12rem;
+        }
     }
 
     &--search-subline {
-        padding: 1rem 22px 0 22px;
+        padding: 1rem 22px;
         text-align: justify;
         color: $brand-blue;
         font-size: .825rem !important;
+        background: rgba(255,255,255,.7);
     }
 
     &--kiezretter {
@@ -32,6 +39,7 @@
         background-size: 2200px;
         background-repeat: no-repeat;
         transition: opaicty 300ms;
+        z-index: -1;
 
         &__hidden {
             opacity: 0;
@@ -55,15 +63,19 @@
     }
 
     &--together {
-        background-color: $brand-blue;
+        background-color: $brand-blue-l;
         color: #fff;
         padding: 2.5rem 0;
+
+        &--icon {
+            width: 100%;
+        } 
     }
 
     &--about {
         background-color: $brand-blue-l;
         color: #fff;
-        padding: 0.5rem 0 3.5rem 0;
+        padding: 1px 0 3.5rem 0;
     }
 
     &--howitworks {
@@ -75,8 +87,13 @@
     &--kiezhero-animated {
         position: absolute;
         width: 25rem;
-        top: 0;
+        top: -1rem;
         transform: translateX(-50%);
+        pointer-events: none;
+
+        @media screen and (min-width: 768px) {
+            top: 3rem;
+        }
     }
 
     &--kiezhero {
@@ -85,8 +102,12 @@
 
     &--kiezhero-animated {
         left: .35rem;
-        top: 1rem;
+        top: 0;
         width: 25.75rem;
+
+        @media screen and (min-width: 768px) {
+            top: 4rem;
+        }
     }
 
     @media (prefers-reduced-motion: reduce) {
