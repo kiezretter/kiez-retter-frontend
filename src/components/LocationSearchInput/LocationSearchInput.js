@@ -46,14 +46,12 @@ const LocationSearchInput = (props) => {
 
   const goToKiez = (latLng) => {
     history.push(`/kiez?lat=${latLng.lat}&lng=${latLng.lng}`);
+    setCurrentLocation(latLng);
   }
   
   const handleSelect = (input) => {
     geocodeByAddress(input)
-      .then(results => {
-        setCurrentLocation({lat: results[0].lat, lng: results[0].lng});
-        return getLatLng(results[0]);
-      })
+      .then(results => getLatLng(results[0]))
       .then(latLng => goToKiez(latLng))
       .catch(error => console.error('Error', error));
   };

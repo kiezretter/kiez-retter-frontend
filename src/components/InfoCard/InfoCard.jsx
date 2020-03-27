@@ -127,21 +127,21 @@ const InfoCard = () => {
     }
 
     const renderFundingButton = () => {
-        // if (!this.props.store.store.funding) return null;
+        if (!business.funding) return null;
 
         let text = 'Gutschein kaufen';
 
-        // if (this.props.store.store.funding.funding_type === 'voucher') text = 'Gutschein kaufen';
-        // if (this.props.store.store.funding.funding_type === 'crowd_funding') text = 'Zum Crowdfunding';
+        if (business.funding.funding_type === 'voucher') text = 'Gutschein kaufen';
+        if (business.funding.funding_type === 'crowd_funding') text = 'Zum Crowdfunding';
 
-        // if (!text) return null;
+        if (!text) return null;
 
         return (
             <>
                 <Button
                     variant="contained"
                     disableElevation
-                    // href={this.props.store.store.funding.link}
+                    href={business.funding.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="info__box-button"
@@ -178,7 +178,6 @@ const InfoCard = () => {
         
         if (business.favorite_place_image) image = `${business.favorite_place_image}&w=300`;
         if (business.image_references) {
-            console.log('business', business)
             image = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference=${business.image_references[1].google_reference}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
         }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { 
   useLocation,
   useParams,
@@ -26,6 +26,12 @@ const BusinessOverview = () => {
   const { businessId } = useParams();
 
   useEffect(() => {
+    const lat = query.get('lat');
+    const lng = query.get('lng');
+    if (lat && lng) {
+      setCurrentLocation({lat, lng})
+      sessionStorage.setItem('personalLocation', `${lat}|${lng}`);
+    }
     setPlaceId(businessId);
     if (store && !currentLocation) {
       getCurrentLocation();
@@ -33,12 +39,7 @@ const BusinessOverview = () => {
   }, [store, businessId]);
 
   const getCurrentLocation = () => {
-    const lat = query.get('lat');
-    const lng = query.get('lng');
-    if (lat && lng) {
-      setCurrentLocation({lat, lng})
-      sessionStorage.setItem('personalLocation', `${lat}|${lng}`);
-    } else if (businessId) {
+     if (businessId) {
       setShowInfoCard(true);
       setActiveMarker(parseInt(businessId));
       setCurrentLocation({lat: store.address.lat, lng: store.address.lng})
