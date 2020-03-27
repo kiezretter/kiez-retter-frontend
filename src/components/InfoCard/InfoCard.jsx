@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 
 import {
     Input,
@@ -11,10 +11,8 @@ import {
     Grid,
 } from '@material-ui/core';
 
-import { useHistory } from 'react-router-dom';
-
 import { StoreContext } from "../../context/StoreContext";
-import { MarkersContext } from "../../context/MarkerContext";
+import { MarkerContext } from "../../context/MarkerContext";
 
 import PrettoSlider from "../DonateSlider/DonateSlider";
 import * as IconProvider from './IconProvider';
@@ -34,32 +32,26 @@ const StyledInput = withStyles({
     }
 })(Input);
 
-class InfoCard extends React.Component {
-    constructor(props) {
-        super(props);
+const InfoCard = () => {
+    const [donatedValue, setDonatedValue] = useState(8.5);
+    const [showInfoStore, setShowInfoStore] = useState(false);
+    const store = useContext(StoreContext);
+    const business = store.store;
+    const markers = useContext(MarkerContext);
 
-        this.state = {
-            donatedValue: 8.5,
-            showStoreInfo: false,
-        };
+    const handleSliderChange = (event, newValue) => {
+        console.log('value', newValue);
+        setDonatedValue(newValue);
     }
 
-    handleSliderChange(event, value) {
-        this.setState({
-            donatedValue: +value,
-        })
+    const handleSliderInputChange = (event) => {
+        setDonatedValue(event.target.value);
     }
 
-    handleSliderInputChange(event, value) {
-        this.setState({
-            donatedValue: +event.target.value,
-        })
-    }
-
-    async handleSendDonation() {
+    const handleSendDonation = async () => {
         const data = {
-            business_id: this.props.store.business_id,
-            amount_cents: this.state.donatedValue * 100,
+            business_id: business.business_id,
+            amount_cents: donatedValue * 100,
         };
 
         let response;
@@ -83,12 +75,10 @@ class InfoCard extends React.Component {
         }
     }
 
-    handleClose(event) {
-        this.props.markers.setActiveMarker(null);
-        this.props.store.setPlaceId(null);
-        this.props.store.setShowInfoCard(false);
-
-        console.log()
+    const handleClose = () => {
+        markers.setActiveMarker(null);
+        store.setPlaceId(null);
+        store.setShowInfoCard(false);
 
         if (sessionStorage.getItem('personalLocation')) {
             const [lat, lng] = sessionStorage.getItem('personalLocation').split('|');
@@ -96,7 +86,7 @@ class InfoCard extends React.Component {
         }
     }
 
-    renderPlaceholder() {
+    const renderPlaceholder = () => {
         return (
             <div className="info__prompt">
                 Klick eine Location in deinem Kiez an.
@@ -104,8 +94,8 @@ class InfoCard extends React.Component {
         );
     }
 
-    renderSliderIcons() {
-        const icons = IconProvider.icons(this.props.store.business_type);
+    const renderSliderIcons = () => {
+        const icons = IconProvider.icons(business.business_type);
 
         return (
             <div className="info__box-icons">
@@ -116,19 +106,19 @@ class InfoCard extends React.Component {
         );
     }
 
-    renderDonateButton() {
-        if (!this.props.store.store.verified) return 'Solange dein Lieblingsladen nicht verifiziert ist, kannst du leider nicht für ihn spenden. Schau doch einfach später nochmal vorbei!';
+    const renderDonateButton = () => {
+        if (!business.verified) return 'Solange dein Lieblingsladen nicht verifiziert ist, kannst du leider nicht für ihn spenden. Schau doch einfach später nochmal vorbei!';
 
         return (
             <Button
                 variant="contained"
                 color="primary"
                 disableElevation
-                href={`https://www.paypal.me/${this.props.store.store.owner.paypal}/${this.state.donatedValue}EUR`}
+                href={`https://www.paypal.me/${business.owner.paypal}/${donatedValue}EUR`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="info__box-button"
-                onClick={() => this.handleSendDonation()}
+                onClick={() => handleSendDonation()}
             >
                 <img src={IconProvider.payPalIcon} alt="paypal-icon" className="paypal-icon" />
                 Jetzt Retten
@@ -136,7 +126,7 @@ class InfoCard extends React.Component {
         );
     }
 
-    renderFundingButton() {
+    const renderFundingButton = () => {
         // if (!this.props.store.store.funding) return null;
 
         let text = 'Gutschein kaufen';
@@ -164,10 +154,10 @@ class InfoCard extends React.Component {
         );
     };
 
-    renderOwnerImage() {
+    const renderOwnerImage = () => {
         let image = IconProvider.ownerPlaceholder;
 
-        if (this.props.store.store.owner.image) image = `${this.props.store.store.owner.image}&w=300`;
+        if (business.owner.image) image = `${business.owner.image}&w=300`;
 
         return (
             <CardMedia
@@ -178,38 +168,38 @@ class InfoCard extends React.Component {
         );
     }
 
-    renderPlaceImage() {
+    const renderPlaceImage = () => {
         let image = IconProvider.shopPlaceholder;
         
-        if (this.props.store.store.favorite_place_image) image = `${this.props.store.store.favorite_place_image}&w=300`;
-        if (this.props.store.store.image_references) {
-            image = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference=${this.props.store.store.image_references[0]}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+        if (business.favorite_place_image) image = `${business.favorite_place_image}&w=300`;
+        if (business.image_references) {
+            image = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference=${business.image_references[0]}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
         }
 
         return (
             <CardMedia
                 image={image}
-                title={this.props.store.store.name}
+                title={business.name}
                 className="info__img info__img-human"
             />
         );
     }
 
-    renderAddressContainer() {
-        if (!this.props.store.store.address) return null;
+    const renderAddressContainer = () => {
+        if (!business.address) return null;
 
         return (
             <div className="info__box-address">
-                <div>{this.props.store.store.address.street_address}</div>
+                <div>{business.address.street_address}</div>
                 <div>
-                    {this.props.store.store.address.postcode} {this.props.store.store.address.city}
+                    {business.address.postcode} {business.address.city}
                 </div>
             </div>
         );
     }
 
-    renderVerifiedIcon() {
-        if (!this.props.store.store.verified) return null;
+    const renderVerifiedIcon = () => {
+        if (!business.verified) return null;
         
         return (
             <img
@@ -220,13 +210,13 @@ class InfoCard extends React.Component {
         );
     }
 
-    renderInfoBox() {
+    const renderInfoBox = () => {
         return (
             <div className="info__box">
                 <div className="info__box-name__wrapper">
                     <div className="info__box-name__wrapper-name">
-                        {this.props.store.store.name}
-                        {this.renderVerifiedIcon()}
+                        {business.name}
+                        {renderVerifiedIcon()}
                     </div>
                     {/* <div className="info__box-name__wrapper-icon">
                         <img
@@ -240,100 +230,84 @@ class InfoCard extends React.Component {
         )
     }
 
-    renderStoreMessage() {
-        if (!this.state.showStoreInfo) return null;
+    const renderStoreMessage = () => {
+        if (!showInfoStore) return null;
 
         return (
             <div className="info__box-intro">
-                {this.props.store.store.message}
+                {business.message}
             </div>
         );
     }
 
-    renderStoreMessageLink() {
+    const renderStoreMessageLink = () => {
         let text = 'mehr anzeigen &#8594;';
 
-        if (this.state.showStoreInfo) text = '&#8592; weniger anzeigen';
+        if (showInfoStore) text = '&#8592; weniger anzeigen';
 
         return (
             <button
                 className="info__box-info-btn"
-                onClick={() => this.setState(prev => ({ ...prev, showStoreInfo: !prev.showStoreInfo }))}
+                onClick={() => setShowInfoStore(!showInfoStore)}
                 dangerouslySetInnerHTML={{ __html: text }}
             ></button>
         );
     }
 
-    renderStoreMessageSwitcher() {
-        if (!this.props.store.store.message) return null;
+    const renderStoreMessageSwitcher = () => {
+        if (!business.message) return null;
 
         return (
             <div>
-                {this.renderStoreMessage()}
-                {this.renderStoreMessageLink()}
+                {renderStoreMessage()}
+                {renderStoreMessageLink()}
             </div>
         );
     }
 
-    render() {
-        console.log('re-reder triggered ######################', this.props.store);
-        if (!this.props.store.store || !this.props.store.showInfoCard) return this.renderPlaceholder();
+        console.log('re-reder triggered ######################', store);
+        if (!business || !store.showInfoCard) return renderPlaceholder();
 
-        return (
-            <Card className="info__wrapper">
-                <div className="info__close-btn" onClick={() => this.handleClose()}>&times;</div>
-                {this.renderOwnerImage()}
-                {this.renderPlaceImage()}
+    return (
+        <Card className="info__wrapper">
+            <div className="info__close-btn" onClick={() => handleClose()}>&times;</div>
+            {renderOwnerImage()}
+            {renderPlaceImage()}
 
-                <CardContent>
-                    {this.renderInfoBox()}
-                    {this.renderAddressContainer()}
-                    {this.renderStoreMessageSwitcher()}
-                    {this.renderSliderIcons()}
-                    <PrettoSlider
-                        aria-label="pretto slider"
-                        aria-labelledby="discrete-slider"
-                        value={this.state.donatedValue}
-                        onChange={this.handleSliderChange.bind(this)}
-                        min={0.00}
-                        max={20.00}
-                        step={0.50}
+            <CardContent>
+                {renderInfoBox()}
+                {renderAddressContainer()}
+                {renderStoreMessageSwitcher()}
+                {renderSliderIcons()}
+                <PrettoSlider
+                    aria-label="pretto slider"
+                    aria-labelledby="discrete-slider"
+                    value={donatedValue}
+                    onChange={handleSliderChange}
+                    min={0.00}
+                    max={20.00}
+                    step={0.50}
+                />
+                <div className="info__box-amount">
+                    <StyledInput
+                        type="text"
+                        value={donatedValue}
+                        onChange={handleSliderInputChange}
+                        classes={{ root: "my-class-name" }}
+                        endAdornment={<InputAdornment position="end">‎€</InputAdornment>}
                     />
-                    <div className="info__box-amount">
-                        <StyledInput
-                            type="text"
-                            value={this.state.donatedValue}
-                            onChange={this.handleSliderInputChange.bind(this)}
-                            classes={{ root: "my-class-name" }}
-                            endAdornment={<InputAdornment position="end">‎€</InputAdornment>}
-                        />
-                    </div>
-                    <Grid container spacing={2} className="info__box-buttons">
-                        <Grid item xs={12} sm={6}>
-                            {this.renderDonateButton()}
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            {this.renderFundingButton()}
-                        </Grid>
+                </div>
+                <Grid container spacing={2} className="info__box-buttons">
+                    <Grid item xs={12} sm={6}>
+                        {renderDonateButton()}
                     </Grid>
-                </CardContent>
-            </Card>
-        )
-    }
+                    <Grid item xs={12} sm={6}>
+                        {renderFundingButton()}
+                    </Grid>
+                </Grid>
+            </CardContent>
+        </Card>
+    )
 }
 
-export default class Wrapper extends React.Component {
-    render() {
-        return (
-            <StoreContext.Consumer>
-                {store => (
-                    <MarkersContext.Consumer>
-                        {markers => (
-                            <InfoCard store={store} markers={markers} />
-                        )}
-                    </MarkersContext.Consumer>
-                )}
-            </StoreContext.Consumer>
-        )
-    }
-}
+export default InfoCard;

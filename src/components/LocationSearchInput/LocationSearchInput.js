@@ -6,7 +6,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete';
 import { useHistory } from 'react-router-dom';
-import { useStoreContext } from "../../context/StoreContext";
+import { useMarkerContext } from '../../context/MarkerContext';
 
 import { 
   TextField,
@@ -41,8 +41,8 @@ const LocationSearchInput = (props) => {
   const [address, setAddress] = useState('');
   const [iconLoading, setIconLoading] = useState('');
   const berlin = new google.maps.LatLng(52.50888, 13.396647);
-  const { setPlaceId } = useStoreContext();
   const forceUpdate = React.useCallback(() => updateState({}), []);
+  const { setCurrentLocation } = useMarkerContext();
 
   const goToKiez = (latLng) => {
     history.push(`/kiez?lat=${latLng.lat}&lng=${latLng.lng}`);
@@ -51,7 +51,7 @@ const LocationSearchInput = (props) => {
   const handleSelect = (input) => {
     geocodeByAddress(input)
       .then(results => {
-        setPlaceId(results[0].place_id);
+        setCurrentLocation({lat: results[0].lat, lng: results[0].lng});
         return getLatLng(results[0]);
       })
       .then(latLng => goToKiez(latLng))
@@ -76,7 +76,7 @@ const LocationSearchInput = (props) => {
     goToKiez({ lat: position.coords.latitude, lng: position.coords.longitude });
   }
 
-  const renderResultList = (loading, suggestions, getSuggestionItemProps) => {
+  const renderResultList = (suggestions, getSuggestionItemProps) => {
     let results = <ListItem><ListItemText primary="Suche Ergebnisse für dich..." /></ListItem>;
 
     if (suggestions.length) {
@@ -135,7 +135,7 @@ const LocationSearchInput = (props) => {
 
     return (
       <Paper variant="outlined" className="kr-location-search--autocomplete">
-        {renderResultList(loading, suggestions, getSuggestionItemProps)}
+        {renderResultList(suggestions, getSuggestionItemProps)}
       </Paper>
     );
   }

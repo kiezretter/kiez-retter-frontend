@@ -7,7 +7,6 @@ const Store = ({
   children,
 }) => {
   const [store, setStore] = useState();
-  const [googleDetails, setGoogleDetails] = useState();
   const [placeId, setPlaceId] = useState();
   const [showInfoCard, setShowInfoCard] = useState(false);
 
@@ -22,7 +21,6 @@ const Store = ({
       } catch (error) {
         console.error(`something went wrong by calling ${dataUrl}, error: ${error}`);
       }
-
     }
     if (placeId) loadInformation();
   }, [placeId]);
@@ -30,10 +28,9 @@ const Store = ({
   return (
     <Provider value={{
       store,
-      googleDetails,
       setPlaceId,
       showInfoCard,
-      setShowInfoCard
+      setShowInfoCard,
     }}>
       {children}
     </Provider>
