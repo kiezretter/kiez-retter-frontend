@@ -1,10 +1,15 @@
 @import "../../styles/Colors.scss";
 
 .kr-nav {
-    padding-top: .5rem;
-    
+    display: flex;
+
     &__bordered {
         border-bottom: 1px solid $brand-red;
+    }
+
+    &__wide {
+        align-items: center;
+        height: 70px;
     }
 
     .MuiContainer-root {

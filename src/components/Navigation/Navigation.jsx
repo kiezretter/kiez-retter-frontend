@@ -15,6 +15,7 @@ export default class Navigation extends React.Component {
         let classes = 'kr-nav';
 
         if (this.props.bordered) classes += ' kr-nav__bordered';
+        if (!this.props.hideLogo) classes += ' kr-nav__wide'
 
         return classes;
     }
