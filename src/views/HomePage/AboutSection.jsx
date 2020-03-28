@@ -23,7 +23,7 @@ export default class AboutSection extends React.Component {
                             <Typography>
                                 Kiezretter ist eine Liebeserklärung an unsere Kieze – gemeinsam wollen wir dafür sorgen, dass unsere Nachbarschaft nach der Krise noch genauso bunt und vielfältig ist wie davor!<br />
                                 <br />
-                                Wenn du selbst Inhaber bist, kannst du <Link color="primary" href="/assets/KiezretterFlyer.pdf">hier</Link> einen Flyer für dein Schaufenster oder Ladentür herunterladen.
+                                Wenn du selbst Inhaber bist, kannst du <Link color="primary" target="_blank" rel="noopener noreferrer" href="https://kiezretter-static.s3.eu-central-1.amazonaws.com/Kiezretter+Flyer.pdf">hier</Link> einen Flyer für dein Schaufenster oder Ladentür herunterladen.
                             </Typography>
                         </Grid>
                         <Grid item sm={12} md={4}>
