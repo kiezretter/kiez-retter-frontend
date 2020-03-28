@@ -7,7 +7,7 @@ const Store = ({
   children,
 }) => {
   const [store, setStore] = useState();
-  const [googleDetails, setGoogleDetails] = useState();
+  const [businessLocation, setBusinessLocation] = useState();
   const [placeId, setPlaceId] = useState();
   const [showInfoCard, setShowInfoCard] = useState(false);
 
@@ -19,10 +19,11 @@ const Store = ({
         const store = await fetch(dataUrl);
         const storeJSON = await store.json();
         setStore(storeJSON.business);
+        const [lat, lng] = storeJSON.business.address;
+        setBusinessLocation({lat, lng})
       } catch (error) {
         console.error(`something went wrong by calling ${dataUrl}, error: ${error}`);
       }
-
     }
     if (placeId) loadInformation();
   }, [placeId]);
@@ -30,10 +31,10 @@ const Store = ({
   return (
     <Provider value={{
       store,
-      googleDetails,
+      businessLocation,
       setPlaceId,
       showInfoCard,
-      setShowInfoCard
+      setShowInfoCard,
     }}>
       {children}
     </Provider>
@@ -42,4 +43,4 @@ const Store = ({
 
 const useStoreContext = () => useContext(StoreContext)
 
-export { Store, useStoreContext }
+export { Store, StoreContext, useStoreContext }

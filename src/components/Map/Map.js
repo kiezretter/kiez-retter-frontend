@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import markerIcon from '../../assets/images/marker.png';
 import activeMarkerIcon from '../../assets/images/active_marker.png';
 import currentLocationIcon from '../../assets/images/current-location.svg';
-import { useMarkersContext } from "../../context/MarkerContext";
+import { useMarkerContext } from "../../context/MarkerContext";
 import { useStoreContext } from '../../context/StoreContext';
 import { useHistory } from 'react-router-dom';
 
@@ -11,30 +11,34 @@ import { useHistory } from 'react-router-dom';
 export const Geo = ({ google, currentLocation }) => {
   const history = useHistory();
   const mapRef = useRef(null);
-  const { markers, activeMarker, setActiveMarker } = useMarkersContext();
-  const { store, setPlaceId, setShowInfoCard } = useStoreContext();
+  const { markers, activeMarker, setActiveMarker } = useMarkerContext();
+  const { setPlaceId, setShowInfoCard } = useStoreContext();
+  const berlin = {
+    lat: 52.50888,
+    lng: 13.396647
+  }
 
-  const onMarkerClick = (id) => {
-    const store = markers.find(_ => _.id === id);
-
+  const onMarkerClick = (id, name) => {
+    history.push(`/kiez/${id}/${name}`);
     setPlaceId(id);
     setShowInfoCard(true);
     setActiveMarker(id);
-    // history.push(`/kiez?lat=${currentLocation.lat}&lng=${currentLocation.lng}&active=${id}`);
-    history.push(`/kiez/${id}/${store.name}`);
   }
 
   const renderOwnMarker = () => {
-    const [lat, lng] = sessionStorage.getItem('personalLocation').split('|');
-
-    return (
-      <Marker
-        title="Da bist du!"
-        position={{ lat, lng }}
-        icon={currentLocationIcon}
-      />
-    );
+    if (currentLocation) {
+      return (
+        <Marker
+          title="Da bist du!"
+          position={currentLocation}
+          icon={currentLocationIcon}
+        />
+      );
+    }
+    return null;
   }
+
+  console.log('currentLocation', currentLocation)
 
   return (
     <Map
@@ -45,7 +49,7 @@ export const Geo = ({ google, currentLocation }) => {
         width: "100%",
         position: "relative"
       }}
-      initialCenter={currentLocation}
+      initialCenter={currentLocation ? currentLocation : berlin}
       zoom={13}
       disableDefaultUI={true}
     >
@@ -56,7 +60,7 @@ export const Geo = ({ google, currentLocation }) => {
             key={marker.id}
             position={marker}
             title={marker.name}
-            onClick={() => onMarkerClick(marker.id)}
+            onClick={() => onMarkerClick(marker.id, marker.name)}
             icon={activeMarker === marker.id ? activeMarkerIcon : markerIcon}
           />
         );

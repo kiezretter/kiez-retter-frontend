@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { 
   useLocation,
   useParams,
@@ -6,64 +6,65 @@ import {
 
 import Navigation from '../../components/Navigation/Navigation.jsx';
 import GoogleApiWrapper from '../../components/Map/Map';
-import Info from '../../components/Info/Info';
+import InfoCard from '../../components/InfoCard/InfoCard';
 
 import { useStoreContext } from "../../context/StoreContext";
-import { useMarkersContext } from "../../context/MarkerContext";
+import { useMarkerContext } from '../../context/MarkerContext';
 
 const BusinessOverview = () => {
   const {
     setPlaceId,
-    setShowInfoCard
+    showInfoCard,
+    setShowInfoCard,
+    store,
   } = useStoreContext();
 
-  const { markers } = useMarkersContext();
+  const { setActiveMarker, setCurrentLocation, currentLocation } = useMarkerContext();
 
-  const useQuery = () => {
-    return new URLSearchParams(useLocation().search);
-  }
+  const useQuery = () => new URLSearchParams(useLocation().search);
   const query = useQuery();
-  let lat = query.get('lat');
-  let lng = query.get('lng');
-
   const { businessId } = useParams();
 
-  if (businessId) {
+  useEffect(() => {
+    const lat = query.get('lat');
+    const lng = query.get('lng');
+    if (lat && lng) {
+      setCurrentLocation({lat, lng})
+      sessionStorage.setItem('personalLocation', `${lat}|${lng}`);
+    }
     setPlaceId(businessId);
-    setShowInfoCard(true);
+    if (store && !currentLocation) {
+      getCurrentLocation();
+    }
+  }, [store, businessId]);
 
-    if (markers) {
-      const storeMarker = markers.find(_ => _.id === +businessId);
-
-      if (storeMarker) {
-        lat = storeMarker.lat;
-        lng = storeMarker.lng;
-      }
+  const getCurrentLocation = () => {
+     if (businessId) {
+      setShowInfoCard(true);
+      setActiveMarker(parseInt(businessId));
+      setCurrentLocation({lat: store.address.lat, lng: store.address.lng})
+    } else if (personalLocationPresentInStorage()) {
+      const [sessionLat, sessionLng] = sessionStorage.getItem('personalLocation').split('|');
+      setCurrentLocation({sessionLat, sessionLng});
+    } else {
+      setCurrentLocation(null);
     }
   }
 
-  if (!lat || !lng) return null;
-
-  if (!sessionStorage.getItem('personalLocation')) {
-    sessionStorage.setItem('personalLocation', `${lat}|${lng}`);
+  const personalLocationPresentInStorage = () => {
+    return sessionStorage.getItem('personalLocation') !== null
   }
 
   return (
     <>
       <Navigation bordered={true} />
       <GoogleApiWrapper
-        currentLocation={{
-          lat,
-          lng,
-        }}
-        cardIn={200}
+        currentLocation={currentLocation}
       />
-      <Info
-        currentLocation={{
-          lat,
-          lng,
-        }}
-      />
+      {showInfoCard && (
+        <InfoCard />
+      )
+      }
     </>
   )
 }
