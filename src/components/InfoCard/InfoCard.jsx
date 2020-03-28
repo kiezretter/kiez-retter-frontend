@@ -39,7 +39,6 @@ const InfoCard = () => {
     const markers = useContext(MarkerContext);
 
     const handleSliderChange = (event, newValue) => {
-        console.log('value', newValue);
         setDonatedValue(newValue);
     }
 
@@ -106,10 +105,6 @@ const InfoCard = () => {
     }
 
     const renderDonateButton = () => {
-        console.log('business', business);
-        console.log('!business.verified', !business.verified);
-        console.log('!business.owner.paypal', !business.owner.paypal);
-        console.log('business.funding && !business.verfied', business.funding && !business.verfied);
         if (!business.owner.paypal) return null;
         if (business.funding && !business.verified) return null;
         if (!business.verified) return <p>Solange dein Lieblingsladen nicht verifiziert ist, kannst du leider nicht für ihn spenden. Schau doch einfach später vorbei.</p>
@@ -278,7 +273,6 @@ const InfoCard = () => {
     }
 
     const renderSlider = () => {
-        console.log('business', business)
         if (!business.owner.paypal || !business.verified) return null;
         return (
             <div>
