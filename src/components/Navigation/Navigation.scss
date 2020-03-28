@@ -1,7 +1,7 @@
 @import "../../styles/Colors.scss";
 
 .kr-nav {
-    padding: 1.5rem 0;
+    padding-top: .5rem;
     
     &__bordered {
         border-bottom: 1px solid $brand-red;
@@ -20,24 +20,34 @@
     }
 
     &--list {
-        margin-right: -.25rem !important;
+        margin-right: -.5rem !important;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+
+        @media screen and (min-width: 768px) {
+            margin-right: -1rem !important;
+        }
     }
 
     &--link {
-        padding: 0 .25rem;
+        padding: .5rem .5rem;
+        flex: 0;
         padding-bottom: .25rem;
+        white-space: nowrap;
+        border-bottom: 1px solid transparent;
 
-        & + & {
-            margin-left: 1.5rem;
+        @media screen and (min-width: 768px) {
+            margin: 0 .5rem !important;
         }
 
         &:hover {
             text-decoration: none !important;
-            border-bottom: 1px solid $brand-blue;
+            border-bottom-color: $brand-blue;
         }
         
         &__active {
-            border-bottom: 1px solid $brand-red;
+            border-bottom-color: $brand-red;
         }
     }
 }

@@ -4,8 +4,6 @@ import {
     Container,
     Typography,
     Grid,
-    Card,
-    CardContent,
     Button,
 } from '@material-ui/core';
 

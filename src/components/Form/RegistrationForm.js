@@ -122,7 +122,7 @@ class RegistrationForm extends React.Component {
 
     }
 
-    geocodeByAddress(`${this.state.street_address} ${this.state.postcode} ${this.state.city}`)
+    geocodeByAddress(`${this.state.name} ${this.state.street_address} ${this.state.postcode} ${this.state.city}`)
       .then(results => {
         const gmap_id = results[0].place_id;
         const lng = results[0].geometry.location.lng();

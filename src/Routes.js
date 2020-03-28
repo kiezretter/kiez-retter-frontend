@@ -17,6 +17,8 @@ const Routes = () => {
       <Switch>
         <Route exact path="/" component={HomePageView} />
         <Route exact path="/kiez" component={BusinessOverviewView} />
+        <Route exact path="/kiez/:businessId" component={BusinessOverviewView} />
+        <Route exact path="/kiez/:businessId/:businessName" component={BusinessOverviewView} />
         <Route exact path="/inhaber" component={InhaberView} />
         <Route exact path="/agb" component={AGBView} />
         <Route exact path="/datenschutz" component={DatenschutzView} />

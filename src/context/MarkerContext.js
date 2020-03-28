@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 
-const MarktersContext = React.createContext();
-const { Provider } = MarktersContext;
+const MarkerContext = React.createContext();
+const { Provider } = MarkerContext;
 
 const Markers = ({
   children,
 }) => {
   const [markers, setMarkers] = useState();
+  const [activeMarker, setActiveMarker] = useState();
+  const [currentLocation, setCurrentLocation] = useState();
 
   const loadAllMarkers = async () => {
     await fetch(`${process.env.REACT_APP_ROOT_URL}/api/businesses`)
@@ -22,12 +24,12 @@ const Markers = ({
   }, [])
 
   return (
-    <Provider value={{markers}}>
+    <Provider value={{ markers, activeMarker, setActiveMarker, currentLocation, setCurrentLocation }}>
       {children}
     </Provider>
   )
 }
 
-const useMarkersContext = () => useContext(MarktersContext);
+const useMarkerContext = () => useContext(MarkerContext);
 
-export { Markers, useMarkersContext };
+export { Markers, MarkerContext, useMarkerContext };
