@@ -8,7 +8,6 @@ import {
     CardMedia,
     withStyles,
     InputAdornment,
-    Grid,
 } from '@material-ui/core';
 
 import { StoreContext } from "../../context/StoreContext";
@@ -107,22 +106,30 @@ const InfoCard = () => {
     }
 
     const renderDonateButton = () => {
-        if (!business.verified) return 'Solange dein Lieblingsladen nicht verifiziert ist, kannst du leider nicht für ihn spenden. Schau doch einfach später nochmal vorbei!';
+        console.log('business', business);
+        console.log('!business.verified', !business.verified);
+        console.log('!business.owner.paypal', !business.owner.paypal);
+        console.log('business.funding && !business.verfied', business.funding && !business.verfied);
+        if (!business.owner.paypal) return null;
+        if (business.funding && !business.verified) return null;
+        if (!business.verified) return <p>Solange dein Lieblingsladen nicht verifiziert ist, kannst du leider nicht für ihn spenden. Schau doch einfach später vorbei.</p>
 
         return (
-            <Button
-                variant="contained"
-                color="primary"
-                disableElevation
-                href={`https://www.paypal.me/${business.owner.paypal}/${donatedValue}EUR`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="info__box-button"
-                onClick={() => handleSendDonation()}
-            >
-                <img src={IconProvider.payPalIcon} alt="paypal-icon" className="paypal-icon" />
-                Jetzt Retten
-            </Button>
+            <div className="info__button-cta">
+                <Button
+                    variant="contained"
+                    color="primary"
+                    disableElevation
+                    href={`https://www.paypal.me/${business.owner.paypal}/${donatedValue}EUR`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => handleSendDonation()}
+                    style={{width: '300px'}}
+                >
+                    <img src={IconProvider.payPalIcon} alt="paypal-icon" className="paypal-icon" />
+                    Jetzt Spenden
+                </Button>
+            </div>
         );
     }
 
@@ -137,20 +144,20 @@ const InfoCard = () => {
         if (!text) return null;
 
         return (
-            <>
+            <div className="info__button-cta info__button-cta-funding">
                 <Button
                     variant="contained"
                     disableElevation
                     href={business.funding.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="info__box-button"
+                    style={{width: '300px', backgroundColor: '#00a8cc', color: 'white'}}
                     // onClick={() => this.handleSendDonation()}
                 >
                     {text}
                 </Button>
-                Mit Klick wirst auf die Seite eines externen Anbieters weitergeleitet.
-            </>
+                <p style={{width: '300px'}}>Mit Klick wirst auf die Seite eines externen Anbieters weitergeleitet.</p>
+            </div>
         );
     };
 
@@ -263,37 +270,30 @@ const InfoCard = () => {
         if (!business.message) return null;
 
         return (
-            <div>
+            <div style={{paddingBottom: '20px'}}>
                 {renderStoreMessage()}
                 {renderStoreMessageLink()}
             </div>
         );
     }
 
-        console.log('re-reder triggered ######################', store);
-        if (!business || !store.showInfoCard) return renderPlaceholder();
-
-    return (
-        <Card className="info__wrapper">
-            <div className="info__close-btn" onClick={() => handleClose()}>&times;</div>
-            {renderOwnerImage()}
-            {renderPlaceImage()}
-
-            <CardContent>
-                {renderInfoBox()}
-                {renderAddressContainer()}
-                {renderStoreMessageSwitcher()}
+    const renderSlider = () => {
+        console.log('business', business)
+        if (!business.owner.paypal || !business.verified) return null;
+        return (
+            <div>
                 {renderSliderIcons()}
-                <PrettoSlider
-                    aria-label="pretto slider"
-                    aria-labelledby="discrete-slider"
-                    value={donatedValue}
-                    onChange={handleSliderChange}
-                    min={0.00}
-                    max={20.00}
-                    step={0.50}
-                />
-                <div className="info__box-amount">
+                    <PrettoSlider
+                        style={{color: '#1f5092'}}
+                        aria-label="pretto slider"
+                        aria-labelledby="discrete-slider"
+                        value={donatedValue}
+                        onChange={handleSliderChange}
+                        min={0.00}
+                        max={20.00}
+                        step={0.50}
+                    />
+                    <div className="info__box-amount">
                     <StyledInput
                         type="text"
                         value={donatedValue}
@@ -302,14 +302,27 @@ const InfoCard = () => {
                         endAdornment={<InputAdornment position="end">‎€</InputAdornment>}
                     />
                 </div>
-                <Grid container spacing={2} className="info__box-buttons">
-                    <Grid item xs={12} sm={6}>
-                        {renderDonateButton()}
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        {renderFundingButton()}
-                    </Grid>
-                </Grid>
+            </div>
+        )
+    }
+
+        if (!business || !store.showInfoCard) return renderPlaceholder();
+
+    return (
+        <Card className="info__wrapper" style={{overflowY: 'scroll'}}>
+            <div className="info__close-btn" onClick={() => handleClose()}>&times;</div>
+            {renderOwnerImage()}
+            {renderPlaceImage()}
+
+            <CardContent>
+                {renderInfoBox()}
+                {renderAddressContainer()}
+                {renderStoreMessageSwitcher()}
+                {renderSlider()}
+                <>
+                    {renderDonateButton()}
+                    {renderFundingButton()}
+                </>
             </CardContent>
         </Card>
     )
