@@ -43,7 +43,7 @@ export const Geo = ({ google, currentLocation }) => {
       ref={mapRef}
       google={google}
       containerStyle={{
-        height: "calc(100vh - 83px)",
+        height: "calc(100vh - 70px)",
         width: "100%",
         position: "relative"
       }}
