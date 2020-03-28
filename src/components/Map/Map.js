@@ -38,8 +38,6 @@ export const Geo = ({ google, currentLocation }) => {
     return null;
   }
 
-  console.log('currentLocation', currentLocation)
-
   return (
     <Map
       ref={mapRef}
