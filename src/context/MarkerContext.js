@@ -16,7 +16,6 @@ const Markers = ({
         let params = ''
         if (currentBounds) {
           params = `?north=${currentBounds.north}&east=${currentBounds.east}&south=${currentBounds.south}&west=${currentBounds.west}`
-          console.debug('Loading markers for ', currentBounds)
 
           await fetch(`${process.env.REACT_APP_ROOT_URL}/api/businesses${params}`)
             .then(res => res.json())
