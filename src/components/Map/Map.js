@@ -8,7 +8,7 @@ import { useStoreContext } from '../../context/StoreContext';
 import { useHistory } from 'react-router-dom';
 
 
-export const Geo = ({ google, currentLocation }) => {
+export const Geo = ({ google, currentLocation, onBoundsChange }) => {
   const history = useHistory();
   const mapRef = useRef(null);
   const { markers, activeMarker, setActiveMarker } = useMarkerContext();
@@ -19,7 +19,8 @@ export const Geo = ({ google, currentLocation }) => {
   }
 
   const onMarkerClick = (id, name) => {
-    history.push(`/kiez/${id}/${name}`);
+    const escapedName = name.replace('/', '-')
+    history.push(`/kiez/${id}/${escapedName}`);
     setPlaceId(id);
     setShowInfoCard(true);
     setActiveMarker(id);
@@ -48,8 +49,10 @@ export const Geo = ({ google, currentLocation }) => {
         position: "relative"
       }}
       initialCenter={currentLocation ? currentLocation : berlin}
-      zoom={13}
-      disableDefaultUI={true}
+      zoom={14}
+      disableDefaultUI
+      zoomControl={true}
+      onIdle={(_, map) => onBoundsChange(map.getBounds().toJSON())}
     >
       {renderOwnMarker()}
       {markers && markers.map(marker => {
