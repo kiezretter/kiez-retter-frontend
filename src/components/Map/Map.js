@@ -49,8 +49,9 @@ export const Geo = ({ google, currentLocation }) => {
         position: "relative"
       }}
       initialCenter={currentLocation ? currentLocation : berlin}
-      zoom={13}
-      disableDefaultUI={true}
+      zoom={14}
+      disableDefaultUI
+      zoomControl={true}
     >
       {renderOwnMarker()}
       {markers && markers.map(marker => {
