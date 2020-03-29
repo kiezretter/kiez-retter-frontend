@@ -19,7 +19,7 @@ const BusinessOverview = () => {
     store,
   } = useStoreContext();
 
-  const { setActiveMarker, setCurrentLocation, currentLocation } = useMarkerContext();
+  const { setActiveMarker, setCurrentBounds, setCurrentLocation, currentLocation } = useMarkerContext();
 
   const useQuery = () => new URLSearchParams(useLocation().search);
   const query = useQuery();
@@ -60,6 +60,7 @@ const BusinessOverview = () => {
       <Navigation bordered={true} />
       <GoogleApiWrapper
         currentLocation={currentLocation}
+        onBoundsChange={(bounds) => setCurrentBounds(bounds)}
       />
       {showInfoCard && (
         <InfoCard />
