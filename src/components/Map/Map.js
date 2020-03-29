@@ -19,7 +19,8 @@ export const Geo = ({ google, currentLocation }) => {
   }
 
   const onMarkerClick = (id, name) => {
-    history.push(`/kiez/${id}/${name}`);
+    const escapedName = name.replace('/', '-')
+    history.push(`/kiez/${id}/${escapedName}`);
     setPlaceId(id);
     setShowInfoCard(true);
     setActiveMarker(id);
