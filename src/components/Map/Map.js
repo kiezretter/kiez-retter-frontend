@@ -17,6 +17,7 @@ export const Geo = ({ google, currentLocation, onBoundsChange }) => {
     lat: 52.50888,
     lng: 13.396647
   }
+  const screenHeight = window.innerHeight;
 
   const onMarkerClick = (id, name) => {
     const escapedName = name.replace('/', '-')
@@ -44,7 +45,7 @@ export const Geo = ({ google, currentLocation, onBoundsChange }) => {
       ref={mapRef}
       google={google}
       containerStyle={{
-        height: "calc(100vh - 70px)",
+        height: `calc(${screenHeight}px - 7em)`,
         width: "100%",
         position: "relative"
       }}
