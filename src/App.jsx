@@ -7,6 +7,7 @@ import {
 import Routes from './Routes';
 import { Store } from "./context/StoreContext";
 import { Markers } from "./context/MarkerContext";
+import { CustomStyle } from "./context/CustomStyleContext";
 
 import './index.scss';
 
@@ -56,7 +57,9 @@ export default class App extends React.Component {
                 {this.state.gmapsLoaded && (
                     <Markers>
                         <Store>
-                            <Routes />
+                            <CustomStyle>
+                                <Routes />
+                            </CustomStyle>
                         </Store>
                     </Markers>
                 )}
