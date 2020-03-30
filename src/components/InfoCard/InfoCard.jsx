@@ -169,24 +169,26 @@ const InfoCard = () => {
         return (
             <CardMedia
                 image={image()}
-                title="store"
+                title={`${business.name}-image1`}
                 className="info__img info__img-store"
             />
         );
     }
 
     const renderPlaceImage = () => {
-        let image = IconProvider.shopPlaceholder;
-        
-        if (business.favorite_place_image) image = `${business.favorite_place_image}&w=300`;
-        if (business.image_references && business.image_references[1]) {
-            image = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference=${business.image_references[1].google_reference}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+        const image = () => {
+            if (business.favorite_place_image) return `${business.favorite_place_image}&w=300`;
+
+            if (business.image_references && business.image_references[1]) {
+                return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference=${business.image_references[1].google_reference}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+            }
+            return IconProvider.ownerPlaceholder;
         }
 
         return (
             <CardMedia
-                image={image}
-                title={business.name}
+                image={image()}
+                title={`${business.name}-image2`}
                 className="info__img info__img-human"
             />
         );
