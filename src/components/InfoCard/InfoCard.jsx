@@ -12,11 +12,12 @@ import {
 
 import { StoreContext } from "../../context/StoreContext";
 import { MarkerContext } from "../../context/MarkerContext";
-
+import { useCustomStyleContext } from '../../context/CustomStyleContext';
+import TrackingApi from '../../api/TrackingApi';
 import PrettoSlider from "../DonateSlider/DonateSlider";
 import * as IconProvider from './IconProvider';
-
 import './InfoCard.scss';
+
 
 const StyledInput = withStyles({
     root: {
@@ -37,6 +38,7 @@ const InfoCard = () => {
     const store = useContext(StoreContext);
     const business = store.store;
     const markers = useContext(MarkerContext);
+    const { screenHeight } = useCustomStyleContext();
 
     const handleSliderChange = (event, newValue) => {
         setDonatedValue(newValue);
@@ -46,32 +48,7 @@ const InfoCard = () => {
         setDonatedValue(event.target.value);
     }
 
-    const handleSendDonation = async () => {
-        const data = {
-            business_id: business.business_id,
-            amount_cents: donatedValue * 100,
-        };
 
-        let response;
-
-        try {
-            response = await fetch(`${process.env.REACT_APP_ROOT_URL}/api/donations`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify(data)
-            });
-    
-            if (response.ok) {
-                console.log('Danke fürs Spenden!')
-            } else {
-                console.error(`HTTP-Error: ${response.status}`);
-            }
-        } catch(e) {
-            console.error(`HTTP-Error (2): ${response.status}`);
-        }
-    }
 
     const handleClose = () => {
         markers.setActiveMarker(null);
@@ -118,7 +95,7 @@ const InfoCard = () => {
                     href={`https://www.paypal.me/${business.owner.paypal}/${donatedValue}EUR`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => handleSendDonation()}
+                    onClick={() => TrackingApi.sendDonation(business.business_id, donatedValue * 100)}
                     style={{width: '300px'}}
                 >
                     <img src={IconProvider.payPalIcon} alt="paypal-icon" className="paypal-icon" />
@@ -131,12 +108,15 @@ const InfoCard = () => {
     const renderFundingButton = () => {
         if (!business.funding) return null;
 
-        let text = 'Gutschein kaufen';
+        const text = () => {
+            if (business.funding.funding_type === 'voucher') return 'Gutschein kaufen';
+            if (business.funding.funding_type === 'crowd_funding') return 'Zum Crowdfunding';
+            return null;
+        }
 
-        if (business.funding.funding_type === 'voucher') text = 'Gutschein kaufen';
-        if (business.funding.funding_type === 'crowd_funding') text = 'Zum Crowdfunding';
-
-        if (!text) return null;
+        const action = () => {
+            return business.funding.funding_type;
+        }
 
         return (
             <div className="info__button-cta info__button-cta-funding">
@@ -147,9 +127,9 @@ const InfoCard = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{width: '300px', backgroundColor: '#00a8cc', color: 'white'}}
-                    // onClick={() => this.handleSendDonation()}
+                    onClick={() => TrackingApi.sendTracking(business.business_id, action())}
                 >
-                    {text}
+                    {text()}
                 </Button>
                 <p style={{width: '300px'}}>Mit Klick wirst auf die Seite eines externen Anbieters weitergeleitet.</p>
             </div>
@@ -169,24 +149,26 @@ const InfoCard = () => {
         return (
             <CardMedia
                 image={image()}
-                title="store"
+                title={`${business.name}-image1`}
                 className="info__img info__img-store"
             />
         );
     }
 
     const renderPlaceImage = () => {
-        let image = IconProvider.shopPlaceholder;
-        
-        if (business.favorite_place_image) image = `${business.favorite_place_image}&w=300`;
-        if (business.image_references && business.image_references[1]) {
-            image = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference=${business.image_references[1].google_reference}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+        const image = () => {
+            if (business.favorite_place_image) return `${business.favorite_place_image}&w=300`;
+
+            if (business.image_references && business.image_references[1]) {
+                return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference=${business.image_references[1].google_reference}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+            }
+            return IconProvider.shopPlaceholder;
         }
 
         return (
             <CardMedia
-                image={image}
-                title={business.name}
+                image={image()}
+                title={`${business.name}-image2`}
                 className="info__img info__img-human"
             />
         );
@@ -303,7 +285,7 @@ const InfoCard = () => {
         if (!business || !store.showInfoCard) return renderPlaceholder();
 
     return (
-        <Card className="info__wrapper" style={{overflowY: 'scroll'}}>
+        <Card className="info__wrapper" style={{overflowY: 'scroll', maxHeight: `calc(${screenHeight}px - 7em)`}}>
             <div className="info__close-btn" onClick={() => handleClose()}>&times;</div>
             {renderOwnerImage()}
             {renderPlaceImage()}
