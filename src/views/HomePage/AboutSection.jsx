@@ -21,7 +21,7 @@ export default class AboutSection extends React.Component {
                                 <img src={KiezretterTypo} className="kr-homepage--kiezretter" aria-hidden="true" alt="#kiezretter" />
                             </Typography>
                             <Typography>
-                                Kiezretter ist eine Liebeserklärung an unsere Kieze – gemeinsam wollen wir dafür sorgen, dass unsere Nachbarschaft nach der Krise noch genauso bunt und vielfältig ist wie davor!<br />
+                                Kiezretter ist eine Liebeserklärung an unsere Kieze – gemeinsam wollen wir dafür sorgen, dass unsere Nachbarschaft nach der Krise noch genauso bunt und vielfältig ist wie davor! Hier findest du Möglichkeiten, wie du direkt bei uns oder auf Partnerseiten deine Lieblingsläden unterstützen kannst. Kiezretter ist für alle kostenlos und eine Non-Profit Organisation.<br />
                                 <br />
                                 Wenn du selbst Inhaber bist, kannst du <Link color="primary" target="_blank" rel="noopener noreferrer" href="https://kiezretter-static.s3.eu-central-1.amazonaws.com/Kiezretter+Flyer.pdf">hier</Link> einen Flyer für dein Schaufenster oder Ladentür herunterladen.
                             </Typography>
