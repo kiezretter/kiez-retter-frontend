@@ -5,6 +5,7 @@ import activeMarkerIcon from '../../assets/images/active_marker.png';
 import currentLocationIcon from '../../assets/images/current-location.svg';
 import { useMarkerContext } from "../../context/MarkerContext";
 import { useStoreContext } from '../../context/StoreContext';
+import { useCustomStyleContext } from '../../context/CustomStyleContext';
 import { useHistory } from 'react-router-dom';
 
 
@@ -13,11 +14,12 @@ export const Geo = ({ google, currentLocation, onBoundsChange }) => {
   const mapRef = useRef(null);
   const { markers, activeMarker, setActiveMarker } = useMarkerContext();
   const { setPlaceId, setShowInfoCard } = useStoreContext();
+  const { screenHeight } = useCustomStyleContext();
+
   const berlin = {
     lat: 52.50888,
     lng: 13.396647
   }
-  const screenHeight = window.innerHeight;
 
   const onMarkerClick = (id, name) => {
     const escapedName = name.replace('/', '-')
