@@ -51,8 +51,9 @@ Verwendung von Zuwendungen in unangemessenem Maße für andere Zwecke.
 
 8.1 Für die Nutzung der Spendenaufrufe ist eine ordnungsgemäße Registrierung des/der Spendenaufrufenden über die Internetplattform von kiezretter.de oder kiez-retter.de erforderlich. Hierfür füllt der/die Spendenaufrufende das Online-Anmeldeformular vollständig aus und befolgt die Online-Hinweise zur Registrierung. Durch die wahrheitsgemäße Eingabe der Stammdaten (Angaben zur Person, Unternehmensnummer und Zahlungsdienstleister - PayPal) und das Akzeptieren der AGB im Registrierungsprozess gilt die Registrierung als ordnungsgemäß abgeschlossen. 
 
-8.1.1 Der/die Spendenaufrufende gibt bei ihrer/seiner Registrierung Daten zu ihrer/seiner Person sowie ihres/seines Ladens an.  
-Daten zur Person:  
+8.1.1 Der/die Spendenaufrufende gibt bei ihrer/seiner Registrierung Daten zu ihrer/seiner Person sowie ihres/seines Ladens an.
+
+Daten zur Person:
 * Vorname
 * Nachname
 * Spitzname/Künstlername (optional)
@@ -60,14 +61,16 @@ Daten zur Person:
 * PayPal-Name
 * Gewerbeschein
 * Kopie des Personalausweises/Reisepasses
-Daten zum Gewerbe:  
+
+Daten zum Gewerbe:
 * Name des Gewerbes
 * Straße
 * Postleitzahl
 * Stadt
 * Kategorie (Drop Down)
 * Telefonnummer (optional)
-Folgende Daten werden nach erfolgreicher Registrierung innerhalb von 7 Tagen durch das kiezretter-Team wieder gelöscht.  
+
+Folgende Daten werden nach erfolgreicher Registrierung innerhalb von 7 Tagen durch das kiezretter-Team wieder gelöscht.
 * Gewerbeschein
 * Kopie des Personalausweises/Reisepasses
 
