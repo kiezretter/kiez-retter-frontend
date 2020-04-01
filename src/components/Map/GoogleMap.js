@@ -64,7 +64,7 @@ class GoogleMap extends Component {
   render() {
     // eslint-disable-next-line
     this.markerCluster = new MarkerClusterer(this.googleMap, this.state.markers,
-      { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+      { imagePath: 'marker-cluster-img/m' });
     return (
       <div
         style={this.props.containerStyle}
