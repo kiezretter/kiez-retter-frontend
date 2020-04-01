@@ -1,7 +1,6 @@
 import React from 'react'
-import PlacesAutocomplete, {
+import {
   geocodeByAddress,
-  getLatLng,
 } from 'react-places-autocomplete';
 import {
   Typography,
@@ -58,9 +57,9 @@ class RegistrationForm extends React.Component {
 
     let ownerImage = null
     if (this.state.owner_image) {
-        ownerImage = {
-          data: this.state.owner_image
-        }
+      ownerImage = {
+        data: this.state.owner_image
+      }
     }
 
     let favorite_place_image = null;
@@ -193,7 +192,7 @@ class RegistrationForm extends React.Component {
               </Grid>
               <Grid item xs={12} md={6}>
                 <FormControl className="form-control">
-                  <FileUpload  required name="id_card_image" label="Personalausweis*" onChange={this.handleFileUpload} />
+                  <FileUpload required name="id_card_image" label="Personalausweis*" onChange={this.handleFileUpload} />
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
