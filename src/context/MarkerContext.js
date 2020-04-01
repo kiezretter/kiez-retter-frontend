@@ -24,12 +24,6 @@ const Markers = ({
             console.log(`something went wrong by calling ${URL}, error: ${error}`);
           });
       }
-      await fetch(`${process.env.REACT_APP_ROOT_URL}/api/businesses${params}`)
-        .then(res => res.json())
-        .then(data => setMarkers(data.businesses))
-        .catch((error) => {
-          console.log(`something went wrong by calling ${URL}, error: ${error}`);
-        });
     }
     loadMarkers();
   }, [currentBounds])
