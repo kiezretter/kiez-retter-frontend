@@ -24,7 +24,7 @@ export const Geo = ({ google, currentLocation, onBoundsChange }) => {
   }
 
   const onMarkerClick = (id, name) => {
-    const escapedName = name.replace('/', '-')
+    const escapedName = encodeURIComponent(name.replace('/', '-'))
     history.push(`/kiez/${id}/${escapedName}`);
     setPlaceId(id);
     setShowInfoCard(true);

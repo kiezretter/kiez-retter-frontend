@@ -32,11 +32,16 @@ class GoogleMap extends Component {
 
     this.googleMap = this.createGoogleMap();
     this.marker = this.props.markers && this.props.markers.map(marker => {
-      return new window.google.maps.Marker({
+      const newMarker = new window.google.maps.Marker({
         position: new window.google.maps.LatLng(marker.lat, marker.lng),
         icon: this.props.activeMarker === marker.id ? activeMarkerIcon : markerIcon,
         animation: window.google.maps.Animation.DROP,
+        clickable: true,
       })
+      window.google.maps.event.addListener(newMarker, 'click', () => {
+        this.props.onMarkerClick(marker.id, marker.name);
+      });
+      return newMarker;
     })
     console.log('CL: GoogleMap -> componentDidMount -> this.props.markers', this.props.markers)
     this.setState({
