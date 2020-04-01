@@ -9,6 +9,9 @@ import {
 
 import ZusammenIcon from '../../assets/images/zusammen.png';
 import PayNowEatLaterLogo from '../../assets/images/Logo-PayNowEatLater.png';
+import HelfenBerlinLogo from '../../assets/images/Logo_B_Helfen.Berlin_white.png';
+import HelfenMunichLogo from '../../assets/images/helfen-muenchen-white.png';
+import LokalHelpLogo from '../../assets/images/logo_lokal.help_white.png';
 
 export default class TogetherSection extends React.Component {
     render() {
@@ -26,7 +29,16 @@ export default class TogetherSection extends React.Component {
                                 Auch wir glauben fest daran, dass wir zusammen mehr erreichen können.<br />
                                 Deswegen verweisen wir auf die tollen Angebote anderer Plattformen. Hier unsere aktuellen Partner:<br />
                                 <br />
-                                <img src={PayNowEatLaterLogo} alt="paynoweatlater-logo" className="kr-homepage--together--icon" />
+                                <div className="kr-homepage--partnericon-wrapper">
+                                    <div>
+                                        <img src={PayNowEatLaterLogo} alt="paynoweatlater-logo" className="kr-homepage--partnericon" />
+                                        <img src={LokalHelpLogo} alt="paynoweatlater-logo" className="kr-homepage--partnericon" />
+                                    </div>
+                                    <div>
+                                        <img src={HelfenBerlinLogo} alt="paynoweatlater-logo" className="kr-homepage--partnericon" />
+                                        <img src={HelfenMunichLogo} alt="paynoweatlater-logo" className="kr-homepage--partnericon" />
+                                    </div>
+                                </div>
                                 <br />
                                 #kiezretter #bettertogether
                             </Typography>
