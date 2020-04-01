@@ -25,16 +25,13 @@ const BusinessOverview = () => {
   const query = useQuery();
   const { businessId } = useParams();
 
-  const lat = query.get('lat');
-  const lng = query.get('lng');
-  if (lat && lng) {
-    // setCurrentLocation({ lat, lng })
-    sessionStorage.setItem('personalLocation', `${lat}|${lng}`);
-  }
+
   useEffect(() => {
+    const lat = query.get('lat');
+    const lng = query.get('lng');
 
     setPlaceId(businessId);
-    if (store) {
+    if (store && !currentLocation) {
       if (businessId) {
         setShowInfoCard(true);
         setActiveMarker(parseInt(businessId));
@@ -43,10 +40,16 @@ const BusinessOverview = () => {
         const [sessionLat, sessionLng] = sessionStorage.getItem('personalLocation').split('|');
         setCurrentLocation({ sessionLat, sessionLng });
       } else {
-        setCurrentLocation(null);
+        if (lat && lng) {
+          setCurrentLocation({ lat, lng })
+          sessionStorage.setItem('personalLocation', `${lat}|${lng}`);
+        } else {
+          setCurrentLocation(null);
+        }
       }
     }
-  }, [store, businessId, query, setPlaceId, setActiveMarker, setShowInfoCard, setCurrentLocation, lat, lng]);
+  }, [store, businessId, query, setPlaceId, currentLocation, setCurrentLocation, setShowInfoCard, setActiveMarker]);
+
 
 
 
