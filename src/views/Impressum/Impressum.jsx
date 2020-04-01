@@ -29,8 +29,8 @@ export default class ImpressumView extends React.Component {
 
                     <Typography variant="h4" component="h3" gutterBottom>Kontaktmöglichkeiten</Typography>
                     <Typography>
-                        <strong>E-Mail-Adresse:</strong> kiezretter(a)gmail.com<br />
-                        <strong>Kontaktformular:</strong> kiezretter(a)gmail.com
+                        <strong>E-Mail-Adresse:</strong> info(at)kiez-retter.de<br />
+                        <strong>Kontaktformular:</strong> info(at)kiez-retter.de
                     </Typography>
                     <br /><br />
 
