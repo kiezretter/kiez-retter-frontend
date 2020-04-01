@@ -13,17 +13,23 @@ const Markers = ({
 
   useEffect(() => {
     async function loadMarkers() {
-        let params = ''
-        if (currentBounds) {
-          params = `?north=${currentBounds.north}&east=${currentBounds.east}&south=${currentBounds.south}&west=${currentBounds.west}`
+      let params = ''
+      if (currentBounds) {
+        params = `?north=${currentBounds.north}&east=${currentBounds.east}&south=${currentBounds.south}&west=${currentBounds.west}`
 
-          await fetch(`${process.env.REACT_APP_ROOT_URL}/api/businesses${params}`)
-            .then(res => res.json())
-            .then(data => setMarkers(data.businesses))
-            .catch((error) => {
-              console.log(`something went wrong by calling ${URL}, error: ${error}`);
-            });
-        }
+        await fetch(`${process.env.REACT_APP_ROOT_URL}/api/businesses${params}`)
+          .then(res => res.json())
+          .then(data => setMarkers(data.businesses))
+          .catch((error) => {
+            console.log(`something went wrong by calling ${URL}, error: ${error}`);
+          });
+      }
+      await fetch(`${process.env.REACT_APP_ROOT_URL}/api/businesses${params}`)
+        .then(res => res.json())
+        .then(data => setMarkers(data.businesses))
+        .catch((error) => {
+          console.log(`something went wrong by calling ${URL}, error: ${error}`);
+        });
     }
     loadMarkers();
   }, [currentBounds])
