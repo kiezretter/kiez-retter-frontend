@@ -56,7 +56,7 @@ export default class DatenschutzView extends React.Component {
                     <Typography>
                         <strong>Vertretungsberechtigte Personen:</strong> Celal Basar, Franziska Bodenseeler, Pauline Cremer, Ana Alipass Fernandez, Celina Gunkelmann, Thomas Heer, Martin Honermeyer, Caspar Ibel, Annette Jann, Julian Kern, Lucas Lamby, Annika Kersten, Richard Maier, Adrian Ochs, Alexandra Scholz, Marcus Zierke, Robin Zuschke<br />
                         <br />
-                        <strong>E-Mail-Adresse:</strong> kiezretter (a) gmail.com
+                        <strong>E-Mail-Adresse:</strong> info(at)kiez-retter.de
                     </Typography>
                     <br /><br />
 
