@@ -10,19 +10,50 @@ class GoogleMap extends Component {
     this.markerCluster = null;
     this.marker = [];
     this.state = {
+      dataLoaded: false,
+      stateCurrentLocation: null,
       markers: [],
     }
+    this.updateTimer = null;
   }
 
   componentDidMount() {
-
-
+    this.getCurrentLocation();
     this.googleMap = this.createGoogleMap();
-    this.marker = this.props.markers && this.props.markers.map(marker => {
+    this.marker = this.createMarker();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.markers !== this.props.markers) {
+      this.setState({ dataLoaded: !!this.props.markers })
+      this.marker = this.createMarker();
+    }
+    if (prevProps.initialCenter !== this.props.initialCenter) {
+      this.setState({ dataLoaded: !!this.props.initialCenter })
+      this.googleMap = this.createGoogleMap();
+    }
+  }
+
+  createGoogleMap = () => {
+
+    const map = new window.google.maps.Map(this.googleMapRef.current, {
+      zoom: this.props.zoom,
+      center: this.props.initialCenter || this.getCurrentLocation() || { lat: 52.50888, lng: 13.396647 },
+      disableDefaultUI: true,
+      zoomControl: this.props.zoomControl,
+    })
+    map.addListener('idle', () => {
+      this.props.onIdle(map)
+    })
+    return map;
+  }
+
+  createMarker = () => {
+    return this.props.markers && this.props.markers.map(marker => {
       const newMarker = new window.google.maps.Marker({
         position: new window.google.maps.LatLng(marker.lat, marker.lng),
         icon: this.props.activeMarker === marker.id ? activeMarkerIcon : markerIcon,
-        animation: window.google.maps.Animation.DROP,
+        // animation: window.google.maps.Animation.BOUNCE,
         clickable: true,
       })
       window.google.maps.event.addListener(newMarker, 'click', () => {
@@ -30,26 +61,19 @@ class GoogleMap extends Component {
       });
       return newMarker;
     })
-
-    this.setState({
-      markers: this.marker
-    })
   }
 
-  createGoogleMap = () => {
-    return new window.google.maps.Map(this.googleMapRef.current, {
-      zoom: this.props.zoom,
-      center: this.props.initialCenter,
-      disableDefaultUI: true,
-      zoomControl: this.props.zoomControl,
-      idle: this.props.onIdle
-    })
+  getCurrentLocation() {
+    if (sessionStorage.getItem('personalLocation') !== null) {
+      const [sessionLat, sessionLng] = sessionStorage.getItem('personalLocation').split('|');
+      this.setState({ stateCurrentLocation: { lat: +sessionLat, lng: +sessionLng } })
+      return { lat: +sessionLat, lng: +sessionLng };
+    }
   }
-
 
   render() {
     // eslint-disable-next-line
-    this.markerCluster = new MarkerClusterer(this.googleMap, this.state.markers,
+    this.markerCluster = new MarkerClusterer(this.googleMap, this.marker,
       { imagePath: '/marker-cluster-img/m' });
     return (
       <div

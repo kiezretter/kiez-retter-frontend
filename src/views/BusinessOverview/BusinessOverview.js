@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   useLocation,
   useParams,
@@ -25,45 +25,45 @@ const BusinessOverview = () => {
   const query = useQuery();
   const { businessId } = useParams();
 
+  // eslint-disable-next-line
+  const [stateCurrentLocation, setStateCurrentLocation] = useState(currentLocation);
+
 
   useEffect(() => {
     const lat = query.get('lat');
     const lng = query.get('lng');
-
+    if (lat && lng) {
+      // setCurrentLocation({ lat, lng })
+      sessionStorage.setItem('personalLocation', `${lat}|${lng}`);
+    }
     setPlaceId(businessId);
     if (store && !currentLocation) {
       if (businessId) {
         setShowInfoCard(true);
         setActiveMarker(parseInt(businessId));
         setCurrentLocation({ lat: store.address.lat, lng: store.address.lng })
+        setStateCurrentLocation(currentLocation);
       } else if (personalLocationPresentInStorage()) {
         const [sessionLat, sessionLng] = sessionStorage.getItem('personalLocation').split('|');
-        setCurrentLocation({ sessionLat, sessionLng });
+        setCurrentLocation({ lat: +sessionLat, lng: +sessionLng });
+        setStateCurrentLocation(currentLocation);
       } else {
-        if (lat && lng) {
-          setCurrentLocation({ lat, lng })
-          sessionStorage.setItem('personalLocation', `${lat}|${lng}`);
-        } else {
-          setCurrentLocation(null);
-        }
+        setCurrentLocation(null);
+        setStateCurrentLocation(currentLocation);
       }
     }
-  }, [store, businessId, query, setPlaceId, currentLocation, setCurrentLocation, setShowInfoCard, setActiveMarker]);
-
-
-
+  }, [store, businessId, currentLocation, setCurrentLocation, query, setPlaceId, setShowInfoCard, setActiveMarker]);
 
   const personalLocationPresentInStorage = () => {
     return sessionStorage.getItem('personalLocation') !== null
   }
-
 
   return (
     <>
       <Navigation bordered={true} />
       <Geo
         currentLocation={currentLocation}
-        onBoundsChange={(bounds) => setCurrentBounds(bounds)}
+        onBoundsChange={(bounds) => { setCurrentBounds(bounds) }}
       />
       {showInfoCard && (
         <InfoCard />
