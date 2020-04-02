@@ -53,7 +53,7 @@ class GoogleMap extends Component {
       const newMarker = new window.google.maps.Marker({
         position: new window.google.maps.LatLng(marker.lat, marker.lng),
         icon: this.props.activeMarker === marker.id ? activeMarkerIcon : markerIcon,
-        animation: window.google.maps.Animation.DROP,
+        // animation: window.google.maps.Animation.BOUNCE,
         clickable: true,
       })
       window.google.maps.event.addListener(newMarker, 'click', () => {
@@ -64,7 +64,6 @@ class GoogleMap extends Component {
   }
 
   getCurrentLocation() {
-    console.log('CL: GoogleMap -> getCurrentLocation -> localStorage.getItem(personalLocation)', localStorage.getItem('personalLocation'))
     if (localStorage.getItem('personalLocation') !== null) {
       const [sessionLat, sessionLng] = localStorage.getItem('personalLocation').split('|');
       this.setState({ stateCurrentLocation: { lat: +sessionLat, lng: +sessionLng } })
