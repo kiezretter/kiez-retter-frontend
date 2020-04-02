@@ -11,7 +11,7 @@ Stand: 22. März 2020
 
 
 
-#### <a name="sec2">Inhaltsübersicht</a>
+#### Inhaltsübersicht
 
 [Einleitung](#sec1)  
 [Verantwortlicher](#sec2)  
@@ -34,7 +34,7 @@ Stand: 22. März 2020
 
 
 
-#### <a name="sec3">Verantwortlicher</a>
+#### <a name="sec2">Verantwortlicher</a>
 
 **Vertretungsberechtigte Personen:** Celal Basar, Franziska Bodenseeler, Pauline Cremer, Ana Alipass Fernandez, Celina Gunkelmann, Thomas Heer, Martin Honermeyer, Caspar Ibel, Annette Jann, Julian Kern, Lucas Lamby, Annika Kersten, Richard Maier, Adrian Ochs, Alexandra Scholz, Marcus Zierke, Robin Zuschke  
 
@@ -42,7 +42,7 @@ Stand: 22. März 2020
 
 
 
-#### <a name="sec4">Übersicht der Verarbeitungen</a>
+#### <a name="sec3">Übersicht der Verarbeitungen</a>
 
 Die nachfolgende Übersicht fasst die Arten der verarbeiteten Daten und die Zwecke ihrer Verarbeitung zusammen und verweist auf die betroffenen Personen.    
 
@@ -86,7 +86,7 @@ Die nachfolgende Übersicht fasst die Arten der verarbeiteten Daten und die Zwec
 
 
 
-##### Maßgebliche Rechtsgrundlagen
+#### <a name="sec4">Maßgebliche Rechtsgrundlagen</a>
 Im Folgenden teilen wir die Rechtsgrundlagen der Datenschutzgrundverordnung (DSGVO), auf deren Basis wir die personenbezogenen Daten verarbeiten, mit. Bitte beachten Sie, dass zusätzlich zu den Regelungen der DSGVO die nationalen Datenschutzvorgaben in Ihrem bzw. unserem Wohn- und Sitzland gelten können. Sollten ferner im Einzelfall speziellere Rechtsgrundlagen maßgeblich sein, teilen wir Ihnen diese in der Datenschutzerklärung mit.  
 
 **Einwilligung (Art. 6 Abs. 1 S. 1 lit. a DSGVO)** - Die betroffene Person hat ihre Einwilligung in die Verarbeitung der sie betreffenden personenbezogenen Daten für einen spezifischen Zweck oder mehrere bestimmte Zwecke gegeben.  
@@ -235,8 +235,7 @@ Solange nicht anders angegeben, bitten wir Sie davon auszugehen, dass verwendete
 
 **Eingesetzte Dienste und Diensteanbieter:**  
 
-* 
-Google Analytics: Onlinemarketing und Webanalyse; Dienstanbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, Mutterunternehmen: Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA; 
+* Google Analytics: Onlinemarketing und Webanalyse; Dienstanbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, Mutterunternehmen: Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA; 
 Website: [https://marketingplatform.google.com/intl/de/about/analytics/](https://marketingplatform.google.com/intl/de/about/analytics/); Datenschutzerklärung: [https://policies.google.com/privacy](https://policies.google.com/privacy); Privacy Shield (Gewährleistung Datenschutzniveau bei Verarbeitung von Daten in den USA): [https://www.privacyshield.gov/participant?id=a2zt000000001L5AAI&status=Active](https://www.privacyshield.gov/participant?id=a2zt000000001L5AAI&status=Active); Widerspruchsmöglichkeit (Opt-Out): Opt-Out-Plugin: [https://tools.google.com/dlpage/gaoptout?hl=de](https://tools.google.com/dlpage/gaoptout?hl=de), Einstellungen für die Darstellung von Werbeeinblendungen: [https://adssettings.google.com/authenticated](https://adssettings.google.com/authenticated).
 
 
@@ -264,7 +263,7 @@ Auch im Fall von Auskunftsanfragen und der Geltendmachung von Betroffenenrechten
 
 **Eingesetzte Dienste und Diensteanbieter:**  
 
-* **Instagram **: Soziales Netzwerk; Dienstanbieter: Instagram Inc., 1601 Willow Road, Menlo Park, CA, 94025, USA; Website: [https://www.instagram.com](https://www.instagram.com); Datenschutzerklärung: [https://instagram.com/about/legal/privacy](https://instagram.com/about/legal/privacy).
+* **Instagram:** Soziales Netzwerk; Dienstanbieter: Instagram Inc., 1601 Willow Road, Menlo Park, CA, 94025, USA; Website: [https://www.instagram.com](https://www.instagram.com); Datenschutzerklärung: [https://instagram.com/about/legal/privacy](https://instagram.com/about/legal/privacy).
 * **Facebook:** Soziales Netzwerk; Dienstanbieter: Facebook Ireland Ltd., 4 Grand Canal Square, Grand Canal Harbour, Dublin 2, Irland, Mutterunternehmen: Facebook, 1 Hacker Way, Menlo Park, CA 94025, USA; Website: [https://www.facebook.com](https://www.facebook.com); Datenschutzerklärung: [https://www.facebook.com/about/privacy](https://www.facebook.com/about/privacy); Privacy Shield (Gewährleistung Datenschutzniveau bei Verarbeitung von Daten in den USA): [https://www.privacyshield.gov/participant?id=a2zt0000000GnywAAC&status=Active](https://www.privacyshield.gov/participant?id=a2zt0000000GnywAAC&status=Active); Widerspruchsmöglichkeit (Opt-Out): Einstellungen für Werbeanzeigen: [https://www.facebook.com/settings?tab=ads](https://www.facebook.com/settings?tab=ads); Zusätzliche Hinweise zum Datenschutz: Vereinbarung über gemeinsame Verarbeitung personenbezogener Daten auf Facebook-Seiten: [https://www.facebook.com/legal/terms/page_controller_addendum](https://www.facebook.com/legal/terms/page_controller_addendum), Datenschutzhinweise für Facebook-Seiten: [https://www.facebook.com/legal/terms/information_about_page_insights_data](https://www.facebook.com/legal/terms/information_about_page_insights_data).
 * **Twitter:** Soziales Netzwerk; Dienstanbieter: Twitter Inc., 1355 Market Street, Suite 900, San Francisco, CA 94103, USA; Datenschutzerklärung: [https://twitter.com/de/privacy](https://twitter.com/de/privacy), (Einstellungen) [https://twitter.com/personalization](https://twitter.com/personalization); Privacy Shield (Gewährleistung Datenschutzniveau bei Verarbeitung von Daten in den USA): [https://www.privacyshield.gov/participant?id=a2zt0000000TORzAAO&status=Active](https://www.privacyshield.gov/participant?id=a2zt0000000TORzAAO&status=Active).
 
