@@ -34,7 +34,7 @@ const BusinessOverview = () => {
     const lng = query.get('lng');
     if (lat && lng) {
       // setCurrentLocation({ lat, lng })
-      localStorage.setItem('personalLocation', `${lat}|${lng}`);
+      sessionStorage.setItem('personalLocation', `${lat}|${lng}`);
     }
     setPlaceId(businessId);
     if (store && !currentLocation) {
@@ -44,7 +44,7 @@ const BusinessOverview = () => {
         setCurrentLocation({ lat: store.address.lat, lng: store.address.lng })
         setStateCurrentLocation(currentLocation);
       } else if (personalLocationPresentInStorage()) {
-        const [sessionLat, sessionLng] = localStorage.getItem('personalLocation').split('|');
+        const [sessionLat, sessionLng] = sessionStorage.getItem('personalLocation').split('|');
         setCurrentLocation({ lat: +sessionLat, lng: +sessionLng });
         setStateCurrentLocation(currentLocation);
       } else {
@@ -55,7 +55,7 @@ const BusinessOverview = () => {
   }, [store, businessId, currentLocation, setCurrentLocation, query, setPlaceId, setShowInfoCard, setActiveMarker]);
 
   const personalLocationPresentInStorage = () => {
-    return localStorage.getItem('personalLocation') !== null
+    return sessionStorage.getItem('personalLocation') !== null
   }
 
   return (

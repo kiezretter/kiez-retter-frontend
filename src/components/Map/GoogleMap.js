@@ -64,8 +64,8 @@ class GoogleMap extends Component {
   }
 
   getCurrentLocation() {
-    if (localStorage.getItem('personalLocation') !== null) {
-      const [sessionLat, sessionLng] = localStorage.getItem('personalLocation').split('|');
+    if (sessionStorage.getItem('personalLocation') !== null) {
+      const [sessionLat, sessionLng] = sessionStorage.getItem('personalLocation').split('|');
       this.setState({ stateCurrentLocation: { lat: +sessionLat, lng: +sessionLng } })
       return { lat: +sessionLat, lng: +sessionLng };
     }
