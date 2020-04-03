@@ -2,6 +2,26 @@ import React, { Component, createRef } from 'react'
 import markerIcon from '../../assets/images/marker.png';
 import activeMarkerIcon from '../../assets/images/active_marker.png';
 
+// generated with: https://mapstyle.withgoogle.com
+const mapStyles = [
+  {
+    "featureType": "poi.business",
+    "stylers": [{ "visibility": "off" }]
+  },
+  {
+    "featureType": "poi.medical",
+    "stylers": [{ "visibility": "off" }]
+  },
+  {
+    "featureType": "poi.school",
+    "stylers": [{ "visibility": "off" }]
+  },
+  {
+    "featureType": "poi.sports_complex",
+    "stylers": [{ "visibility": "off" }]
+  }
+];
+
 class GoogleMap extends Component {
   constructor(props) {
     super(props);
@@ -39,6 +59,7 @@ class GoogleMap extends Component {
     const map = new window.google.maps.Map(this.googleMapRef.current, {
       zoom: this.props.zoom,
       center: this.props.initialCenter || this.getCurrentLocation() || { lat: 52.50888, lng: 13.396647 },
+      styles: mapStyles,
       disableDefaultUI: true,
       zoomControl: this.props.zoomControl,
     })
