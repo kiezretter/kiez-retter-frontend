@@ -3,13 +3,19 @@ import {
   useLocation,
   useParams,
 } from 'react-router-dom';
+import {
+  Container,
+} from '@material-ui/core';
 
 import Navigation from '../../components/Navigation/Navigation.jsx';
 import Geo from '../../components/Map/Map';
 import InfoCard from '../../components/InfoCard/InfoCard';
+import LocationSearchInput from '../../components/LocationSearchInput/LocationSearchInput';
 
 import { useStoreContext } from "../../context/StoreContext";
 import { useMarkerContext } from '../../context/MarkerContext';
+
+import './BusinessOverview.scss';
 
 const BusinessOverview = () => {
   const {
@@ -59,8 +65,11 @@ const BusinessOverview = () => {
   }
 
   return (
-    <>
+    <div className="kr-businessOverview">
       <Navigation bordered={true} />
+      <Container maxWidth="md">
+        <LocationSearchInput size="small" />
+      </Container>
       <Geo
         currentLocation={currentLocation}
         onBoundsChange={(bounds) => { setCurrentBounds(bounds) }}
@@ -69,7 +78,7 @@ const BusinessOverview = () => {
         <InfoCard />
       )
       }
-    </>
+    </div>
   )
 }
 
