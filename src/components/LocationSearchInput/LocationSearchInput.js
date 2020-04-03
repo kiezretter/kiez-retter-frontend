@@ -79,6 +79,7 @@ const LocationSearchInput = (props) => {
 
   const getGeolocationSuccess = (position) => {
     goToKiez({ lat: position.coords.latitude, lng: position.coords.longitude });
+    setTimeout(setIconLoading.bind(null, false), 2000);
   }
 
   const renderResultList = (suggestions, getSuggestionItemProps) => {
@@ -167,7 +168,7 @@ const LocationSearchInput = (props) => {
     </InputAdornment>,
     endAdornment: <InputAdornment position="end">
       <IconButton color="primary" size={props.size} component="span" onClick={e => getGeolocation()}>
-        <Icon className={iconLoading && 'kr-location-search--icon__loading'}>location_on</Icon>
+        <Icon className={iconLoading ? 'kr-location-search--icon__loading' : ''}>location_on</Icon>
       </IconButton>
     </InputAdornment>,
   };
