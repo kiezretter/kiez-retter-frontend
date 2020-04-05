@@ -43,17 +43,24 @@ const LocationSearchInput = (props) => {
   const berlin = new google.maps.LatLng(52.50888, 13.396647);
   const forceUpdate = React.useCallback(() => updateState({}), []);
   const { setCurrentLocation } = useMarkerContext();
+  const inputRef = React.createRef();
 
   const goToKiez = (latLng) => {
     history.push(`/kiez?lat=${latLng.lat}&lng=${latLng.lng}`);
     setCurrentLocation(latLng);
   }
   
-  const handleSelect = (input) => {
-    geocodeByAddress(input)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => goToKiez(latLng))
-      .catch(error => console.error('Error', error));
+  const handleSelect = async (input) => {
+    // clear input and loose focus
+    setAddress('');
+    inputRef.current.querySelector('input').blur();
+    
+    try {
+      const results = await geocodeByAddress(input);
+      goToKiez(await getLatLng(results[0]));
+    } catch(error) {
+      console.error('Error', error)
+    }
   };
 
   const searchOptions = {
@@ -72,6 +79,7 @@ const LocationSearchInput = (props) => {
 
   const getGeolocationSuccess = (position) => {
     goToKiez({ lat: position.coords.latitude, lng: position.coords.longitude });
+    setTimeout(setIconLoading.bind(null, false), 2000);
   }
 
   const renderResultList = (suggestions, getSuggestionItemProps) => {
@@ -111,7 +119,7 @@ const LocationSearchInput = (props) => {
     }
 
     return (
-      <List component="nav">
+      <List component="nav" dense={props.size === 'small'}>
         {results}
       </List>
     );
@@ -154,6 +162,17 @@ const LocationSearchInput = (props) => {
     if (!e.target.value && props.onSearchEnd) props.onSearchEnd();
   }
 
+  const inputProps = {
+    startAdornment: <InputAdornment position="start">
+      <Icon>search</Icon>
+    </InputAdornment>,
+    endAdornment: <InputAdornment position="end">
+      <IconButton color="primary" size={props.size} component="span" onClick={e => getGeolocation()}>
+        <Icon className={iconLoading ? 'kr-location-search--icon__loading' : ''}>location_on</Icon>
+      </IconButton>
+    </InputAdornment>,
+  };
+
   return (
     <PlacesAutocomplete
       value={address}
@@ -166,25 +185,18 @@ const LocationSearchInput = (props) => {
         <div className="kr-location-search">
           <TextField 
             {...getInputProps({
-              label: 'Dein Lieblingsort',
+              label: props.size === 'small' ? null : 'Dein Lieblingsort',
               variant: 'outlined',
               fullWidth: true,
               placeholder: 'Kiez, Stadtteil, Späti, Kneipe, Club, Laden, Restaurant...',
             })}
+            ref={inputRef}
             onBlur={e => onBlurSearch()}
             onFocus={e => onFocusSearch()}
             onKeyUp={onChangeSearch}
             className="kr-location-search--input"
-            InputProps={{
-              startAdornment: <InputAdornment position="start">
-                <Icon>search</Icon>
-              </InputAdornment>,
-              endAdornment: <InputAdornment position="end">
-                <IconButton color="primary" component="span" onClick={e => getGeolocation()}>
-                  <Icon className={ iconLoading && 'kr-location-search--icon__loading'}>location_on</Icon>
-                </IconButton>
-              </InputAdornment>,
-            }}
+            InputProps={inputProps}
+            size={props.size}
           />
           {renderResults(loading, suggestions, getSuggestionItemProps)}
         </div>

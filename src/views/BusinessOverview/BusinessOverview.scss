@@ -1,0 +1,14 @@
+.kr-businessOverview {
+    .MuiContainer-root {
+        position: relative;
+        width: 100%;
+    }
+
+    .kr-location-search {
+        position: absolute;
+        z-index: 1;
+        left: 24px;
+        right: 24px;
+        top: 1rem;
+    }
+}
