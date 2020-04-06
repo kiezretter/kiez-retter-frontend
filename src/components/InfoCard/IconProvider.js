@@ -1,5 +1,5 @@
 import verifiedIcon from '../../assets/images/verifiziert.png';
-// import shareIcon from '../../assets/images/share.svg';
+import shareIcon from '../../assets/images/share.svg';
 import bar1 from '../../assets/images/bar1.png';
 import bar2 from '../../assets/images/bar2.png';
 import bar3 from '../../assets/images/bar3.png';
@@ -44,4 +44,5 @@ export {
     shopPlaceholder,
     payPalIcon,
     verifiedIcon,
+    shareIcon,
 }

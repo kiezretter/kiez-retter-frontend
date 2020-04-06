@@ -82,10 +82,6 @@
                     letter-spacing: 1px;
                     color: $brand-blue;
                 }
-                &-icon__share {
-                    margin-right: 1em;
-                    cursor: pointer;
-                }
                 
                 &-icon img{
                     height: 3em;
@@ -93,6 +89,13 @@
                     cursor: pointer;
                 }
             }
+        }
+
+        &__icon_share {
+            width: 1.75rem;
+            height: 1.75rem;
+            margin-top: -.5rem;
+            cursor: pointer;
         }
         
         &-address {

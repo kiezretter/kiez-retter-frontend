@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import EventEmitter from 'events';
 
 import {
     Input,
@@ -8,6 +9,7 @@ import {
     CardMedia,
     withStyles,
     InputAdornment,
+    Icon,
 } from '@material-ui/core';
 
 import { StoreContext } from "../../context/StoreContext";
@@ -16,8 +18,11 @@ import { useCustomStyleContext } from '../../context/CustomStyleContext';
 import TrackingApi from '../../api/TrackingApi';
 import PrettoSlider from "../DonateSlider/DonateSlider";
 import * as IconProvider from './IconProvider';
+import ShareSheet from './ShareSheet.jsx';
+
 import './InfoCard.scss';
 
+const EventBus = new EventEmitter();
 
 const StyledInput = withStyles({
     root: {
@@ -35,6 +40,7 @@ const StyledInput = withStyles({
 const InfoCard = () => {
     const [donatedValue, setDonatedValue] = useState(8.5);
     const [showInfoStore, setShowInfoStore] = useState(false);
+    const [showShareSheet, setShowShareSheet] = useState(false);
     const store = useContext(StoreContext);
     const business = store.store;
     const markers = useContext(MarkerContext);
@@ -60,6 +66,12 @@ const InfoCard = () => {
             window.history.pushState(null, null, `/kiez?lat=${lat}&lng=${lng}`);
         }
     }
+
+    const toggleShareSheet = () => {
+        EventBus.emit('changeShareSheetState', !showShareSheet);
+    }
+
+    EventBus.on('shareSheetShown', state => setShowShareSheet(state));
 
     const renderPlaceholder = () => {
         return (
@@ -200,6 +212,18 @@ const InfoCard = () => {
     }
 
     const renderInfoBox = () => {
+        let shareButton = <img
+            src={IconProvider.shareIcon}
+            onClick={toggleShareSheet.bind(this)}
+            alt="share"
+            className="info__box__icon_share"
+        />;
+
+        if (showShareSheet) shareButton = <Icon
+            onClick={toggleShareSheet.bind(this)}
+            className="info__box__icon_share"
+        >close</Icon>;
+
         return (
             <div className="info__box">
                 <div className="info__box-name__wrapper">
@@ -207,13 +231,7 @@ const InfoCard = () => {
                         {business.name}
                         {renderVerifiedIcon()}
                     </div>
-                    {/* <div className="info__box-name__wrapper-icon">
-                        <img
-                            src={IconProvider.shareIcon}
-                            alt="share"
-                            className="info__box-name__wrapper-icon__share"
-                        />
-                    </div> */}
+                    {shareButton}
                 </div>
             </div>
         )
@@ -286,7 +304,7 @@ const InfoCard = () => {
 
     return (
         <Card className="info__wrapper" style={{overflowY: 'scroll', maxHeight: `calc(${screenHeight}px - 7em)`}}>
-            <div className="info__close-btn" onClick={() => handleClose()}>&times;</div>
+            <div className="info__close-btn" onClick={() => handleClose()}><Icon>close</Icon></div>
             {renderOwnerImage()}
             {renderPlaceImage()}
 
@@ -299,6 +317,11 @@ const InfoCard = () => {
                     {renderDonateButton()}
                     {renderFundingButton()}
                 </>
+                <ShareSheet 
+                    eventBus={EventBus} 
+                    title={business.name} 
+                    text={`${business.name} in ${business.address.city} braucht unsere Hilfe! Werde jetzt #kiezretter!`}
+                />
             </CardContent>
         </Card>
     )
