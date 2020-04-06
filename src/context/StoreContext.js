@@ -9,6 +9,7 @@ const Store = ({
   const [store, setStore] = useState();
   const [placeId, setPlaceId] = useState();
   const [showInfoCard, setShowInfoCard] = useState(false);
+  const [pageTitle, setPageTitle] = useState();
 
   useEffect(() => {
     const loadInformation = async () => {
@@ -25,12 +26,26 @@ const Store = ({
     if (placeId) loadInformation();
   }, [placeId]);
 
+  useEffect(() => {
+    const changePageTitle = async () => {
+      const mainpageTile = document.querySelector('title').innerText.split('|').pop();
+
+      if (!pageTitle) return document.querySelector('title').innerText = mainpageTile;
+
+      document.querySelector('title').innerText = `${pageTitle} | ${mainpageTile}`;
+    }
+    
+    changePageTitle();
+  }, [pageTitle]);
+
   return (
     <Provider value={{
       store,
       setPlaceId,
       showInfoCard,
       setShowInfoCard,
+      pageTitle,
+      setPageTitle,
     }}>
       {children}
     </Provider>
