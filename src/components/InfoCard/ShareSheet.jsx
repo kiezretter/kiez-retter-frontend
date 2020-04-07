@@ -71,13 +71,13 @@ export default class ShareSheet extends React.Component {
                         <FacebookShareButton
                             url={this.state.shareUrl}
                             quote={this.props.text}
-                            className="Demo__some-network__share-button"
+                            hashtag={this.props.hashtag}
                         >
                             <FacebookIcon size={48} round />
                         </FacebookShareButton>
 
                         <div>
-                            <FacebookShareCount url={this.state.shareUrl} className="Demo__some-network__share-count">
+                            <FacebookShareCount url={this.state.shareUrl}>
                                 {count => <Typography>{count}</Typography>}
                             </FacebookShareCount>
                         </div>
@@ -86,7 +86,6 @@ export default class ShareSheet extends React.Component {
                         <FacebookMessengerShareButton
                             url={this.state.shareUrl}
                             appId="521270401588372"
-                            className="Demo__some-network__share-button"
                         >
                             <FacebookMessengerIcon size={48} round />
                         </FacebookMessengerShareButton>
@@ -95,7 +94,6 @@ export default class ShareSheet extends React.Component {
                         <TwitterShareButton
                             url={this.state.shareUrl}
                             title={this.props.text}
-                            className="Demo__some-network__share-button"
                         >
                             <TwitterIcon size={48} round />
                         </TwitterShareButton>
@@ -104,7 +102,6 @@ export default class ShareSheet extends React.Component {
                         <TelegramShareButton
                             url={this.state.shareUrl}
                             title={this.props.text}
-                            className="Demo__some-network__share-button"
                         >
                             <TelegramIcon size={48} round />
                         </TelegramShareButton>
@@ -114,7 +111,6 @@ export default class ShareSheet extends React.Component {
                             url={this.state.shareUrl}
                             title={this.props.text}
                             separator=":: "
-                            className="Demo__some-network__share-button"
                         >
                             <WhatsappIcon size={48} round />
                         </WhatsappShareButton>
@@ -122,9 +118,8 @@ export default class ShareSheet extends React.Component {
                     <li className="kr-share-sheet--item">
                         <EmailShareButton
                             url={this.state.shareUrl}
-                            subject={this.props.text}
-                            body="body"
-                            className="Demo__some-network__share-button"
+                            subject={this.props.title}
+                            body={this.props.text}
                         >
                             <EmailIcon size={48} round />
                         </EmailShareButton>
