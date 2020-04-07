@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import EventEmitter from 'events';
 
 import {
@@ -70,7 +70,14 @@ const InfoCard = () => {
         EventBus.emit('changeShareSheetState', !showShareSheet);
     }
 
-    EventBus.on('shareSheetShown', state => setShowShareSheet(state));
+    useEffect(() => {
+        EventBus.on('shareSheetShown', state => setShowShareSheet(state));
+
+        return () => {
+            EventBus.removeAllListeners('shareSheetShown');
+        }
+    }, [])
+
 
     const renderPlaceholder = () => {
         return (
@@ -218,11 +225,6 @@ const InfoCard = () => {
             className="info__box__icon_share"
         />;
 
-        if (showShareSheet) shareButton = <Icon
-            onClick={toggleShareSheet.bind(this)}
-            className="info__box__icon_share"
-        >close</Icon>;
-
         return (
             <div className="info__box">
                 <div className="info__box-name__wrapper">
@@ -320,6 +322,7 @@ const InfoCard = () => {
                     eventBus={EventBus} 
                     title={business.name} 
                     text={`${business.name} in ${business.address.city} braucht unsere Hilfe! Werde jetzt #kiezretter!`}
+                    hashtag="#kiezretter"
                 />
             </CardContent>
         </Card>
