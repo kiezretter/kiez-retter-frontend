@@ -23,6 +23,7 @@ const BusinessOverview = () => {
     showInfoCard,
     setShowInfoCard,
     store,
+    setPageTitle,
   } = useStoreContext();
 
   const { setActiveMarkerId, setCurrentLocation, currentLocation } = useMarkerContext();
@@ -34,7 +35,6 @@ const BusinessOverview = () => {
   // eslint-disable-next-line
   const [stateCurrentLocation, setStateCurrentLocation] = useState(currentLocation);
 
-
   useEffect(() => {
     const lat = query.get('lat');
     const lng = query.get('lng');
@@ -45,20 +45,23 @@ const BusinessOverview = () => {
     setPlaceId(businessId);
     if (store && !currentLocation) {
       if (businessId) {
+        setPageTitle(store.name);
         setShowInfoCard(true);
         setActiveMarkerId(parseInt(businessId));
         setCurrentLocation({ lat: store.address.lat, lng: store.address.lng })
         setStateCurrentLocation(currentLocation);
       } else if (personalLocationPresentInStorage()) {
+        setPageTitle();
         const [sessionLat, sessionLng] = sessionStorage.getItem('personalLocation').split('|');
         setCurrentLocation({ lat: +sessionLat, lng: +sessionLng });
         setStateCurrentLocation(currentLocation);
       } else {
+        setPageTitle();
         setCurrentLocation(null);
         setStateCurrentLocation(currentLocation);
       }
     }
-  }, [store, businessId, currentLocation, setCurrentLocation, query, setPlaceId, setShowInfoCard, setActiveMarkerId]);
+  }, [store, businessId, currentLocation, setCurrentLocation, query, setPlaceId, setShowInfoCard, setActiveMarkerId, setPageTitle]);
 
   const personalLocationPresentInStorage = () => {
     return sessionStorage.getItem('personalLocation') !== null

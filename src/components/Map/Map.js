@@ -10,7 +10,7 @@ export const Geo = ({ currentLocation }) => {
 
   const history = useHistory();
   const { activeMarkerId, setActiveMarkerId } = useMarkerContext();
-  const { setPlaceId, setShowInfoCard } = useStoreContext();
+  const { setPlaceId, setShowInfoCard, setPageTitle } = useStoreContext();
   const { screenHeight } = useCustomStyleContext();
   const [stateCurrentLocation, setStateCurrentLocation] = useState(currentLocation);
 
@@ -25,6 +25,7 @@ export const Geo = ({ currentLocation }) => {
     setPlaceId(id);
     setShowInfoCard(true);
     setActiveMarkerId(id);
+    setPageTitle(name);
   }
 
   const getCurrentLocation = () => {
