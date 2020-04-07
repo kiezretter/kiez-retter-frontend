@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {
-    Typography
+    Typography,
+    Icon,
 } from '@material-ui/core';
 
 import {
@@ -35,10 +36,7 @@ export default class ShareSheet extends React.Component {
     }
 
     onChangeShareSheetState(show) {
-        if (!show) {
-            this.props.eventBus.emit('shareSheetShown', false);
-            return this.setState({ show: false });
-        }
+        if (!show) return this.hideShareSheet();
 
         if (window.navigator.share) {
             navigator.share({
@@ -55,6 +53,11 @@ export default class ShareSheet extends React.Component {
         }
     }
 
+    hideShareSheet() {
+        this.props.eventBus.emit('shareSheetShown', false);
+        this.setState({ show: false });
+    }
+
     render() {
         let classes = 'kr-share-sheet';
         
@@ -65,6 +68,10 @@ export default class ShareSheet extends React.Component {
                 <Typography>
                     Erzähle deinen Freunden von {this.props.title}:
                 </Typography>
+                <Icon
+                    onClick={this.hideShareSheet.bind(this)}
+                    className="kr-share-sheet--close"
+                >close</Icon>
                 <br />
                 <ul className="kr-share-sheet--list">
                     <li className="kr-share-sheet--item">
@@ -76,11 +83,11 @@ export default class ShareSheet extends React.Component {
                             <FacebookIcon size={48} round />
                         </FacebookShareButton>
 
-                        <div>
+                        {/* <div>
                             <FacebookShareCount url={this.state.shareUrl}>
                                 {count => <Typography>{count}</Typography>}
                             </FacebookShareCount>
-                        </div>
+                        </div> */}
                     </li>
                     {/* <li className="kr-share-sheet--item">
                         <FacebookMessengerShareButton
