@@ -12,7 +12,6 @@ export const Geo = ({ currentLocation }) => {
   const { activeMarkerId, setActiveMarkerId } = useMarkerContext();
   const { setPlaceId, setShowInfoCard } = useStoreContext();
   const { screenHeight } = useCustomStyleContext();
-
   const [stateCurrentLocation, setStateCurrentLocation] = useState(currentLocation);
 
   useEffect(() => {
