@@ -90,6 +90,7 @@ const Map = ({center, zoom, maxZoom, activeMarkerId, onMarkerClick, containerSty
 
   const updateMarkers = (prevMarkerId) => {
     if (currentMarkers && prevMarkerId) changeMarkerAppearance(prevMarkerId, '#4a7fb9', markerIcon);
+    if (!activeMarkerId) return;
     if (currentMarkers) changeMarkerAppearance(activeMarkerId, '#de3a42', activeMarkerIcon);
     previousActiveMarkerId.current = activeMarkerId;
   }
