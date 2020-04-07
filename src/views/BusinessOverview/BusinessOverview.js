@@ -25,7 +25,7 @@ const BusinessOverview = () => {
     store,
   } = useStoreContext();
 
-  const { setActiveMarker, setCurrentBounds, setCurrentLocation, currentLocation } = useMarkerContext();
+  const { setActiveMarkerId, setCurrentLocation, currentLocation } = useMarkerContext();
 
   const useQuery = () => new URLSearchParams(useLocation().search);
   const query = useQuery();
@@ -46,7 +46,7 @@ const BusinessOverview = () => {
     if (store && !currentLocation) {
       if (businessId) {
         setShowInfoCard(true);
-        setActiveMarker(parseInt(businessId));
+        setActiveMarkerId(parseInt(businessId));
         setCurrentLocation({ lat: store.address.lat, lng: store.address.lng })
         setStateCurrentLocation(currentLocation);
       } else if (personalLocationPresentInStorage()) {
@@ -58,7 +58,7 @@ const BusinessOverview = () => {
         setStateCurrentLocation(currentLocation);
       }
     }
-  }, [store, businessId, currentLocation, setCurrentLocation, query, setPlaceId, setShowInfoCard, setActiveMarker]);
+  }, [store, businessId, currentLocation, setCurrentLocation, query, setPlaceId, setShowInfoCard, setActiveMarkerId]);
 
   const personalLocationPresentInStorage = () => {
     return sessionStorage.getItem('personalLocation') !== null
@@ -72,7 +72,6 @@ const BusinessOverview = () => {
       </Container>
       <Geo
         currentLocation={currentLocation}
-        onBoundsChange={(bounds) => { setCurrentBounds(bounds) }}
       />
       {showInfoCard && (
         <InfoCard />

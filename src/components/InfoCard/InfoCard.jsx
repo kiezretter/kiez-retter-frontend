@@ -51,7 +51,7 @@ const InfoCard = () => {
 
 
     const handleClose = () => {
-        markers.setActiveMarker(null);
+        markers.setActiveMarkerId(null);
         store.setPlaceId(null);
         store.setShowInfoCard(false);
 
