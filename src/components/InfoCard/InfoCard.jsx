@@ -48,12 +48,11 @@ const InfoCard = () => {
         setDonatedValue(event.target.value);
     }
 
-
-
     const handleClose = () => {
-        markers.setActiveMarker(null);
+        markers.setActiveMarkerId(null);
         store.setPlaceId(null);
         store.setShowInfoCard(false);
+        store.setPageTitle();
 
         if (sessionStorage.getItem('personalLocation')) {
             const [lat, lng] = sessionStorage.getItem('personalLocation').split('|');

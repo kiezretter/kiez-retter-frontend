@@ -1,32 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { Map } from './GoogleMap';
+import Map from './GoogleMap';
 import { useMarkerContext } from "../../context/MarkerContext";
 import { useStoreContext } from '../../context/StoreContext';
 import { useCustomStyleContext } from '../../context/CustomStyleContext';
 import { useHistory } from 'react-router-dom';
 
 
-export const Geo = ({ currentLocation, onBoundsChange }) => {
+export const Geo = ({ currentLocation }) => {
 
   const history = useHistory();
-  const { markers, activeMarker, setActiveMarker } = useMarkerContext();
-  const { setPlaceId, setShowInfoCard } = useStoreContext();
+  const { activeMarkerId, setActiveMarkerId } = useMarkerContext();
+  const { setPlaceId, setShowInfoCard, setPageTitle } = useStoreContext();
   const { screenHeight } = useCustomStyleContext();
-
-  const [stateMarkers, setStateMarkers] = useState(markers);
   const [stateCurrentLocation, setStateCurrentLocation] = useState(currentLocation);
 
   useEffect(() => {
-    setStateMarkers(markers);
     setStateCurrentLocation(currentLocation);
-  }, [markers, currentLocation]);
+    if (!currentLocation) getCurrentLocation();
+  }, [currentLocation]);
 
   const onMarkerClick = (id, name) => {
-    const escapedName = encodeURIComponent(name.replace('/', '-'))
+    const escapedName = encodeURIComponent(name.replace(/\/|%/, '-'));
     history.push(`/kiez/${id}/${escapedName}`);
     setPlaceId(id);
     setShowInfoCard(true);
-    setActiveMarker(id);
+    setActiveMarkerId(id);
+    setPageTitle(name);
+  }
+
+  const getCurrentLocation = () => {
+    if (sessionStorage.getItem('personalLocation') !== null) {
+      const [sessionLat, sessionLng] = sessionStorage.getItem('personalLocation').split('|');
+      setStateCurrentLocation({ lat: +sessionLat, lng: +sessionLng });
+      return { lat: +sessionLat, lng: +sessionLng };
+    }
   }
 
   return (
@@ -37,14 +44,11 @@ export const Geo = ({ currentLocation, onBoundsChange }) => {
         width: "100%",
         position: "relative"
       }}
-      initialCenter={stateCurrentLocation}
+      center={ stateCurrentLocation || { lat: 52.50888, lng: 13.396647 } }
       zoom={14}
-      disableDefaultUI
-      zoomControl={true}
-      onIdle={(map) => onBoundsChange(map.getBounds().toJSON())}
+      maxZoom={17}
       onMarkerClick={onMarkerClick}
-      markers={stateMarkers}
-      activeMarker={activeMarker}
+      activeMarkerId={activeMarkerId}
     />
   );
 };
