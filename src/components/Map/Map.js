@@ -1,78 +1,56 @@
-import React, { useRef } from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import markerIcon from '../../assets/images/marker.png';
-import activeMarkerIcon from '../../assets/images/active_marker.png';
-import currentLocationIcon from '../../assets/images/current-location.svg';
+import React, { useState, useEffect } from 'react';
+import Map from './GoogleMap';
 import { useMarkerContext } from "../../context/MarkerContext";
 import { useStoreContext } from '../../context/StoreContext';
 import { useCustomStyleContext } from '../../context/CustomStyleContext';
 import { useHistory } from 'react-router-dom';
 
 
-export const Geo = ({ google, currentLocation, onBoundsChange }) => {
-  const history = useHistory();
-  const mapRef = useRef(null);
-  const { markers, activeMarker, setActiveMarker } = useMarkerContext();
-  const { setPlaceId, setShowInfoCard } = useStoreContext();
-  const { screenHeight } = useCustomStyleContext();
+export const Geo = ({ currentLocation }) => {
 
-  const berlin = {
-    lat: 52.50888,
-    lng: 13.396647
-  }
+  const history = useHistory();
+  const { activeMarkerId, setActiveMarkerId } = useMarkerContext();
+  const { setPlaceId, setShowInfoCard, setPageTitle } = useStoreContext();
+  const { screenHeight } = useCustomStyleContext();
+  const [stateCurrentLocation, setStateCurrentLocation] = useState(currentLocation);
+
+  useEffect(() => {
+    setStateCurrentLocation(currentLocation);
+    if (!currentLocation) getCurrentLocation();
+  }, [currentLocation]);
 
   const onMarkerClick = (id, name) => {
-    const escapedName = name.replace('/', '-')
+    const escapedName = encodeURIComponent(name.replace(/\/|%/, '-'));
     history.push(`/kiez/${id}/${escapedName}`);
     setPlaceId(id);
     setShowInfoCard(true);
-    setActiveMarker(id);
+    setActiveMarkerId(id);
+    setPageTitle(name);
   }
 
-  const renderOwnMarker = () => {
-    if (currentLocation) {
-      return (
-        <Marker
-          title="Da bist du!"
-          position={currentLocation}
-          icon={currentLocationIcon}
-        />
-      );
+  const getCurrentLocation = () => {
+    if (sessionStorage.getItem('personalLocation') !== null) {
+      const [sessionLat, sessionLng] = sessionStorage.getItem('personalLocation').split('|');
+      setStateCurrentLocation({ lat: +sessionLat, lng: +sessionLng });
+      return { lat: +sessionLat, lng: +sessionLng };
     }
-    return null;
   }
 
   return (
     <Map
-      ref={mapRef}
-      google={google}
+      id={'map'}
       containerStyle={{
         height: `calc(${screenHeight}px - 7em)`,
         width: "100%",
         position: "relative"
       }}
-      initialCenter={currentLocation ? currentLocation : berlin}
+      center={ stateCurrentLocation || { lat: 52.50888, lng: 13.396647 } }
       zoom={14}
-      disableDefaultUI
-      zoomControl={true}
-      onIdle={(_, map) => onBoundsChange(map.getBounds().toJSON())}
-    >
-      {renderOwnMarker()}
-      {markers && markers.map(marker => {
-        return (
-          <Marker
-            key={marker.id}
-            position={marker}
-            title={marker.name}
-            onClick={() => onMarkerClick(marker.id, marker.name)}
-            icon={activeMarker === marker.id ? activeMarkerIcon : markerIcon}
-          />
-        );
-      })}
-    </Map>
+      maxZoom={17}
+      onMarkerClick={onMarkerClick}
+      activeMarkerId={activeMarkerId}
+    />
   );
 };
 
-export default GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-})(Geo);
+export default Geo;

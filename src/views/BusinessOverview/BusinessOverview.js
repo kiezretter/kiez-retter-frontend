@@ -1,15 +1,21 @@
-import React, { useEffect } from 'react';
-import { 
+import React, { useEffect, useState } from 'react';
+import {
   useLocation,
   useParams,
 } from 'react-router-dom';
+import {
+  Container,
+} from '@material-ui/core';
 
 import Navigation from '../../components/Navigation/Navigation.jsx';
-import GoogleApiWrapper from '../../components/Map/Map';
+import Geo from '../../components/Map/Map';
 import InfoCard from '../../components/InfoCard/InfoCard';
+import LocationSearchInput from '../../components/LocationSearchInput/LocationSearchInput';
 
 import { useStoreContext } from "../../context/StoreContext";
 import { useMarkerContext } from '../../context/MarkerContext';
+
+import './BusinessOverview.scss';
 
 const BusinessOverview = () => {
   const {
@@ -17,56 +23,64 @@ const BusinessOverview = () => {
     showInfoCard,
     setShowInfoCard,
     store,
+    setPageTitle,
   } = useStoreContext();
 
-  const { setActiveMarker, setCurrentBounds, setCurrentLocation, currentLocation } = useMarkerContext();
+  const { setActiveMarkerId, setCurrentLocation, currentLocation } = useMarkerContext();
 
   const useQuery = () => new URLSearchParams(useLocation().search);
   const query = useQuery();
   const { businessId } = useParams();
 
+  // eslint-disable-next-line
+  const [stateCurrentLocation, setStateCurrentLocation] = useState(currentLocation);
+
   useEffect(() => {
     const lat = query.get('lat');
     const lng = query.get('lng');
     if (lat && lng) {
-      setCurrentLocation({lat, lng})
+      // setCurrentLocation({ lat, lng })
       sessionStorage.setItem('personalLocation', `${lat}|${lng}`);
     }
     setPlaceId(businessId);
     if (store && !currentLocation) {
-      getCurrentLocation();
+      if (businessId) {
+        setPageTitle(store.name);
+        setShowInfoCard(true);
+        setActiveMarkerId(parseInt(businessId));
+        setCurrentLocation({ lat: store.address.lat, lng: store.address.lng })
+        setStateCurrentLocation(currentLocation);
+      } else if (personalLocationPresentInStorage()) {
+        setPageTitle();
+        const [sessionLat, sessionLng] = sessionStorage.getItem('personalLocation').split('|');
+        setCurrentLocation({ lat: +sessionLat, lng: +sessionLng });
+        setStateCurrentLocation(currentLocation);
+      } else {
+        setPageTitle();
+        setCurrentLocation(null);
+        setStateCurrentLocation(currentLocation);
+      }
     }
-  }, [store, businessId]);
-
-  const getCurrentLocation = () => {
-     if (businessId) {
-      setShowInfoCard(true);
-      setActiveMarker(parseInt(businessId));
-      setCurrentLocation({lat: store.address.lat, lng: store.address.lng})
-    } else if (personalLocationPresentInStorage()) {
-      const [sessionLat, sessionLng] = sessionStorage.getItem('personalLocation').split('|');
-      setCurrentLocation({sessionLat, sessionLng});
-    } else {
-      setCurrentLocation(null);
-    }
-  }
+  }, [store, businessId, currentLocation, setCurrentLocation, query, setPlaceId, setShowInfoCard, setActiveMarkerId, setPageTitle]);
 
   const personalLocationPresentInStorage = () => {
     return sessionStorage.getItem('personalLocation') !== null
   }
 
   return (
-    <>
+    <div className="kr-businessOverview">
       <Navigation bordered={true} />
-      <GoogleApiWrapper
+      <Container maxWidth="md">
+        <LocationSearchInput size="small" />
+      </Container>
+      <Geo
         currentLocation={currentLocation}
-        onBoundsChange={(bounds) => setCurrentBounds(bounds)}
       />
       {showInfoCard && (
         <InfoCard />
       )
       }
-    </>
+    </div>
   )
 }
 

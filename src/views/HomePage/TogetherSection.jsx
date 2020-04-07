@@ -25,7 +25,7 @@ export default class TogetherSection extends React.Component {
                         </Grid>
                         <Grid item xs={12} sm={9}>
                             <Typography variant="h4" component="h3" gutterBottom>Zusammen</Typography>
-                            <Typography>
+                            <div className="MuiTypography-root MuiTypography-body1">
                                 Auch wir glauben fest daran, dass wir zusammen mehr erreichen können.<br />
                                 Deswegen verweisen wir auf die tollen Angebote anderer Plattformen. Hier unsere aktuellen Partner:<br />
                                 <br />
@@ -41,7 +41,7 @@ export default class TogetherSection extends React.Component {
                                 </div>
                                 <br />
                                 #kiezretter #bettertogether
-                            </Typography>
+                            </div>
                         </Grid>
                     </Grid>
                 </Container>
