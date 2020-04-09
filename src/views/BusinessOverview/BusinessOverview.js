@@ -23,7 +23,7 @@ const BusinessOverview = () => {
     showInfoCard,
     setShowInfoCard,
     store,
-    setPageTitle,
+    setPageData,
   } = useStoreContext();
 
   const { setActiveMarkerId, setCurrentLocation, currentLocation } = useMarkerContext();
@@ -42,26 +42,28 @@ const BusinessOverview = () => {
       // setCurrentLocation({ lat, lng })
       sessionStorage.setItem('personalLocation', `${lat}|${lng}`);
     }
-    setPlaceId(businessId);
+
+    if (!store || (store && store.business_id !== +businessId)) setPlaceId(businessId);
+
     if (store && !currentLocation) {
       if (businessId) {
-        setPageTitle(store.name);
+        setPageData(store);
         setShowInfoCard(true);
         setActiveMarkerId(parseInt(businessId));
         setCurrentLocation({ lat: store.address.lat, lng: store.address.lng })
         setStateCurrentLocation(currentLocation);
       } else if (personalLocationPresentInStorage()) {
-        setPageTitle();
+        setPageData();
         const [sessionLat, sessionLng] = sessionStorage.getItem('personalLocation').split('|');
         setCurrentLocation({ lat: +sessionLat, lng: +sessionLng });
         setStateCurrentLocation(currentLocation);
       } else {
-        setPageTitle();
+        setPageData();
         setCurrentLocation(null);
         setStateCurrentLocation(currentLocation);
       }
     }
-  }, [store, businessId, currentLocation, setCurrentLocation, query, setPlaceId, setShowInfoCard, setActiveMarkerId, setPageTitle]);
+  }, [store, businessId, currentLocation, setCurrentLocation, query, setPlaceId, setShowInfoCard, setActiveMarkerId, setPageData]);
 
   const personalLocationPresentInStorage = () => {
     return sessionStorage.getItem('personalLocation') !== null
