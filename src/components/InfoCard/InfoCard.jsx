@@ -58,7 +58,6 @@ const InfoCard = () => {
         markers.setActiveMarkerId(null);
         store.setPlaceId(null);
         store.setShowInfoCard(false);
-        store.setPageTitle();
 
         if (sessionStorage.getItem('personalLocation')) {
             const [lat, lng] = sessionStorage.getItem('personalLocation').split('|');
