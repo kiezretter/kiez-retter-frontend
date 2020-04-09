@@ -10,7 +10,7 @@ const Map = ({center, zoom, maxZoom, activeMarkerId, onMarkerClick, containerSty
   const cluster = useRef();
   const previousActiveMarkerId = useRef();
   const { markers } = useMarkerContext();
-  const [currentMarkers, setCurrentMarkers] = useState(null);
+  const [currentMarkers, setCurrentMarkers] = useState([]);
   const [map, setMap] = useState(null);
 
   const mapStyles = [
@@ -32,19 +32,50 @@ const Map = ({center, zoom, maxZoom, activeMarkerId, onMarkerClick, containerSty
     }
   ];
 
+  const clusterStyles = { 
+    maxZoom: 16,
+    styles: [
+      { 
+        textColor: 'white',
+        url: '/marker-cluster-img/m1.png',
+        width: 52,
+        height: 52,
+      },
+      { 
+        textColor: 'black',
+        url: '/marker-cluster-img/m2.png',
+        width: 52,
+        height: 52,
+      },
+      { 
+        textColor: 'white',
+        url: '/marker-cluster-img/m3.png',
+        width: 52,
+        height: 52,
+      },
+      { 
+        textColor: 'black',
+        url: '/marker-cluster-img/m4.png',
+        width: 52,
+        height: 52,
+      }
+    ]
+  }
+
   useEffect(() => {
     setCurrentMarkers(createMarkers());
-  }, [markers])
+  }, [markers]);
 
   useEffect(() => {
     updateMarkers(previousActiveMarkerId.current);
-  }, [activeMarkerId])
+  }, [activeMarkerId]);
 
   useEffect(() => {
-    if (cluster.current) {
+    if (cluster.current && currentMarkers) {
       resetCluster();
     }
-  }, [currentMarkers, map])
+  }, [currentMarkers, map]);
+
 
   useEffect(() => {
     const createGoogleMap = () => {
@@ -85,7 +116,7 @@ const Map = ({center, zoom, maxZoom, activeMarkerId, onMarkerClick, containerSty
         onMarkerClick(marker.id, marker.name);
       });
       return newMarker;
-    })
+    });
   }
 
   const updateMarkers = (prevMarkerId) => {
@@ -93,30 +124,30 @@ const Map = ({center, zoom, maxZoom, activeMarkerId, onMarkerClick, containerSty
     if (!activeMarkerId) return;
     if (currentMarkers) changeMarkerAppearance(activeMarkerId, '#de3a42', activeMarkerIcon);
     previousActiveMarkerId.current = activeMarkerId;
-  }
+  };
 
   const changeMarkerAppearance = (markerId, color, iconImage) => {
     const marker = currentMarkers.find(el => el.id === markerId);
-    const icon = marker.getIcon()
+    const icon = marker.getIcon();
     const label = marker.getLabel();
     icon.url = iconImage;
     label.color = color;
     marker.setIcon(icon);
     marker.setLabel(label);
-  }
+  };
 
   const createCluster = () => {
     cluster.current = new MarkerClusterer(
       map,
       currentMarkers,
-      { imagePath: '/marker-cluster-img/m', maxZoom: 16 }
+      clusterStyles,
     );
   }
 
   const resetCluster = () => {
     cluster.current.clearMarkers();
     createCluster();
-  }
+  };
 
   return (
     <div
