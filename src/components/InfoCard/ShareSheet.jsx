@@ -6,7 +6,6 @@ import {
 } from '@material-ui/core';
 
 import {
-    FacebookShareCount,
     FacebookShareButton,
     // FacebookMessengerShareButton,
     // FacebookMessengerIcon,
@@ -82,21 +81,7 @@ export default class ShareSheet extends React.Component {
                         >
                             <FacebookIcon size={48} round />
                         </FacebookShareButton>
-
-                        {/* <div>
-                            <FacebookShareCount url={this.state.shareUrl}>
-                                {count => <Typography>{count}</Typography>}
-                            </FacebookShareCount>
-                        </div> */}
                     </li>
-                    {/* <li className="kr-share-sheet--item">
-                        <FacebookMessengerShareButton
-                            url={this.state.shareUrl}
-                            appId="521270401588372"
-                        >
-                            <FacebookMessengerIcon size={48} round />
-                        </FacebookMessengerShareButton>
-                    </li> */}
                     <li className="kr-share-sheet--item">
                         <TwitterShareButton
                             url={this.state.shareUrl}
