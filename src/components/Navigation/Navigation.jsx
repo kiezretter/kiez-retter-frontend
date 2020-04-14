@@ -37,7 +37,7 @@ export default class Navigation extends React.Component {
     renderLogo() {
         if (this.props.hideLogo) return null;
 
-        return (<a href="/"><img src={LogoImage} alt="Kiezretter Logo" className="kr-nav--logo" /></a>);
+        return (<a href="/" className="kr-nav--logo"><img src={LogoImage} alt="Kiezretter Logo" /></a>);
     }
 
     render() {
