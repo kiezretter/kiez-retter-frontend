@@ -31,6 +31,9 @@ export default class Footer extends React.Component {
                         <Link className={this.getClassesForLink('/ueberuns')} href="/ueberuns">
                             Über uns
                         </Link>
+                        <Link className={this.getClassesForLink('/presse')} href="/presse">
+                            Presse
+                        </Link>
                         <Link className={this.getClassesForLink('/impressum')} href="/impressum">
                             Impressum
                         </Link>
