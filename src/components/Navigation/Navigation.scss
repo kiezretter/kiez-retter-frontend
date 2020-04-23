@@ -19,9 +19,13 @@
     &--logo {
         width: 5.5rem;
         position: absolute;
-        left: 24px;
+        left: 14px;
         top: 50%;
         transform: translateY(-50%);
+
+        img {
+            width: 100%;
+        }
     }
 
     &--list {
@@ -29,11 +33,15 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-end;
-
+        
         @media screen and (min-width: 768px) {
             margin-right: -1rem !important;
         }
     }
+    
+    &--logo + &--list {
+        padding-left: 5.5rem;
+    } 
 
     &--link {
         padding: .5rem .5rem;

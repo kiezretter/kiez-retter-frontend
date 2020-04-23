@@ -6,13 +6,19 @@
     width: 100%;
     padding: 1rem;
     background: #fff;
-    transition: transform 300ms;
-    transform: translateY(100%);
+    transition: opacity 300ms;
+    opacity: 0;
+    pointer-events: none;
     border-top: 1px solid $brand-blue;
     box-shadow: 0 -5px 5px rgba(0,0,0,.075);
 
+    > .MuiTypography-root {
+        padding-right: 1.5rem;
+    }
+
     &__show {
-        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
     }
 
     &--list {

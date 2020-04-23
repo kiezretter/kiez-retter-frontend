@@ -10,6 +10,7 @@ import FAQView from './views/FAQ/FAQ.jsx';
 import ImpressumView from './views/Impressum/Impressum.jsx';
 import InhaberView from './views/Inhaber/Inhaber.jsx';
 import UeberUnsView from './views/UeberUns/UeberUns.jsx';
+import PresseView from './views/Presse/Presse.jsx';
 
 const Routes = () => {
   return (
@@ -25,6 +26,7 @@ const Routes = () => {
         <Route exact path="/faq" component={FAQView} />
         <Route exact path="/impressum" component={ImpressumView} />
         <Route exact path="/ueberuns" component={UeberUnsView} />
+        <Route exact path="/presse" component={PresseView} />
       </Switch>
     </Router>
   );
