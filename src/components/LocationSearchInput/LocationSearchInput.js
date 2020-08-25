@@ -20,6 +20,7 @@ import {
   Paper,
 } from '@material-ui/core';
 
+import poweredByGoogle from '../../assets/images/powered_by_google_on_white.png';
 import './LocationSearchInput.scss';
 
 const locationTypeIcons = {
@@ -142,6 +143,7 @@ const LocationSearchInput = (props) => {
     return (
       <Paper variant="outlined" className="kr-location-search--autocomplete">
         {renderResultList(suggestions, getSuggestionItemProps)}
+        <div className="kr-location-search--powered-by-google"><img src={poweredByGoogle} alt="powered-by-google"/></div>
       </Paper>
     );
   }
@@ -183,7 +185,7 @@ const LocationSearchInput = (props) => {
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div className="kr-location-search">
-          <TextField 
+          <TextField
             {...getInputProps({
               label: props.size === 'small' ? null : 'Dein Lieblingsort',
               variant: 'outlined',
